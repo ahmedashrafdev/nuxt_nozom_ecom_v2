@@ -4,16 +4,16 @@
    <v-col cols="12 p-0">
      <layouts-breadcrumbs/>
    </v-col>
-    <v-col cols="12" class="filters">
-     <div class="sort d-flex">
-       <span>sorting</span>
+    <v-col cols="12" class="mt-4 filters">
+     <div class="sort d-flex items-center">
+       <span class="mr-2">sorting:</span>
        <v-select
           :items="items"
           label="Solo field"
           dense
+          hide-details
           solo
         ></v-select>
-       <span>sorting</span>
      </div>
     </v-col>
   </v-row>

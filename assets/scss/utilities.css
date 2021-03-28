@@ -5,7 +5,15 @@ body{
 .p-0{
     padding:0 !important;
 }
-
+.items-center{
+    align-items: center;
+}
+.mr-2{
+    margin-right: 10px;    
+}
+.mt-4{
+    margin-top: 20px;
+}
 .space-between{
     justify-content: space-between;
 }
