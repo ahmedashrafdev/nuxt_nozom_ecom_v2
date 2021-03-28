@@ -1,0 +1,22 @@
+body{
+    overflow: hidden;
+}
+
+.p-0{
+    padding:0 !important;
+}
+
+.space-between{
+    justify-content: space-between;
+}
+.underline{
+    text-decoration: underline;
+}
+
+.px-4{
+    padding: 20px 0;
+}
+
+.v-main{
+    padding-bottom: 85px   !important;
+}
