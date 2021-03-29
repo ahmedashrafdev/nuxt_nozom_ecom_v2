@@ -1,5 +1,6 @@
 .no-shadow .v-input__slot {
-  box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+          box-shadow: none !important;
 }
 
 .bg-gray .v-input__slot {
@@ -31,12 +32,10 @@
 .v-stepper--alt-labels .v-stepper__header .v-divider {
   margin: 29px -80px 0 !important;
 }
-p{
-  font-size: 14px;
-}
 
 .v-stepper, .v-stepper__header {
-  box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+          box-shadow: none !important;
 }
 
 .theme--light.v-stepper .v-stepper__step__step .v-icon {
@@ -44,8 +43,7 @@ p{
 }
 
 .atc-input {
-  width: 40px !important;
-  max-width: 40px !important;
+  width: 40px;
 }
 
 .atc-input .v-input__control > .v-input__slot::before {
@@ -63,5 +61,12 @@ p{
 }
 
 .items-center {
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
+
+.text-sm {
+  font-size: 12px;
+}
+/*# sourceMappingURL=global.css.map */

@@ -1,16 +1,25 @@
 <template>
+<div>
   <swiper
     :options="swiperOption" 
-    v-show="!loading"
+    v-show="!Componentloading"
     ref="mySwiper" 
     :space-between="50"
     @swiper="onSwiper"
     @slideChange="onSlideChange"
   >
-    <swiper-slide v-for="product in products" :key="product">
-     <partials-product/>
+    <swiper-slide v-for="product in products" :key="product.id">
+     <partials-product :product="product" :loading="loading"/>
     </swiper-slide>
   </swiper>
+ <v-skeleton-loader
+      v-if="Componentloading"
+      width="100%"
+      type="image"
+    >
+    </v-skeleton-loader>
+
+</div>
 </template>
 
 <script>
@@ -18,9 +27,10 @@ import swiperOption from '@/utilities/swiper.js'
 import { mapGetters } from 'vuex'
 export default {
   name: 'carrousel',
+  props : ['productKey'],
     data() {
       return {
-        loading : true,
+        Componentloading : true,
         swiperOption,
       }
     },
@@ -29,18 +39,24 @@ export default {
         return this.$refs.mySwiper.$swiper
       },
       ...mapGetters({
-        products: 'shop/products'
+        products: 'product/products',
+        loading: 'product/loading',
       })
 
     },
     
     mounted() {
-      this.loading = false
+      this.Componentloading = false
       
-      console.log('Current Swiper instance object', this.swiper)
       // this.swiper.slideTo(3, 1000, false)
     },
 
+    created(){
+      const payload = { key : this.productKey}
+      this.$store.dispatch('product/getProducts' , payload)
+      console.log(payload)
+      // this.$store.dispatch('product/getProducts' ,payload)
+    },
     
     methods: {
       onSwiper(swiper) {

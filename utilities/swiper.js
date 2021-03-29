@@ -6,24 +6,24 @@ export default {
     watchOverflow: true,
     breakpoints: {
         1904: {
-        slidesPerView: 2,
+        slidesPerView: 6,
         spaceBetween: 20
         },
         1264: {
-        slidesPerView: 2,
+        slidesPerView: 4,
         spaceBetween: 20
         },
         960: {
-        slidesPerView: 2,
+        slidesPerView: 4,
         spaceBetween: 50
         },
         600: {
-        slidesPerView: 2,
-        spaceBetween: 150
+        slidesPerView: 4,
+        spaceBetween: 50
         },
         400: {
         slidesPerView: 2,
-        spaceBetween: 150
+        spaceBetween: 50
         }
     },
 }
