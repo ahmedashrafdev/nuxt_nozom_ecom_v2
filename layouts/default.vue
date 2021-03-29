@@ -9,6 +9,7 @@
       <v-spacer />
       <v-btn
         icon
+        @click.prevent="$router.push({name : `shop-cart___${$i18n.locale}`})"
       >
         <v-icon>mdi-cart-arrow-down</v-icon>
       </v-btn>
@@ -19,8 +20,17 @@
       </v-btn>
       <v-btn
         icon
+        v-if="$i18n.locale == 'en'"
+        @click.prevent="switchLanguage"
       >
         <v-icon>mdi-abjad-arabic</v-icon>
+      </v-btn>
+      <v-btn
+        icon
+        v-else
+        @click.prevent="switchLanguage"
+      >
+        <v-icon large>mdi-alpha-e</v-icon>
       </v-btn>
     </v-app-bar>
     <v-main>
@@ -76,13 +86,18 @@ export default {
   methods:{
     goTo(to){
       if(to == 'categories'){
-				this.$store.commit('ui/setMobileCategoriesModal', true)
+				this.$store.commit('ui/mobileCategoriesModal', true)
 
         console.log('categories')
         return 
       }
       // console.log(to)
       this.$router.push({name : `${to}___${this.$i18n.locale}`})
+    },
+    switchLanguage(){
+      const locale = this.$i18n.locale === 'en' ? 'ar' : 'en'
+      console.log('asd')
+      this.$router.push({name : `index___${locale}`})
     }
   }
 }

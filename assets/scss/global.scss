@@ -1,0 +1,53 @@
+.no-shadow  .v-input__slot{
+   box-shadow: none !important;
+}
+
+
+.bg-gray .v-input__slot{
+    background-color: var(--bg-gray) !important;
+}
+
+.v-stepper:not(.v-stepper--vertical) .v-stepper__label{
+    display: block !important;
+    @media(max-width: 413px){
+        display: none !important;
+    }
+}
+.v-stepper__step__step{
+    &.primary{
+        color : var(--primary-color) !important;
+    }
+    color : rgb(158, 158, 158) !important;
+    background-color : rgb(158, 158, 158) !important;
+    min-width: 10px !important;
+    width: 10px !important;
+    height: 10px !important;
+}
+.v-stepper--alt-labels .v-stepper__header .v-divider{
+    margin: 28px -70px 0;
+}
+.v-stepper,.v-stepper__header{
+    box-shadow: none !important;
+}
+.theme--light.v-stepper .v-stepper__step__step .v-icon{
+    display: none;
+}
+.atc-input{
+    width: 40px;
+    .v-input__control > .v-input__slot::before{
+        display: none !important;
+    }
+    & input{
+        text-align: center !important;
+    }
+}
+.atc{
+    & button{
+        border: 1px solid var(--border-color);
+        border-radius:50%;
+        padding: 5px;
+    }
+}
+.items-center{
+    align-items: center;
+}

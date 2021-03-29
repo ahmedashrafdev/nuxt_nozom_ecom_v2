@@ -8,10 +8,7 @@
     @slideChange="onSlideChange"
   >
     <swiper-slide v-for="product in products" :key="product">
-      <v-skeleton-loader
-        class="mx-auto"
-        type="card, list-item-two-line"
-      ></v-skeleton-loader>
+     <partials-product/>
     </swiper-slide>
   </swiper>
 </template>

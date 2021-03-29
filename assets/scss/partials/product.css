@@ -1,0 +1,12 @@
+.product:not(:last-child) {
+  border-bottom: 1px solid var(--border-color) !important;
+}
+
+.product:not(:first-child) {
+  padding-top: 50px;
+}
+
+.product .img {
+  max-width: 120px;
+  margin-right: 20px;
+}

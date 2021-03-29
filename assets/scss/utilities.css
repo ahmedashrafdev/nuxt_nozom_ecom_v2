@@ -28,3 +28,28 @@ body{
 .v-main{
     padding-bottom: 85px   !important;
 }
+.font-gray{
+    color:var(--font-gray) !important
+}
+
+.max-w-80{
+    max-width: 80%;
+}
+.f-light{
+    color: var(--font-lighter) !important;
+}
+.product-title{
+    color: var(--font);
+    font-size: 18px !important;
+    font-weight: 500;
+}
+.danger{
+    color: #dc6a6a !important;
+}
+.product-subtitle{
+    color: var(--font-lighter);
+    font-size: 14px !important;
+}
+.pt-50{
+    padding-top: 50px;
+}

@@ -1,5 +1,7 @@
 import colors from 'vuetify/es5/util/colors'
-
+import en from './locales/en.json'
+import ar from './locales/ar.json'
+import numberFormats from './locales/numbers.json'
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -20,6 +22,7 @@ export default {
     '@/assets/scss/variables.css',
     '@/assets/scss/utilities.css',
     '@/assets/scss/normalize.css',
+    '@/assets/scss/global.css',
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -50,16 +53,10 @@ export default {
     defaultLocale: 'en',
     vueI18n: {
       fallbackLocale: 'en',
+      numberFormats,
       messages: {
-        en: {
-          store: 'store',
-          home: 'home'
-        },
-        ar: {
-          store: 'المتجر',
-          home: 'الرئيسية'
-
-        },
+        en,
+        ar
       }
     }
   },

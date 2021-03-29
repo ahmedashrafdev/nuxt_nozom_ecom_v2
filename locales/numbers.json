@@ -1,0 +1,15 @@
+{
+    "en" :{
+        "currency" : {
+            "style": "currency",
+            "currency": "EGP"
+        }
+    },
+    "ar" :{
+        "currency" : {
+            "style": "currency",
+            "currency": "EGP",
+            "currencyDisplay": "symbol"
+        }
+    }
+}

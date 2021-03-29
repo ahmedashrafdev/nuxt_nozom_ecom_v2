@@ -4,6 +4,11 @@ export const state = () => ({
     errMsg: null,
     errCode: null,
     mobileCateghoriesModal : false,
+    mobileFiltersModal : false,
+    mobileOrdersModal : false,
+    mobilePointsModal : false,
+    mobileAddressesModal : false,
+    mobileWishlistModal:false,
     qtys: [
         1,2,3,4,5,6,7,8,9,10
     ],
@@ -28,8 +33,6 @@ export const state = () => ({
        17.25 , 17.5 , 17.75 , 18,
        18.25 , 18.5 , 18.75 , 19,
        19.25 , 19.5 , 19.75 , 20,
-   
-       
     ]
 
 });
@@ -38,10 +41,30 @@ export const mutations = {
     setErrMsg(state, payload) {
         state.errMsg = payload;
     },
-    setMobileCategoriesModal(state, payload) {
+    mobileOrdersModal(state, payload)
+    {
+        state.mobileOrdersModal = payload
+    },
+    
+    mobilePointsModal(state, payload)
+    {
+        state.mobilePointsModal = payload
+    },
+    
+    mobileAddressesModal(state, payload)
+    {
+        state.mobileAddressesModal = payload
+    },
+    
+    mobileFiltersModal(state, payload) {
+        state.mobileFiltersModal = payload;
+    },
+    mobileCategoriesModal(state, payload) {
         state.mobileCateghoriesModal = payload;
     },
-   
+    mobileWishlistModal(state, payload) {
+        state.mobileWishlistModal = payload;
+    },
     setErrCode(state, payload) {
         state.errCode = payload;
     }
@@ -51,8 +74,23 @@ export const getters = {
     errMsg: state => {
         return state.errMsg
     },
+    mobileOrdersModal: state => {
+        return state.mobileOrdersModal
+    },
+    mobilePointsModal: state => {
+        return state.mobilePointsModal
+    },
+    mobileAddressesModal: state => {
+        return state.mobileAddressesModal
+    },
+    mobileWishlistModal: state => {
+        return state.mobileWishlistModal
+    },
     mobileCateghoriesModal: state => {
         return state.mobileCateghoriesModal
+    },
+    mobileFiltersModal: state => {
+        return state.mobileFiltersModal
     },
     qtys : state => {
         return state.qtys

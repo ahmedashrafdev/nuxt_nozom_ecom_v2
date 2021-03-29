@@ -1,7 +1,7 @@
 <template>
   <v-row justify="center">
     <v-dialog
-      v-model="mobileCateghoriesModal"
+      v-model="mobileOrdersModal"
       fullscreen
       hide-overlay
       transition="slide-x-transition"
@@ -17,7 +17,7 @@
           >
             <v-icon>mdi-close</v-icon>
           </v-btn>
-          <v-toolbar-title calss="text-white">{{$t('categories')}}</v-toolbar-title>
+          <v-toolbar-title calss="text-white">{{$t('Orders')}}</v-toolbar-title>
           <v-spacer></v-spacer>
           <v-toolbar-items>
             <v-btn
@@ -43,12 +43,12 @@
 <script>
 export default {
     computed : {
-        mobileCateghoriesModal: {
+        mobileOrdersModal: {
             get: function() {
-				return this.$store.getters['ui/mobileCateghoriesModal']
+				return this.$store.getters['ui/mobileOrdersModal']
             },
             set: function(newValue) {
-                this.$store.commit('ui/mobileCategoriesModal' , newValue)
+                this.$store.commit('ui/mobileOrdersModal' , newValue)
             }
         },
     },
@@ -61,7 +61,7 @@ export default {
     methods:{
         close(){
             console.log('asd')
-            this.$store.commit('ui/mobileCategoriesModal' , false)
+            this.$store.commit('ui/mobileOrdersModal' , false)
         },
         save(){
             console.log('save')
