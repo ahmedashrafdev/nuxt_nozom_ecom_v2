@@ -29,7 +29,10 @@
 }
 
 .v-stepper--alt-labels .v-stepper__header .v-divider {
-  margin: 28px -70px 0;
+  margin: 29px -80px 0 !important;
+}
+p{
+  font-size: 14px;
 }
 
 .v-stepper, .v-stepper__header {
@@ -41,7 +44,8 @@
 }
 
 .atc-input {
-  width: 40px;
+  width: 40px !important;
+  max-width: 40px !important;
 }
 
 .atc-input .v-input__control > .v-input__slot::before {

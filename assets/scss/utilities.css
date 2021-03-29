@@ -38,10 +38,26 @@ body{
 .f-light{
     color: var(--font-lighter) !important;
 }
+.p-4{
+    padding: 20px !important;
+}
 .product-title{
     color: var(--font);
     font-size: 18px !important;
     font-weight: 500;
+}
+.text-primary{
+    color: var(--primary-color);
+}
+.border{
+    border:1px solid var(--border-color)
+}
+.mb-2{
+    margin-bottom: 10px;
+}
+.larger{
+    font-size: 28px !important;
+    font-weight: 600;
 }
 .danger{
     color: #dc6a6a !important;
