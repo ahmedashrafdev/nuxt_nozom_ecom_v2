@@ -56,5 +56,6 @@ export default {
 .slider-wrapper .slide{
   min-height: 30vh;
   background-size: cover;
+  background-position: center;
 }
 </style>

@@ -1,6 +1,5 @@
 <template>
   <v-app dark>
-    
     <v-app-bar
       fixed
       app
@@ -33,12 +32,11 @@
         <v-icon large>mdi-alpha-e</v-icon>
       </v-btn>
     </v-app-bar>
+    <layouts-app-nav/>
     <v-main>
-      <v-container>
         <nuxt />
-      </v-container>
     </v-main>
-    <modals-mobile-categories/>
+    <layouts-app-footer/>
     <v-bottom-navigation v-model="value" fixed>
       <v-btn v-for="(item , index) in bottomNavs" :key="index" :value="item.value" @click.prevent="goTo(item.to)"> 
         <span>{{$t(item.title)}}</span>
@@ -46,6 +44,7 @@
       </v-btn>
     </v-bottom-navigation>
 
+    <modals-mobile-categories/>
   </v-app>
 </template>
 

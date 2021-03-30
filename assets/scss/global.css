@@ -69,4 +69,16 @@
 .text-sm {
   font-size: 12px;
 }
+
+@media (min-width: 768px) {
+  header, .v-bottom-navigation {
+    display: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  nav.nav, footer.footer {
+    display: none !important;
+  }
+}
 /*# sourceMappingURL=global.css.map */

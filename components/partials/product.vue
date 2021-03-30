@@ -8,8 +8,8 @@
       ></v-skeleton-loader>
       <div class="pr-partial" v-else>
         <div class="img">
-          <v-img :src="product.ItemImage"></v-img>
-          <div class="actions">
+          <v-img min-height="200" :src="product.ItemImage"></v-img>
+          <div class="actions" v-if="!inCart.includes(product.id)">
              <v-btn
                 class="mx-2"
                 fab
@@ -26,12 +26,20 @@
                 fab
                 dark
                 small
+                @click.prevent="addToCart(product.id)"
                 color="primary"
               >
                 <v-icon dark>
                   mdi-cart-arrow-down
                 </v-icon>
               </v-btn>
+          </div>
+          <div class="actions" v-else>
+            <div class="right d-flex atc items-center py-2">
+                <v-icon @click.prevent="qty++" small>mdi-plus</v-icon>
+                <v-text-field class="atc-input"  v-model="qty"/>
+                <v-icon @click.prevent="qty--" small>mdi-minus</v-icon>
+            </div>
           </div>
         </div>
         <div class="meta text-center">
@@ -51,7 +59,13 @@ export default {
   props : ['loading' , 'product'],
   data () {
     return {
-      
+      inCart : [],
+      qty : 1
+    }
+  },
+  methods:{
+    addToCart(id){
+      this.inCart.push(id)
     }
   }
 }

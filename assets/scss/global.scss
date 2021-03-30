@@ -56,3 +56,19 @@
 .text-sm{
     font-size: 12px;
 }
+
+//layoputs
+header , .v-bottom-navigation{
+    @media(min-width:768px){
+        display: none !important;
+    }
+}
+
+//layoputs
+nav.nav , footer.footer{
+    @media(max-width:768px){
+        display: none !important;
+    }
+}
+
+
