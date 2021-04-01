@@ -38,9 +38,10 @@
 
 <script>
 export default {
-    
+    middleware: 'auth',
     data(){
       const action = this.openModal
+     
       return {
         selectedItem: 1,
         items: [
@@ -69,7 +70,13 @@ export default {
       },
 
       logout(){
-        console.log('logout')
+        this.$auth.logout().then(() => {
+          const snackbar = {
+            active: true,
+            text: 'logged out in successfully',
+          }
+          this.$store.commit('ui/setSnackbar', snackbar)
+        })
       }
     }
   }

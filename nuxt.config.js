@@ -37,6 +37,7 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/vuetify',
+    '@nuxtjs/auth-next',
     '@nuxtjs/dotenv'
   ],
 
@@ -98,5 +99,32 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-  }
+  },
+  auth: {
+    strategies: {
+      local: {
+        token: {
+          property: 'access_token',
+          required: true,
+          type: 'Bearer'
+        },
+        redirect: {
+            login: '/login',
+            logout: '/',
+            callback: '/login',
+            home: '/'
+        },
+        watchLoggedIn:false,
+        user: {
+          property: false,
+          autoFetch: true
+        },
+        endpoints: {   
+          login: { url: `${process.env.API_URL}login`, method: `post` },
+          logout: { url: `${process.env.API_URL}user/logout`, method: `post` },
+          user: { url: `${process.env.API_URL}user`, method: `get` }
+        }
+      }
+    }
+  },
 }

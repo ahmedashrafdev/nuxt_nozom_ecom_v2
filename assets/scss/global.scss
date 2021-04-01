@@ -63,7 +63,9 @@ header , .v-bottom-navigation{
         display: none !important;
     }
 }
-
+.pointer{
+    cursor: pointer;
+}
 //layoputs
 nav.nav , footer.footer{
     @media(max-width:768px){

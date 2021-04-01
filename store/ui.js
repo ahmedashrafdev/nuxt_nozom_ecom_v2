@@ -3,6 +3,7 @@
 export const state = () => ({
     errMsg: null,
     errCode: null,
+    
     mobileCateghoriesModal : false,
     mobileFiltersModal : false,
     mobileOrdersModal : false,
@@ -12,6 +13,10 @@ export const state = () => ({
     qtys: [
         1,2,3,4,5,6,7,8,9,10
     ],
+    snackbar : {
+        active: false,
+        text: '',
+    },
     weights: [
        .25 , .5 , .75 , 1,
        1.25 , 1.5 , 1.75 ,2,
@@ -40,6 +45,9 @@ export const state = () => ({
 export const mutations = {
     setErrMsg(state, payload) {
         state.errMsg = payload;
+    },
+    setSnackbar(state , payload){
+        state.snackbar = payload
     },
     mobileOrdersModal(state, payload)
     {
@@ -74,6 +82,10 @@ export const getters = {
     errMsg: state => {
         return state.errMsg
     },
+    snackbar(state){
+        return state.snackbar
+    },
+    
     mobileOrdersModal: state => {
         return state.mobileOrdersModal
     },

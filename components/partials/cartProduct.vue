@@ -4,14 +4,15 @@
             <div class="d-flex space-between">
                 <div class="d-flex right">
                     <div class="img">
-                        <v-img src="https://qomra.pro/wp-content/uploads/2019/03/image-placeholder-350x350.png"/>
+                        <v-img :src="product.ItemImage" lazy-src="https://qomra.pro/wp-content/uploads/2019/03/image-placeholder-350x350.png"/>
                     </div>
                     <div class="data">
-                        <h2 class="product-title">name</h2>
-                        <h4 class="product-subtitle">subname</h4>
+                        <h2 class="product-title"  v-if="$i18n.locale == 'ar'">{{product.ItemName}}</h2>
+                        <h2 class="product-title"  v-else>{{product.ItemNameEn}}</h2>
+                        <!-- <h4 class="product-subtitle">subname</h4> -->
                     </div>
                 </div>
-                <div class="left">
+                <div class="left pointer" @click.prevent="remove">
                     <v-icon class="danger">mdi-trash-can-outline</v-icon>
                 </div>
             </div>
@@ -23,7 +24,7 @@
 
                 </div>
                 <div class="left">
-                     <span>{{ $n(100, 'currency' , 'en') }}</span>
+                     <span>{{ $n(product.POSPP, 'currency' , 'en') }}</span>
                      <del>{{ $n(120, 'currency' , 'en') }}</del>
                 </div>
             </div>
@@ -34,9 +35,15 @@
 <script>
 
 export default {
+    props :['product'],
     data(){
         return{
             qty:1,
+        }
+    },
+    methods:{
+        remove(){
+           this.$store.dispatch('cart/remove', this.product.id)
         }
     }
 }

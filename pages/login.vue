@@ -1,117 +1,121 @@
 <template>
-<v-container>
-    <v-row>
-      <v-col cols="12">
-
-        <validation-observer
-          ref="observer"
-          v-slot="{ invalid }"
-        >
-          <form @submit.prevent="submit">
-            <validation-provider
-                v-slot="{ errors }"
-                name="email"
-                rules="required|email"
-            >
-                <v-text-field
-                v-model="email"
-                :error-messages="errors"
-                label="E-mail"
-                required
-                ></v-text-field>
-            </validation-provider>
-            <validation-provider
-                v-slot="{ errors }"
-                name="select"
-                rules="required"
-            >
-                <v-select
-                v-model="select"
-                :items="items"
-                :error-messages="errors"
-                label="Select"
-                data-vv-name="select"
-                required
-                ></v-select>
-            </validation-provider>
-            <v-btn
-                class="mr-4"
-                type="submit"
-                :disabled="invalid"
-            >
-                submit
-            </v-btn>
-            <v-btn @click="clear">
-                clear
-            </v-btn>
-            </form>
-        </validation-observer>
-      </v-col>
-    </v-row>
-</v-container>
+  <v-form
+    ref="form"
+    v-model="valid"
+    lazy-validation
+  >
+    <div class="mb-10" v-if="err">
+      <v-alert
+        border="top"
+        color="red lighten-2"
+         v-if="typeof err == 'string'"
+        dark
+      >
+        {{err}}
+      </v-alert>
+    </div>
+    <v-text-field
+      v-model="form.emailOrPhone"
+      :rules="rules.emailOrPhone"
+      label="E-mail"
+      required
+    ></v-text-field>
+    <div  class="err-list" v-if="err && err.emailOrPhone">
+      <ul>
+        <li class="error" v-for="(err , index) in err.emailOrPhone" :key="index">
+            {{err}}
+        </li>
+      </ul>
+    </div>
+    <v-text-field
+      v-model="form.password"
+      :rules="rules.password"
+      label="E-mail"
+      required
+    ></v-text-field>
+    <div  class="err-list" v-if="err && err.password">
+      <ul>
+        <li class="error" v-for="(err , index) in err.password" :key="index">
+            {{err}}
+        </li>
+      </ul>
+    </div>
+    <v-btn
+      color="primary"
+      @click="login"
+    
+      :loading="loading"
+    >
+      Login
+    </v-btn>
+  </v-form>
 </template>
 
 <script>
-  import { required, digits, email, max, regex } from 'vee-validate/dist/rules'
-  import { extend, ValidationObserver, ValidationProvider, setInteractionMode } from 'vee-validate'
-
-  setInteractionMode('eager')
-
-  extend('digits', {
-    ...digits,
-    message: '{_field_} needs to be {length} digits. ({_value_})',
-  })
-
-  extend('required', {
-    ...required,
-    message: '{_field_} can not be empty',
-  })
-
-  extend('max', {
-    ...max,
-    message: '{_field_} may not be greater than {length} characters',
-  })
-
-  extend('regex', {
-    ...regex,
-    message: '{_field_} {_value_} does not match {regex}',
-  })
-
-  extend('email', {
-    ...email,
-    message: 'Email must be valid',
-  })
-
   export default {
-    components: {
-      ValidationProvider,
-      ValidationObserver,
-    },
     data: () => ({
-      name: '',
-      phoneNumber: '',
-      email: '',
-      select: null,
-      items: [
-        'Item 1',
-        'Item 2',
-        'Item 3',
-        'Item 4',
-      ],
-      checkbox: null,
+      valid: true,
+      loading: false,
+      err : null,
+      errors :{
+        email : [],
+        password : [],
+      },
+      form : {
+        emailOrPhone : 'test@test.com',
+        password: '123456',
+      },
+      rules :{
+        emailOrPhone : [
+            v => !!v || 'Email Or Phone Field is required',
+            //  v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
+          ],
+        password:  [
+          v => !!v || 'Password is required',
+          // v => (v && v.length >= 6) || 'Password must be greater than or equal 6 characters',
+        ],
+      }
     }),
 
     methods: {
-      submit () {
-        this.$refs.observer.validate()
+      validate () {
+        this.$refs.form.validate()
       },
-      clear () {
-        this.name = ''
-        this.phoneNumber = ''
-        this.email = ''
-        this.select = null
-        this.checkbox = null
-        this.$refs.observer.reset()
+      login () {
+        this.$refs.form.validate()
+        if(this.valid){
+          this.loading  = true
+          this.$auth
+            .loginWith('local', { data: this.form })
+            .then(()=>{
+                const snackbar = {
+                    active : true,
+                    text: 'logged in successfully'
+                }
+                this.$store.commit('ui/setSnackbar' , snackbar)
+                this.loading  = false
+                if(localStorage.getItem('product')){
+                    const payload = {
+                        product : localStorage.getItem('product'),
+                        qty : localStorage.getItem('qty')
+                    }
+                    this.$store.dispatch('cart/create' , payload)
+                    .then(() => {
+                        localStorage.removeItem('product')
+                        localStorage.removeItem('qty')
+                    })
+                }
+                this.isLoading = false
+
+            }).catch(e => {
+              this.err = e.response.data
+              this.loading  = false
+
+            })  
+        }
+      },
+      resetValidation () {
+        this.$refs.form.resetValidation()
       },
     },
   }

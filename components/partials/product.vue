@@ -3,18 +3,25 @@
       <v-skeleton-loader
         v-if="loading"
         class="mx-auto"
-        @click.prevent="$router.push({name : `shop-id___${$i18n.locale}` , params :{id : 1}})"
         type="card, list-item-two-line"
       ></v-skeleton-loader>
       <div class="pr-partial" v-else>
         <div class="img">
           <v-img min-height="200" :src="product.ItemImage"></v-img>
-          <div class="actions" v-if="!inCart.includes(product.id)">
+          <div class="actions"  v-if="product.InCart">
+            <div class="right d-flex atc items-center py-2">
+                <v-icon @click.prevent="qty++" small>mdi-plus</v-icon>
+                <v-text-field class="atc-input"  v-model="qty"/>
+                <v-icon @click.prevent="qty--" small>mdi-minus</v-icon>
+            </div>
+          </div>
+          <div class="actions" v-else>
              <v-btn
                 class="mx-2"
                 fab
                 dark
                 small
+                @click.prevent="addToWishlist()"
                 color="primary"
               >
                 <v-icon dark>
@@ -26,7 +33,7 @@
                 fab
                 dark
                 small
-                @click.prevent="addToCart(product.id)"
+                @click.prevent="addToCart()"
                 color="primary"
               >
                 <v-icon dark>
@@ -34,13 +41,7 @@
                 </v-icon>
               </v-btn>
           </div>
-          <div class="actions" v-else>
-            <div class="right d-flex atc items-center py-2">
-                <v-icon @click.prevent="qty++" small>mdi-plus</v-icon>
-                <v-text-field class="atc-input"  v-model="qty"/>
-                <v-icon @click.prevent="qty--" small>mdi-minus</v-icon>
-            </div>
-          </div>
+          
         </div>
         <div class="meta text-center">
           <h2 class="product-title mb-2" v-if="$i18n.locale == 'ar'">{{product.ItemName}}</h2>
@@ -66,7 +67,37 @@ export default {
   methods:{
     addToCart(id){
       this.inCart.push(id)
-    }
+      if(this.$auth.loggedIn){
+        this.$store.dispatch('cart/create', {product: this.product.id , qty :this.qty})
+        .then(() => {
+          this.product.InCart = true
+        })
+      } else {
+        const snackbar = {
+            active : true,
+            text: 'logged in successfully'
+        }
+        this.$store.commit('ui/setSnackbar' , snackbar)
+        localStorage.setItem('product' , this.product.id )
+        localStorage.setItem('qty' , this.qty )
+
+        this.$router.push('/login')
+      }
+    },
+    addToWishlist() {
+        if(this.$auth.loggedIn){
+            this.$store.dispatch('wishlist/create', {product: this.product.id})
+        } else {
+           const snackbar = {
+            active : true,
+            text: 'logged in successfully'
+        }
+        this.$store.commit('ui/setSnackbar' , snackbar)
+        localStorage.setItem('productW' , this.product.id )
+        localStorage.setItem('qtyW' , this.qty )
+        this.$router.push('/login')
+        }
+    },
   }
 }
 </script>

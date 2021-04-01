@@ -76,6 +76,10 @@
   }
 }
 
+.pointer {
+  cursor: pointer;
+}
+
 @media (max-width: 768px) {
   nav.nav, footer.footer {
     display: none !important;
