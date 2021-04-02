@@ -45,8 +45,8 @@
     </v-col>
     <v-col cols="12">
       <v-row>
-        <v-col cols="6" v-for="(item , index) in products" :key="index">
-          <partials-product/>
+        <v-col cols="6" v-for="(product , index) in products.data" :key="index">
+          <partials-product :product="product"/>
         </v-col>
       </v-row>
     </v-col>
@@ -67,14 +67,18 @@
 <script>
 import { mapGetters } from 'vuex'
 export default {
-  mounted(){
-    console.log(this.$route.name)
-  },
   computed: {
     ...mapGetters({
-      products: 'shop/products'
+      products: 'product/products',
+      loading: 'product/loading',
     })
+  },
 
+  created(){
+    const payload = { }
+    this.$store.dispatch('product/getProducts' , payload)
+    // console.log(payload)
+    // this.$store.dispatch('product/getProducts' ,payload)
   },
   data(){
     return {

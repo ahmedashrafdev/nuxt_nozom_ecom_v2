@@ -2,7 +2,7 @@
     <div class="cart">
         <v-row class="p-b">
             <v-col cols="12">
-                <partials-cart-product v-for="(item,index) in products" :key="index"/>
+                <partials-cart-product v-for="(item,index) in cart.products" :key="index" :product="item"/>
             </v-col>
         </v-row>
         <div class="totals">
@@ -31,7 +31,7 @@ import { mapGetters } from 'vuex'
 export default {
     computed: {
       ...mapGetters({
-        products: 'cart/products'
+        cart: 'cart/cart'
       })
     },
 }

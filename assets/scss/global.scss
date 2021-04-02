@@ -56,3 +56,25 @@
 .text-sm{
     font-size: 12px;
 }
+
+//layoputs
+header , .v-bottom-navigation{
+    @media(min-width:768px){
+        display: none !important;
+    }
+}
+.pointer{
+    cursor: pointer;
+}
+//layoputs
+nav.nav , footer.footer{
+    @media(max-width:768px){
+        display: none !important;
+    }
+}
+
+
+
+.theme--dark.v-btn.v-btn--has-bg.danger{
+    background-color: red;
+}

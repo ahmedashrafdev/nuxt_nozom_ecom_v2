@@ -3,15 +3,26 @@
 export const state = () => ({
     errMsg: null,
     errCode: null,
+    
     mobileCateghoriesModal : false,
     mobileFiltersModal : false,
     mobileOrdersModal : false,
     mobilePointsModal : false,
+    editAccountModal : false,
+    deleteAddressModal:{
+        active : false,
+        id : null
+    },
     mobileAddressesModal : false,
+    mobileCraeteAddressModal : false,
     mobileWishlistModal:false,
     qtys: [
         1,2,3,4,5,6,7,8,9,10
     ],
+    snackbar : {
+        active: false,
+        text: '',
+    },
     weights: [
        .25 , .5 , .75 , 1,
        1.25 , 1.5 , 1.75 ,2,
@@ -40,6 +51,18 @@ export const state = () => ({
 export const mutations = {
     setErrMsg(state, payload) {
         state.errMsg = payload;
+    },
+    editAccountModal(state, payload){
+        state.editAccountModal =payload
+    },
+    deleteAddressModal(state, payload){
+        state.deleteAddressModal =payload
+    },
+    setSnackbar(state , payload){
+        state.snackbar = payload
+    },
+    mobileCraeteAddressModal(state , payload){
+        state.mobileCraeteAddressModal = payload
     },
     mobileOrdersModal(state, payload)
     {
@@ -74,6 +97,19 @@ export const getters = {
     errMsg: state => {
         return state.errMsg
     },
+    editAccountModal: state => {
+        return state.editAccountModal
+    },
+    deleteAddressModal: state =>{
+        return state.deleteAddressModal
+    },
+    mobileCraeteAddressModal: state => {
+        return state.mobileCraeteAddressModal
+    },
+    snackbar(state){
+        return state.snackbar
+    },
+    
     mobileOrdersModal: state => {
         return state.mobileOrdersModal
     },

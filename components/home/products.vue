@@ -39,22 +39,21 @@ export default {
         return this.$refs.mySwiper.$swiper
       },
       ...mapGetters({
-        products: 'product/products',
-        loading: 'product/loading',
+        products: 'product/homeProducts',
+        loading: 'product/homeLoading',
       })
 
     },
     
     mounted() {
       this.Componentloading = false
-      
       // this.swiper.slideTo(3, 1000, false)
     },
 
     created(){
-      const payload = { key : this.productKey}
-      this.$store.dispatch('product/getProducts' , payload)
-      console.log(payload)
+      // const payload = { key : this.productKey}
+      this.$store.dispatch('product/getHomeProducts' , this.productKey)
+      // console.log(payload)
       // this.$store.dispatch('product/getProducts' ,payload)
     },
     

@@ -1,12 +1,18 @@
 <template>
   <v-row justify="center" align="center">
-    <v-col cols="12" class="p-0">
-      <v-skeleton-loader
-        width="100%"
-        height="30vh"
-        type="image"
-      >
-      </v-skeleton-loader>
+    <v-col cols="12" class="p-0 user">
+      <v-avatar color="primary mb-2">
+        <v-icon dark>
+          mdi-account-circle
+        </v-icon>
+      </v-avatar>
+      <div class="pointer" @click.prevent="editAccount">
+        <span class="title">{{$auth.user.user.name}}</span>
+        <v-icon color="primary" small>
+          mdi-pencil
+        </v-icon>           
+      </div>
+    <v-subheader>{{$auth.user.user.email}}</v-subheader>
     </v-col>
     <v-col cols="12">
       <v-list flat>
@@ -33,14 +39,16 @@
     <modals-mobile-points/>
     <modals-mobile-addresses/>
     <modals-mobile-orders/>
+    <modals-edit-account/>
   </v-row>
 </template>
 
 <script>
 export default {
-    
+    middleware: 'auth',
     data(){
       const action = this.openModal
+     
       return {
         selectedItem: 1,
         items: [
@@ -67,10 +75,31 @@ export default {
         }
         this.$store.commit(`ui/${modal}` , true)
       },
-
+      editAccount(){
+        this.$store.commit('ui/editAccountModal' , true)
+      },
       logout(){
-        console.log('logout')
+        this.$auth.logout().then(() => {
+          const snackbar = {
+            active: true,
+            text: 'logged out in successfully',
+          }
+          this.$store.commit('ui/setSnackbar', snackbar)
+        })
       }
     }
   }
 </script>
+<style scoped>
+.user{
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--bg-gray-darken);
+  flex-direction: column;
+}
+.title{
+  color: var(--primary-color);
+}
+</style>

@@ -27,7 +27,7 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    { src: '@/plugins/vue-awesome-swiper', mode: 'client' }
+    { src: '@/plugins/vue-awesome-swiper', mode: 'client' },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -37,6 +37,7 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/vuetify',
+    '@nuxtjs/auth-next',
     '@nuxtjs/dotenv'
   ],
 
@@ -62,9 +63,8 @@ export default {
     }
   },
 
-  server:{
-    host : "192.168.1.102",
-  },
+
+  
 
   
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -98,5 +98,32 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-  }
+  },
+  auth: {
+    strategies: {
+      local: {
+        token: {
+          property: 'access_token',
+          required: true,
+          type: 'Bearer'
+        },
+        redirect: {
+            login: '/login',
+            logout: '/',
+            callback: '/login',
+            home: '/'
+        },
+        watchLoggedIn:false,
+        user: {
+          property: false,
+          autoFetch: true
+        },
+        endpoints: {   
+          login: { url: `${process.env.API_URL}login`, method: `post` },
+          logout: { url: `${process.env.API_URL}user/logout`, method: `post` },
+          user: { url: `${process.env.API_URL}user`, method: `get` }
+        }
+      }
+    }
+  },
 }
