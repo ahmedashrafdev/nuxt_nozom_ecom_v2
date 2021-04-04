@@ -139,11 +139,18 @@ export const actions = {
             .then(res => {
                 dispatch('get');
                 commit('setUpdateLoading', false);
+                const snackbar = {
+                    active : true,
+                    text: 'cart_updated_successfully'
+                }
+                commit('ui/setSnackbar' , snackbar , {root : true})
+                commit('product/updatePorudctAfterCartUpdated' , payload , {root : true})
                 resolve(res);
             })
             .catch(e => {
                 commit('setUpdateLoading', false);
-                reject(e.response.data);
+                console.log(e)
+                // reject(e.response.data);
             })
         })
     },

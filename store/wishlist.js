@@ -5,12 +5,16 @@ export const state = () => ({
     loading: false,
     createLoading: false,
     deleteLoading: false,
+    switchLoading: false,
     wishlist: []
 });
 
 export const mutations = {
     setLoading(state, payload) {
         state.loading = payload;
+    },
+    switchLoading(state, payload) {
+        state.switchLoading = payload;
     },
     setCreateLoading(state, payload) {
         state.createLoading = payload;
@@ -26,6 +30,9 @@ export const mutations = {
 export const getters = {
     loading(state){
         return state.loading
+    },
+    switchLoading(state){
+        return state.switchLoading
     },
     createLoading(state){
         return state.createLoading
@@ -80,6 +87,28 @@ export const actions = {
                 reject(e);
             })
         })
+    },
+    switch({commit , dispatch} , payload) {
+        commit('switchLoading', true);
+        return new Promise((resolve, reject) => {
+            http
+            .post(`wishlist/switch/${payload.id}` , {qty : payload.qty} )
+            .then(res => {
+                dispatch('get');
+                dispatch('cart/get' , '', {root:true});
+                commit('switchLoading', false);
+                const snackbar = {
+                    active : true,
+                    text: 'added_to_wishlist_successfully'
+                }
+                commit('ui/setSnackbar' , snackbar , {root : true})
+                resolve(res);
+            })
+            .catch(e => {
+                commit('switchLoading', false);
+                reject(e.response.data);
+            })
+        })     
     },
     remove({commit , dispatch} , payload) {
         commit('deleteLoading', true);

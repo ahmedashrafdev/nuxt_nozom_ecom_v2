@@ -10,7 +10,7 @@
         <v-btn
           text
           v-bind="attrs"
-          @click="toggle(false)"
+          @click="close()"
         >
           Close
         </v-btn>
@@ -28,10 +28,10 @@ export default {
           snackbar: 'ui/snackbar',
       })
     },
-    methods: {
-      ...mapMutations({
-          toggle: 'ui/setSnackbar' // map `this.add()` to `this.$store.commit('increment')`
-      }),
+    methods:{
+      close(){
+        this.$store.dispatch('ui/setSnackbar' , {active: false,text: ''})
+      }
     }
 }
 </script>

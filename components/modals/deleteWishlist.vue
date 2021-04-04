@@ -1,14 +1,14 @@
 <template>
 <v-dialog
-        transition="dialog-bottom-transition"
-        max-width="600"
-         v-model="deleteAddressModal.active"
-      >
+    transition="dialog-bottom-transition"
+    max-width="600"
+      v-model="deleteWishlistModal.active"
+  >
           <v-card>
             <v-toolbar
               color="danger"
               dark
-            >{{$t('are_you_sure_delete_address')}}</v-toolbar>
+            >{{$t('are_you_sure_delete_wishlist_item')}}</v-toolbar>
             <v-card-text>
              
             </v-card-text>
@@ -36,12 +36,12 @@
 <script>
 export default {
     computed : {
-        deleteAddressModal: {
+        deleteWishlistModal: {
             get: function() {
-				      return this.$store.getters['ui/deleteAddressModal']
+				      return this.$store.getters['ui/deleteWishlistModal']
             },
             set: function(newValue) {
-              this.$store.commit('ui/deleteAddressModal' , newValue)
+              this.$store.commit('ui/deleteWishlistModal' , newValue)
             }
         },
         
@@ -55,10 +55,11 @@ export default {
     },
     methods:{
         close(){
-            this.$store.commit('ui/deleteAddressModal' , {active : false , id : null})
+            console.log('asd')
+            this.$store.commit('ui/deleteWishlistModal' , false)
         },
         remove(){
-           this.$store.dispatch('user/deleteAddress' , this.deleteAddressModal.id)
+           this.$store.dispatch('wishlist/remove' , this.deleteWishlistModal.id)
         },
         save(){
             console.log('save')

@@ -3,6 +3,7 @@ import en from './locales/en.json'
 import ar from './locales/ar.json'
 import numberFormats from './locales/numbers.json'
 export default {
+  // mode:"spa",
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     titleTemplate: '%s - nozom_ecom_v3',
@@ -96,6 +97,9 @@ export default {
     }
   },
 
+  server:{
+    host : "192.168.1.102"
+  },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
   },

@@ -19,6 +19,21 @@ export const mutations = {
   homeLoading(state, payload) {
       state.homeLoading = payload;
   },
+  updatePorudctAfterCartUpdated(state , payload){
+    console.log(state.homeProducts)
+    if(state.homeProducts){
+      const product = state.homeProducts.filter(item => {
+        return item.id === payload.id ? item : ''
+      })[0]
+      product.cartQty = payload.qty
+    }
+    if(state.products.data){
+    const homeProduct = state.products.data.filter(item => {
+      return item.id === payload.id ? item : ''
+    })[0]
+    homeProduct.cartQty = payload.qty
+    }
+  },
   setProduct(state, payload) {
     state.product = payload;
 },

@@ -78,3 +78,24 @@ nav.nav , footer.footer{
 .theme--dark.v-btn.v-btn--has-bg.danger{
     background-color: red;
 }
+.pr-partial .v-btn__content{
+    color:#fff !important;
+}   
+.text-large{
+    font-size: 24px;
+}
+.pr-partial .v-select__slot{
+    height: 30px;
+}
+.pr-partial .v-select__selections{
+    height: 30px;
+}
+
+.pr-partial .v-text-field .v-input__append-inner , .product  .v-text-field .v-input__append-inner {
+    display: none;
+}
+
+.pr-partial .v-select__selection--comma , .product .v-select__selection--comma{
+    width: 100%;
+    text-align: center;
+}
