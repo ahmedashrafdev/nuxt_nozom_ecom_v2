@@ -1,5 +1,6 @@
 .no-shadow .v-input__slot {
-  box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+          box-shadow: none !important;
 }
 
 .bg-gray .v-input__slot {
@@ -33,7 +34,8 @@
 }
 
 .v-stepper, .v-stepper__header {
-  box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+          box-shadow: none !important;
 }
 
 .theme--light.v-stepper .v-stepper__step__step .v-icon {
@@ -41,11 +43,20 @@
 }
 
 .atc-input {
-  width: 40px;
+  width: 40px !important;
 }
 
 .atc-input .v-input__control > .v-input__slot::before {
   display: none !important;
+}
+
+.atc-input .v-input__append-inner {
+  display: none !important;
+}
+
+.atc-input .v-select__selection {
+  width: 100%;
+  text-align: center;
 }
 
 .atc-input input {
@@ -59,7 +70,9 @@
 }
 
 .items-center {
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .text-sm {
@@ -110,3 +123,8 @@
   width: 100%;
   text-align: center;
 }
+
+a {
+  text-decoration: none !important;
+}
+/*# sourceMappingURL=global.css.map */

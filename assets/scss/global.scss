@@ -33,9 +33,16 @@
     display: none;
 }
 .atc-input{
-    width: 40px;
+    width: 40px !important;
     .v-input__control > .v-input__slot::before{
         display: none !important;
+    }
+    & .v-input__append-inner{
+        display: none !important;
+    }
+    & .v-select__selection{
+        width: 100%;
+        text-align: center;
     }
     & input{
         text-align: center !important;
@@ -99,3 +106,7 @@ nav.nav , footer.footer{
     width: 100%;
     text-align: center;
 }
+a {
+    text-decoration: none !important;
+}
+

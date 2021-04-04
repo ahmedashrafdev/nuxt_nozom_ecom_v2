@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import { mapGetters , mapMutations } from 'vuex';
+import { mapGetters  } from 'vuex';
 
 export default {
     computed: {
@@ -30,7 +30,7 @@ export default {
     },
     methods:{
       close(){
-        this.$store.dispatch('ui/setSnackbar' , {active: false,text: ''})
+        this.$store.commit('ui/setSnackbar' , {active: false,text: ''})
       }
     }
 }

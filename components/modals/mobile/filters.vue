@@ -29,11 +29,39 @@
             </v-btn>
           </v-toolbar-items>
         </v-toolbar>
-        <v-list
-          three-line
-          subheader
-        >
-        
+        <v-list>
+          <v-subheader>{{$t('categories')}}</v-subheader>
+          <v-list-group
+            :value="true"
+            prepend-icon="mdi-fruit-grapes-outline"
+          >
+            <template v-slot:activator>
+              <v-list-item-title>categories</v-list-item-title>
+            </template>
+              <v-list-item
+                v-for="([title, icon], i) in admins"
+                :key="i"
+                link
+              >
+                <v-list-item-icon>
+                  <v-icon v-text="icon"></v-icon>
+                </v-list-item-icon>
+                <v-list-item-title v-text="title"></v-list-item-title>
+
+              </v-list-item>
+            
+          </v-list-group>
+          <v-subheader>{{$t('price')}}</v-subheader>
+              <v-list-item>
+                <v-range-slider
+                  v-model="price"
+                  dense
+                  hint="Im a hint"
+                  max="500"
+                  min="0"
+                ></v-range-slider>
+              </v-list-item>
+            
         </v-list>
       </v-card>
     </v-dialog>
@@ -55,7 +83,18 @@ export default {
     data () {
       return {
         sound: true,
+        price: [0, 500],
         widgets: false,
+        admins: [
+        ['Management', 'mdi-account-multiple-outline'],
+        ['Settings', 'mdi-cog-outline'],
+        ],
+        cruds: [
+          ['Create', 'mdi-plus-outline'],
+          ['Read', 'mdi-file-outline'],
+          ['Update', 'mdi-update'],
+          ['Delete', 'mdi-delete'],
+        ],
       }
     },
     methods:{

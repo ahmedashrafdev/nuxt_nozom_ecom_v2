@@ -19,19 +19,18 @@ export const mutations = {
   homeLoading(state, payload) {
       state.homeLoading = payload;
   },
-  updatePorudctAfterCartUpdated(state , payload){
-    console.log(state.homeProducts)
+  updateProductAfterCartUpdated(state , payload){
     if(state.homeProducts){
       const product = state.homeProducts.filter(item => {
         return item.id === payload.id ? item : ''
       })[0]
-      product.cartQty = payload.qty
+     product ? product.cartQty = payload.qty : ''
     }
     if(state.products.data){
     const homeProduct = state.products.data.filter(item => {
       return item.id === payload.id ? item : ''
     })[0]
-    homeProduct.cartQty = payload.qty
+    homeProduct ? homeProduct.cartQty = payload.qty : ''
     }
   },
   setProduct(state, payload) {
@@ -75,22 +74,22 @@ export const actions = {
           reject(e.response.data);
         })
       })
-},
+    },
     getProducts({commit}, payload) {
-        return new Promise((resolve, reject) => {
-            commit('setLoading' , true)
-            http
-            .get(`product?${serializeQuery(payload)}`)
-            .then( async (data) => {
-              commit('setProducts' , data.data)
-              commit('setLoading' , false)
-              resolve(data.data);
-            })
-            .catch(e => {
-              commit('setLoading' , false)
-              reject(e.response.data);
-            })
+      return new Promise((resolve, reject) => {
+          commit('setLoading' , true)
+          http
+          .get(`product?${serializeQuery(payload)}`)
+          .then( async (data) => {
+            commit('setProducts' , data.data)
+            commit('setLoading' , false)
+            resolve(data.data);
           })
+          .catch(e => {
+            commit('setLoading' , false)
+            reject(e.response.data);
+          })
+        })
     },
     getProduct({commit}, payload) {
       return new Promise((resolve, reject) => {

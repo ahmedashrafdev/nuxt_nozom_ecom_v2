@@ -144,7 +144,7 @@ export const actions = {
                     text: 'cart_updated_successfully'
                 }
                 commit('ui/setSnackbar' , snackbar , {root : true})
-                commit('product/updatePorudctAfterCartUpdated' , payload , {root : true})
+                commit('product/updateProductAfterCartUpdated' , payload , {root : true})
                 resolve(res);
             })
             .catch(e => {
