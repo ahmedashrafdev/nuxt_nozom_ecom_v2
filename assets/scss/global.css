@@ -1,6 +1,5 @@
 .no-shadow .v-input__slot {
-  -webkit-box-shadow: none !important;
-          box-shadow: none !important;
+  box-shadow: none !important;
 }
 
 .bg-gray .v-input__slot {
@@ -34,8 +33,7 @@
 }
 
 .v-stepper, .v-stepper__header {
-  -webkit-box-shadow: none !important;
-          box-shadow: none !important;
+  box-shadow: none !important;
 }
 
 .theme--light.v-stepper .v-stepper__step__step .v-icon {
@@ -70,9 +68,7 @@
 }
 
 .items-center {
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  align-items: center;
 }
 
 .text-sm {
@@ -127,4 +123,11 @@
 a {
   text-decoration: none !important;
 }
-/*# sourceMappingURL=global.css.map */
+
+.w-full {
+  width: 100%;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}

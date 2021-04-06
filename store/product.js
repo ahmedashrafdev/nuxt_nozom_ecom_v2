@@ -5,6 +5,13 @@ export const state = () => ({
   products: [],
   product: {},
   homeProducts:[],
+  filters:{
+    price : [],
+    group: {
+      id : null,
+      name : null,
+    },
+  },
   homeLoading: false,
   loading: false,
 });
@@ -13,6 +20,17 @@ export const mutations = {
   setProducts(state, payload) {
       state.products = payload;
   },
+
+  filters(state, payload){
+    state.filters = payload
+  },
+  filtersGroup(state, payload){
+    state.filters.group = payload
+  },
+  filtersPrice(state, payload){
+    state.filters.price = payload
+  },
+  
   homeProducts(state, payload) {
       state.homeProducts = payload;
   },
@@ -43,6 +61,9 @@ export const mutations = {
 export const getters = {
   products: state => {
       return state.products
+  },
+  filters: state => {
+    return state.filters
   },
   product: state => {
     return state.product
