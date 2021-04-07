@@ -1,7 +1,9 @@
 <template>
 <div class="shop">
   <v-row justify="center" align="center">
-
+    <v-col cols="12">
+      <layouts-bradcrumbs/>
+    </v-col>
     <v-col cols="12">
       <v-container>
         <v-row>
@@ -14,46 +16,56 @@
           </v-col>
 
           <v-col cols="12" v-else>
-             <div class="img">
-                <v-img min-height="200" :src="product.ItemImage"></v-img>
-             </div>
+            <v-row>
 
-            <h2 class="product-title larger mb-1" v-if="$i18n.locale == 'ar'">{{product.ItemName}}</h2>
-            <h2 class="product-title larger mb-1" v-else>{{product.ItemNameEn}}</h2>
-            <span class="category" v-if="$i18n.loale == 'ar'">{{product.group.GroupName}}</span>
-            <nuxt-link :to="{name : `shop___${$i18n.locale}` , query: {category : product.group.id}}" class="category" v-else>{{product.group.GroupNameEn}}</nuxt-link>
-            <!-- <p class="p">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis, quibusdam quos? Minima iure repellendus quia dignissimos perspiciatis similique consequatur optio reiciendis, repudiandae aperiam iste aspernatur, dicta asperiores corrupti distinctio soluta?
-            </p> -->
-            <div class="price  text-h4">
-              <span class="text-primary">{{ $n(100, 'currency' , 'en') }}</span>
-              <del >{{ $n(120, 'currency' , 'en') }}</del>
-            </div>
-            <div class="qty">
-              <div class="d-flex atc items-center py-2">
-                <v-icon @click.prevent="increase" small>mdi-plus</v-icon>
-                <v-select @change="updateQty" :items="qtys" class="atc-input"  v-model="qty"/>
-                <!-- <v-text-field class="atc-input"  v-model="qty"/> -->
-                <v-icon @click.prevent="decrease" small>mdi-minus</v-icon>
-              </div>
-            </div>
-            <div class="btns d-flex">
-              <v-btn text  class="border  p-4 rounded-xl">
-                <v-icon>mdi-cart-arrow-down</v-icon>
-                {{$t('add_to_cart')}}
-              </v-btn>
-              <v-btn
-                class="mx-2 p-4  border"
-                fab
-                text
-                light
-                small
-              >
-                <v-icon light>
-                  mdi-heart
-                </v-icon>
-              </v-btn>
-            </div>
+              <v-col cols="12" lg="6" >
+                <div class="img shadow">
+                    <v-img min-height="200" :src="product.ItemImage"></v-img>
+                </div>
+              </v-col>
+              <!-- <v-col cols="2"></v-col> -->
+
+              <v-col cols="12" class="product-description" lg="6" >   
+                <h2 class="product-title larger mb-1" v-if="$i18n.locale == 'ar'">{{product.ItemName}}</h2>
+                <h2 class="product-title larger mb-1" v-else>{{product.ItemNameEn}}</h2>
+                <span class="category" v-if="$i18n.loale == 'ar'">{{product.group.GroupName}}</span>
+                <nuxt-link :to="{name : `shop___${$i18n.locale}` , query: {group : product.group.id}}" class="category" v-else>{{product.group.GroupNameEn}}</nuxt-link>
+                <!-- <p class="p">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis, quibusdam quos? Minima iure repellendus quia dignissimos perspiciatis similique consequatur optio reiciendis, repudiandae aperiam iste aspernatur, dicta asperiores corrupti distinctio soluta?
+                </p> -->
+                <div class="price  text-h4">
+                  <span class="text-primary">{{ $n(100, 'currency' , 'en') }}</span>
+                  <del >{{ $n(120, 'currency' , 'en') }}</del>
+                </div>
+                <div class="qty">
+                  <div class="d-flex atc items-center py-2">
+                    <v-icon @click.prevent="increase" small>mdi-plus</v-icon>
+                    <v-select @change="updateQty" :items="qtys" class="atc-input"  v-model="qty"/>
+                    <!-- <v-text-field class="atc-input"  v-model="qty"/> -->
+                    <v-icon @click.prevent="decrease" small>mdi-minus</v-icon>
+                  </div>
+                </div>
+                <div class="btns d-flex">
+                  <v-btn text @click.prevent="addToCart"  class="border  p-4 rounded-xl">
+                    <v-icon>mdi-cart-arrow-down</v-icon>
+                    {{$t('add_to_cart')}}
+                  </v-btn>
+                  <v-btn
+                    class="mx-2 p-4  border"
+                    fab
+                    text
+                    light
+                    small
+                  >
+                    <v-icon light>
+                      mdi-heart
+                    </v-icon>
+                  </v-btn>
+                </div>
+              </v-col>
+            </v-row>
+
+            
           </v-col>
         </v-row>
       </v-container>
@@ -117,7 +129,8 @@ export default {
   methods:{
     openFiltersModal(){
 				this.$store.commit('ui/mobileFiltersModal', true)
-    }
+    },
+    
   }
   
 }

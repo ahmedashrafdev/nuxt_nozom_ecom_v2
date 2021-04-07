@@ -14,13 +14,14 @@
 .btns{
     & .button{
         display: block !important;
-        width: 100%;
+        widows: 100%;
     }
     & > div{
         &:first-child{
             & button{
-                width: 100%;
+                margin-right: 20px;
                 color:var(--primary-color);
+                width: 100%;
                 border:1px solid var(--primary-color);
                 & i{
                     margin-right: 10px;

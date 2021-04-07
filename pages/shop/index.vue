@@ -1,7 +1,7 @@
 <template>
 <div class="shop">
   <v-container>
-    <v-row justify="center" align="center">
+    <v-row justify="center" align="center" v-if="!loading">
       <!-- <v-col cols="12" class="mt-4 filters font-gray">
       <div class="sort d-flex items-center">
         <span class="mr-2">sorting:</span>
@@ -24,18 +24,18 @@
           <div class="applied-filters d-flex max-w-80 flex-wrap">
             <v-flex v-if="filters">
               <v-chip
-                v-if="filters.group !== null"
+                v-if="filters.group.id !== null"
                 class="ma-2"
                 close
-                @click:close="filters.group = null"
+                @click:close="clearFilter('group')"
               >
                 {{filters.group.name}}
               </v-chip>
               <v-chip
-                v-if="filters.price !== null"
+                v-if="filters.price.length > 0"
                 class="ma-2"
                 close
-                @click:close="filters.price = null"
+                @click:close="clearFilter('price')"
               >
                 {{ $n(filters.price[0], 'currency' , 'en') }} - {{ $n(filters.price[1], 'currency' , 'en') }}
               </v-chip>
@@ -53,14 +53,21 @@
           {{$t('showing')}} {{products.total}} {{$t('products')}}
         </div>
       </v-col>
-      <v-col cols="12">
+      <v-col cols="12" v-if="products && products.total > 0">
         <v-row>
-          <v-col cols="6" v-for="(product , index) in products.data" :key="index">
+          <v-col cols="6" xl="2" lg="3" v-for="(product , index) in products.data" :key="index">
             <partials-product :product="product"/>
           </v-col>
         </v-row>
       </v-col>
-      <v-col cols="12">
+       <v-col v-else cols="12" class="no-products" > 
+            <v-icon x-large class="remove-icon">
+              mdi-cart-remove
+            </v-icon>
+            <span class="text-large">{{$t('no_products_products')}}</span>
+            <v-btn @click.prevent="$router.push({name : `shop___${$i18n.locale}`})" color="primary">{{$t('continue_shopping')}} <v-icon dark>mdi-arrow-right</v-icon></v-btn>
+        </v-col>
+      <v-col cols="12"  v-if="products && products.total > 0">
         <div class="text-center">
            <v-pagination
               v-model="page"
@@ -69,6 +76,14 @@
               :total-visible="10"
             ></v-pagination>
         </div>
+      </v-col>
+    </v-row>
+    <v-row v-else>
+      <v-col cols="6" v-for="i in 6" :key="i">
+        <v-skeleton-loader
+          class="mx-auto"
+          type="card"
+        ></v-skeleton-loader>
       </v-col>
     </v-row>
   </v-container>
@@ -83,6 +98,7 @@ export default {
     ...mapGetters({
       products: 'product/products',
       filters: 'product/filters',
+      filtersParams: 'product/filtersParams',
       loading: 'product/loading',
     })
   },
@@ -113,6 +129,17 @@ export default {
       let query = this.$route.query
       query.page = page
       this.addParamsToLocation(query)
+    },
+    clearFilter(filter){
+      if(filter == 'group'){
+        this.$store.commit('product/filtersGroup' , {id : null,name : null})
+      }
+
+      if(filter == 'price'){
+        this.$store.commit('product/filtersPrice' , [])
+      }
+
+      this.addParamsToLocation(this.filtersParams)
     },
     addParamsToLocation(params) {
       this.$store.dispatch('product/getProducts' , params)

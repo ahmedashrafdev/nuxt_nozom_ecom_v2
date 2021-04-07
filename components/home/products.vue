@@ -12,12 +12,12 @@
      <partials-product :product="product" :loading="loading"/>
     </swiper-slide>
   </swiper>
- <v-skeleton-loader
+  <v-skeleton-loader
       v-if="Componentloading"
       width="100%"
       type="image"
     >
-    </v-skeleton-loader>
+  </v-skeleton-loader>
 
 </div>
 </template>
@@ -46,7 +46,9 @@ export default {
     },
     
     mounted() {
-      this.Componentloading = false
+      setTimeout(() => {
+        this.Componentloading = false
+      }, 1000);
       // this.swiper.slideTo(3, 1000, false)
     },
 

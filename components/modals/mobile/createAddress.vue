@@ -197,15 +197,10 @@ export default {
         getAreas(id){
             if(id){
                 this.$store.dispatch('user/getAreas' , id)
-                    .then(()=>{
-                        console.log(this.areas)
-                    });
                 return
             }
             this.$store.dispatch('user/getSections')
-            .then(()=>{
-                console.log(this.sections)
-            });
+            
         },
         create(){
             this.$refs.form.validate()
@@ -213,7 +208,6 @@ export default {
                 this.loading = true
                 this.$store.dispatch('user/attachAddress', this.form)
                 .then(()=>{
-                    console.log('asd')
                     this.loading = false
                     this.$store.commit('ui/mobileCraeteAddressModal' , false)
                 })

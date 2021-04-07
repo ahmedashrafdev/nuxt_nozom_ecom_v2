@@ -1,10 +1,10 @@
 <template>
   <v-row justify="center" align="center">
     <v-col cols="12">
-      <v-stepper alt-labels v-model="e1">
+      <v-stepper alt-labels v-model="el">
         <v-stepper-header>
           <v-stepper-step
-            :complete="e1 > 3"
+            :complete="!completed && el > 3"
             step="1"
           >
             {{ $t('cart')}}
@@ -13,7 +13,7 @@
           <v-divider></v-divider>
 
           <v-stepper-step
-            :complete="e1 > 2"
+            :complete="!completed &&  el > 2"
             step="2"
           >
             {{ $t('shipping')}}
@@ -21,12 +21,7 @@
 
           <v-divider></v-divider>
 
-          <v-stepper-step step="3"  :complete="e1 > 3">
-            {{ $t('payment')}}
-          </v-stepper-step>
-          <v-divider></v-divider>
-
-          <v-stepper-step step="4">
+          <v-stepper-step step="3">
             {{ $t('done')}}
           </v-stepper-step>
         </v-stepper-header>
@@ -37,14 +32,18 @@
           </v-stepper-content>
 
           <v-stepper-content step="2">
-            <shop-shipping/>
+            <shop-shipping  @finished="finished" @back="back"/>
           </v-stepper-content>
 
           <v-stepper-content step="3">
-            <shop-payment/>
-          </v-stepper-content>
-          <v-stepper-content step="4">
-            <h1>done</h1>
+             <div cols="12" class="no-products" > 
+                <v-icon x-large class="remove-icon">
+                  mdi-cart-check
+                </v-icon>
+                <span class="text-large title mb-0">{{$t('thank_you')}}</span>
+                <span class="mb-4">{{$t('order_done_note')}}</span>
+                <v-btn @click.prevent="$router.push({name : `shop___${$i18n.locale}`})" color="primary">{{$t('continue_shopping')}} <v-icon dark>mdi-arrow-right</v-icon></v-btn>
+            </div>
           </v-stepper-content>
         </v-stepper-items>
       </v-stepper>
@@ -57,14 +56,23 @@
 export default {
   data () {
     return {
-      e1:1,
+      el:1,
+      completed : false,
     }
   },
   methods:{
     clicked(){
-      console.log('clic ')
       this.el = 2
       console.log(this.el)
+    },
+    back(){
+      console.log('back')
+      this.el--
+    },
+    finished(){
+      console.log('asdasdasdasdasd')
+      this.el = 3
+      this.completed = true
     }
   },
   mounted(){

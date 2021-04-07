@@ -1,3 +1,13 @@
+@font-face {
+    font-family: "century";
+    src: local("century"),
+         url(~assets/fonts/Century-Gothic.ttf) format("truetype");
+}
+
+html , body , .v-application {
+    font-family: "century" !important;
+}
+
 .no-shadow  .v-input__slot{
    box-shadow: none !important;
 }
@@ -116,4 +126,44 @@ a {
 }
 .flex-wrap{
     flex-wrap: wrap;
+}
+
+.bt-1{
+    border-top: 1px solid var(--border-color);
+  }
+.mb-0{
+    margin-bottom: 0 !important;
+}
+
+
+.search{
+    & .v-input__slot{
+        min-height: 30px !important;
+    }
+}
+
+
+.v-main{
+    @media(min-width: 768px){
+        padding: 10px 0px 0px !important;
+    }
+} 
+li{
+    list-style: none;
+}
+
+.newsletter {
+    & label {
+        left: 20px !important;
+    }
+    & .v-input__slot{
+        padding-left: 0 !important;
+    }
+    & input{
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        color: #787878;
+        background: #fff;
+        padding: 8px 15px !important;
+    }
 }

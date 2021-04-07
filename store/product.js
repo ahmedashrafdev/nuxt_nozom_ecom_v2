@@ -65,6 +65,18 @@ export const getters = {
   filters: state => {
     return state.filters
   },
+
+  filtersParams: state => {
+    let params = {}
+    if(state.filters.price[0]){
+      params.priceFrom = state.filters.price[0]
+      params.priceTo = state.filters.price[1]
+    }
+    if(state.filters.group.id !== null){
+      params.group = state.filters.group.id
+    }
+    return params
+  },
   product: state => {
     return state.product
   },

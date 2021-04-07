@@ -58,4 +58,9 @@ export default {
   background-size: cover;
   background-position: center;
 }
+@media(min-width : 769px){
+  .slider-wrapper .slide{
+    height: 60vh;
+  }
+}
 </style>

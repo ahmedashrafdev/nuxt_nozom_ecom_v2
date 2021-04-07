@@ -19,20 +19,19 @@
           </v-btn>
           <v-toolbar-title calss="text-white">{{$t('categories')}}</v-toolbar-title>
           <v-spacer></v-spacer>
-          <v-toolbar-items>
-            <v-btn
-              dark
-              text
-              @click="save"
-            >
-              Save
-            </v-btn>
-          </v-toolbar-items>
         </v-toolbar>
         <v-list
-          three-line
-          subheader
         >
+
+        <v-list-item
+          v-for="group in groups"
+          :key="group.id"
+          @click.prevent="applyGroup(group)"
+          link
+        >
+          <v-list-item-title v-text="group.GroupName" v-if="$i18n.locale === 'ar'"></v-list-item-title>
+          <v-list-item-title v-text="group.GroupNameEn" v-else></v-list-item-title>
+        </v-list-item>
         
         </v-list>
       </v-card>
@@ -41,31 +40,8 @@
 </template>
 
 <script>
+import filters from '@/mixins/filters.js'
 export default {
-    computed : {
-        mobileCateghoriesModal: {
-            get: function() {
-				return this.$store.getters['ui/mobileCateghoriesModal']
-            },
-            set: function(newValue) {
-                this.$store.commit('ui/mobileCategoriesModal' , newValue)
-            }
-        },
-    },
-    data () {
-      return {
-        sound: true,
-        widgets: false,
-      }
-    },
-    methods:{
-        close(){
-            console.log('asd')
-            this.$store.commit('ui/mobileCategoriesModal' , false)
-        },
-        save(){
-            console.log('save')
-        }
-    }
-  }
+    mixins : [filters],
+}
 </script>

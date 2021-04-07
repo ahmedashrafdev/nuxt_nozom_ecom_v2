@@ -197,6 +197,11 @@ export const actions = {
             http
             .post("cart/checkout")
             .then(res => {
+                const snackbar = {
+                    active : true,
+                    text: 'added_to_cart_successfully'
+                }
+                commit('ui/setSnackbar' , snackbar , {root : true})
                 dispatch('get');
                 commit('setCheckoutLoading', false);
                 resolve(res);

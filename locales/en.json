@@ -3,8 +3,17 @@
     "home": "home",
     "shipping_note": "Delivery fees is calculated at the next status",
     "total_amount": "total amount",
+    "view_all": "view all",
     "latest_products" : "latest products",
     "from" : "from : ",
+    "thank_you" : "THANK YOU",
+    "order_done_note" : "We will send you email shortly",
     "to" : "to : ",
+    "news_letter" : "news letter",
+    "subscribe_now" : "subscribe now",
+    "news_letter_content" : "Enter your address for our mailing list to keep your update",
+    "welcome" : "welcome to  el rady foods & fruits",
+    "orderd_at" : "orderd at",
+    "copyrights" : "© Copyright 2021, Elnozom. All Rights Reserved.",
     "point": "point | points"
 }

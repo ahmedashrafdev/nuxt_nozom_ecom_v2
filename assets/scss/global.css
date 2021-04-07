@@ -1,5 +1,15 @@
+@font-face {
+  font-family: "century";
+  src: local("century"), url(~assets/fonts/Century-Gothic.ttf) format("truetype");
+}
+
+html, body, .v-application {
+  font-family: "century" !important;
+}
+
 .no-shadow .v-input__slot {
-  box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+          box-shadow: none !important;
 }
 
 .bg-gray .v-input__slot {
@@ -33,7 +43,8 @@
 }
 
 .v-stepper, .v-stepper__header {
-  box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+          box-shadow: none !important;
 }
 
 .theme--light.v-stepper .v-stepper__step__step .v-icon {
@@ -68,7 +79,9 @@
 }
 
 .items-center {
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .text-sm {
@@ -129,5 +142,45 @@ a {
 }
 
 .flex-wrap {
-  flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
 }
+
+.bt-1 {
+  border-top: 1px solid var(--border-color);
+}
+
+.mb-0 {
+  margin-bottom: 0 !important;
+}
+
+.search .v-input__slot {
+  min-height: 30px !important;
+}
+
+@media (min-width: 768px) {
+  .v-main {
+    padding: 10px 0px 0px !important;
+  }
+}
+
+li {
+  list-style: none;
+}
+
+.newsletter label {
+  left: 20px !important;
+}
+
+.newsletter .v-input__slot {
+  padding-left: 0 !important;
+}
+
+.newsletter input {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  color: #787878;
+  background: #fff;
+  padding: 8px 15px !important;
+}
+/*# sourceMappingURL=global.css.map */
