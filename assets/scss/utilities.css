@@ -73,3 +73,8 @@ body{
 .h-30v{
     height: 30vh;
 }
+
+.border-r{
+    border-right: 1px solid var(--border-color);
+    
+}

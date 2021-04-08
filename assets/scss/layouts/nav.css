@@ -7,9 +7,8 @@
 }
 
 .top .b-right {
-  padding: 10px 30px !important;
+  padding: 15px 30px !important;
   border-right: 1px solid var(--border-color);
-  -webkit-transition: var(--primary-transition);
   transition: var(--primary-transition);
 }
 
@@ -31,10 +30,32 @@
   margin-right: 10px;
 }
 
+.top .right .socials li, .top .right .socials li i {
+  transition: var(--primary-transition);
+}
+
+.top .right .socials li:hover, .top .right .socials li i:hover {
+  color: var(--primary-color);
+}
+
+.top .left {
+  padding-left: 0;
+}
+
+.top .left li, .top .left li i {
+  transition: var(--primary-transition);
+}
+
+.top .left:hover li {
+  color: var(--primary-color);
+}
+
+.top .left:hover li i {
+  color: var(--primary-color);
+}
+
 .top .social {
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  align-items: center;
 }
 
 .top .social li {
@@ -42,7 +63,7 @@
 }
 
 .bottom {
-  -webkit-transition: var(--primary-transition);
+  background-color: #fff;
   transition: var(--primary-transition);
 }
 
@@ -51,8 +72,7 @@
   top: 0;
   width: 100%;
   background-color: #fff;
-  -webkit-box-shadow: 0px 6px 5px 0px rgba(0, 0, 0, 0.07);
-          box-shadow: 0px 6px 5px 0px rgba(0, 0, 0, 0.07);
+  box-shadow: 0px 6px 5px 0px rgba(0, 0, 0, 0.07);
   z-index: 1000;
 }
 
@@ -61,13 +81,29 @@
 }
 
 .links ul li {
-  list-style: none;
   padding: 0 20px;
-  -webkit-transition: var(--primary-transition);
-  transition: var(--primary-transition);
 }
 
-.links ul li:hover {
-  color: var(--primary-color);
+.links ul li a {
+  transition: var(--primary-transition);
+  position: relative;
 }
-/*# sourceMappingURL=nav.css.map */
+
+.links ul li a::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  width: 0;
+  transition: var(--primary-transition);
+  height: 2px;
+  background-color: var(--primary-color);
+  display: block;
+}
+
+.links ul li:hover a, .links ul li:hover a:focus, .links ul li:hover a:visited, .links ul li:hover a:active {
+  color: var(--primary-color) !important;
+}
+
+.links ul li:hover a::after, .links ul li:hover a:focus::after, .links ul li:hover a:visited::after, .links ul li:hover a:active::after {
+  width: 100%;
+}

@@ -1,5 +1,16 @@
 .product{
-    
+    padding:50px 0;
+    & .right{
+        @media(min-width:768px){
+            align-items: center;
+        }
+    }
+    & .left{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+    }
     & .img{
         border: 1px solid var(--border-color-lighter);
         transition: var(--primary-transition);
@@ -15,12 +26,20 @@
     &:not(:last-child){
         border-bottom: 1px solid var(--border-color) !important;
     }
-    &:not(:first-child){
-        padding-top: 50px;
-    }
     & .img{
         max-width: 120px;
         margin-right: 20px;
+    }
+
+    & .md-hidden{
+        @media (min-width: 768px) {
+            display: none !important;
+        }
+    }
+    & .sm-hidden{
+        @media (max-width: 768px) {
+            display: none !important;
+        }
     }
 
     

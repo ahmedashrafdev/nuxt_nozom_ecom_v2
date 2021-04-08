@@ -26,7 +26,6 @@
                                     <v-text-field
                                         label="email"
                                         rounded
-                                        :rules="rules"
                                         dense
                                         color="black"
                                         hide-details="auto"
@@ -95,6 +94,8 @@ export default {
               loading: 'group/loading',
               filters: 'product/filters',
               filtersParams: 'product/filtersParams',
+              links : 'global/links',
+              contacts: 'global/contacts',
             }),
     },
     data(){
@@ -105,37 +106,6 @@ export default {
                 {  text: 'shipping_addresses', icon: 'office-building-marker-outline' },
                 {  text: 'my_cart', icon: 'cart-arrow-down' },
             ],
-            contacts :[
-                {
-                    icon : 'map-marker-outline',
-                    title : 'No 60 Lorem Street 6/2 lorem city, Cairo. ',
-                },
-                {
-                    icon : 'phone-outline',
-                    title : '0123456789',
-                },
-                {
-                    icon : 'email-outline',
-                    title : 'info@elradymarket.com',
-                },  
-            ],
-            links : [
-                {
-                    title : "facebook",
-                    url : "www.facebook.com",
-                    icon : "facebook"
-                },
-                {
-                    title : "instagram",
-                    url : "www.instagram.com",
-                    icon : "instagram"
-                },
-                {
-                    title : "twitter",
-                    url : "www.twitter.com",
-                    icon : "twitter"
-                }
-            ]
         }
     },
     methods:{

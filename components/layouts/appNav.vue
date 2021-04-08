@@ -3,12 +3,17 @@
         <div class="top">
             <v-container>
                 <div class="d-flex items-center space-between w-full">
-                   <span> welcome to  el rady foods & fruits</span>
+                   <ul class="d-flex left">
+                       <li v-for="(contact,index) in contacts" :key="index">
+                            <v-icon>mdi-{{contact.icon}}</v-icon>
+                            {{contact.title}}
+                        </li>
+                   </ul>
                     <ul class="d-flex right">
                         <li class="b-right">
                             <v-btn
                                 icon
-                                @click.prevent="$router.push({name : `shop-cart___${$i18n.locale}`})"
+                                @click.prevent="$router.push({name : `account___${$i18n.locale}`})"
                             >
                                 
                                     <v-icon >
@@ -28,6 +33,7 @@
                                     :content="count"
                                     :value="count"
                                     color="primary"
+                                    left
                                     
                                 >
                                     <v-icon >
@@ -37,18 +43,9 @@
                             {{$t('cart')}}
                             </v-btn>
                         </li>
-                        <ul class="d-flex items-center">
-                            <li>
-                                <v-icon small>mdi-facebook</v-icon>
-                            </li>
-                            <li>
-                                <v-icon small>mdi-instagram</v-icon>
-                            </li>
-                            <li>
-                                <v-icon small>mdi-twitter</v-icon>
-                            </li>
-                            <li>
-                                <v-icon small>mdi-facebook</v-icon>
+                        <ul class="d-flex items-center socials pointer">
+                            <li @click.prevent="link.url" v-for="(link , index) in links" :key="index">
+                                <v-icon medium>mdi-{{link.icon}}</v-icon>
                             </li>
 
                         </ul>
@@ -110,10 +107,12 @@ export default {
     methods: {
         handleScroll () {
         // Your scroll handling here
-            if(window.scrollY > 500){
+            if(window.scrollY > 145){
                 this.$refs.nav.classList.add('fixed')
+                // document.querySelector('main.v-main').classList().add('fixed-nav')
             } else {
                 this.$refs.nav.classList.remove('fixed')
+                // document.querySelector('main.v-main').classList().remove('fixed-nav')
 
             }
         },
@@ -162,6 +161,8 @@ export default {
             count: 'cart/cartCount',
             loading: 'product/loading',
             filtersParams: 'product/filtersParams',
+            links : 'global/links',
+            contacts : 'global/contactsNav'
 
         })
     },

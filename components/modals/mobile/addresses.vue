@@ -37,7 +37,7 @@
           subheader
         > 
         <v-container>
-          <v-expansion-panels>
+          <v-expansion-panels v-if="typeof addresses !== 'undefined' && addresses.length > 0">
             <v-expansion-panel
               v-for="(address,i) in addresses"
               :key="i"
@@ -279,6 +279,13 @@
               </v-expansion-panel-content>
             </v-expansion-panel>
           </v-expansion-panels>
+          <div v-else class="no-products" > 
+            <v-icon x-large class="remove-icon">
+              mdi-map-marker-remove-outline
+            </v-icon>
+            <span class="text-large">{{$t('no_addresses')}}</span>
+            <v-btn @click.prevent="create" color="primary">{{$t('create_new_address')}} <v-icon dark>mdi-plus</v-icon></v-btn>
+          </div>
         </v-container>
         
         </v-list>
@@ -361,7 +368,7 @@ export default {
         },
         
         create(){
-          this.$store.commit('ui/mobileCraeteAddressModal' , true)
+          this.$store.commit('ui/mobileCreateAddressModal' , true)
         },
         getUserAddresses(){
           this.$store.dispatch('user/getAddresses')

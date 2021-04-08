@@ -1,30 +1,33 @@
 <template>
+
   <v-row justify="center" align="center">
     <v-col cols="12">
       <v-stepper alt-labels v-model="el">
-        <v-stepper-header>
-          <v-stepper-step
-            :complete="!completed && el > 3"
-            step="1"
-          >
-            {{ $t('cart')}}
-          </v-stepper-step>
+          <v-container>     
+            <v-stepper-header>
+              <v-stepper-step
+                :complete="!completed && el > 3"
+                step="1"
+              >
+                {{ $t('cart')}}
+              </v-stepper-step>
 
-          <v-divider></v-divider>
+              <v-divider></v-divider>
 
-          <v-stepper-step
-            :complete="!completed &&  el > 2"
-            step="2"
-          >
-            {{ $t('shipping')}}
-          </v-stepper-step>
+              <v-stepper-step
+                :complete="!completed &&  el > 2"
+                step="2"
+              >
+                {{ $t('shipping')}}
+              </v-stepper-step>
 
-          <v-divider></v-divider>
+              <v-divider></v-divider>
 
-          <v-stepper-step step="3">
-            {{ $t('done')}}
-          </v-stepper-step>
-        </v-stepper-header>
+              <v-stepper-step step="3">
+                {{ $t('done')}}
+              </v-stepper-step>
+            </v-stepper-header>
+          </v-container>
 
         <v-stepper-items>
           <v-stepper-content step="1">
@@ -49,6 +52,7 @@
       </v-stepper>
     </v-col>
   </v-row>
+
 </template>
 
 <script>
@@ -62,19 +66,22 @@ export default {
   },
   methods:{
     clicked(){
+      window.scrollTo({ top:0, behavior: 'smooth'});
       this.el = 2
       console.log(this.el)
     },
     back(){
-      console.log('back')
+      window.scrollTo({ top:0, behavior: 'smooth'});
       this.el--
     },
     finished(){
-      console.log('asdasdasdasdasd')
+      window.scrollTo({ top:0, behavior: 'smooth'});
       this.el = 3
       this.completed = true
     }
   },
+
+  middleware: 'auth',
   mounted(){
     console.log(this.$route.name)
   }

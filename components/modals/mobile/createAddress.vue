@@ -1,7 +1,7 @@
 <template>
   <v-row justify="center">
     <v-dialog
-      v-model="mobileCraeteAddressModal"
+      v-model="mobileCreateAddressModal"
       fullscreen
       hide-overlay
       transition="slide-x-transition"
@@ -166,12 +166,12 @@ export default {
             sections: 'user/sections',
             areas: 'user/areas',
         }),
-        mobileCraeteAddressModal: {
+        mobileCreateAddressModal: {
             get: function() {
-				return this.$store.getters['ui/mobileCraeteAddressModal']
+				return this.$store.getters['ui/mobileCreateAddressModal']
             },
             set: function(newValue) {
-                this.$store.commit('ui/mobileCraeteAddressModal' , newValue)
+                this.$store.commit('ui/mobileCreateAddressModal' , newValue)
             }
         },
     },
@@ -189,7 +189,7 @@ export default {
     },
     methods:{
         close(){
-            this.$store.commit('ui/mobileCraeteAddressModal' , false)
+            this.$store.commit('ui/mobileCreateAddressModal' , false)
         },
         sectionSelected(item){
             console.log(item)
@@ -209,7 +209,7 @@ export default {
                 this.$store.dispatch('user/attachAddress', this.form)
                 .then(()=>{
                     this.loading = false
-                    this.$store.commit('ui/mobileCraeteAddressModal' , false)
+                    this.$store.commit('ui/mobileCreateAddressModal' , false)
                 })
                 .catch(e => {
                     if(typeof e == 'string'){

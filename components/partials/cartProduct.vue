@@ -12,11 +12,19 @@
                         <!-- <h4 class="product-subtitle">subname</h4> -->
                     </div>
                 </div>
+                <div class="right sm-hidden d-flex atc items-center py-2">
+                    <v-icon @click.prevent="increase" small>mdi-plus</v-icon>
+                    <v-select @change="updateQty" :items="qtys" class="atc-input"  v-model="qty"/>
+                    <v-icon @click.prevent="decrease" small>mdi-minus</v-icon>
+                </div>
+                
                 <div class="left pointer" @click.prevent="remove">
                     <v-icon class="danger">mdi-trash-can-outline</v-icon>
+                     <span class="sm-hidden">{{ $n(product.price * product.qty, 'currency' , 'en') }}</span>
                 </div>
+                
             </div>
-            <div class="d-flex space-between items-center">
+            <div class="d-flex md-hidden space-between items-center">
                 <div class="right d-flex atc items-center py-2">
                     <v-icon @click.prevent="increase" small>mdi-plus</v-icon>
                     <v-select @change="updateQty" :items="qtys" class="atc-input"  v-model="qty"/>

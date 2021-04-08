@@ -14,7 +14,8 @@ export const state = () => ({
         id : null
     },
     mobileAddressesModal : false,
-    mobileCraeteAddressModal : false,
+    mobileCreateAddressModal : false,
+    createAddressModal : false,
     mobileWishlistModal:false,
     qtys: [
         1,2,3,4,5,6,7,8,9,10
@@ -55,14 +56,17 @@ export const mutations = {
     editAccountModal(state, payload){
         state.editAccountModal =payload
     },
+    createAddressModal(state, payload){
+        state.createAddressModal =payload
+    },
     deleteAddressModal(state, payload){
         state.deleteAddressModal =payload
     },
     setSnackbar(state , payload){
         state.snackbar = payload
     },
-    mobileCraeteAddressModal(state , payload){
-        state.mobileCraeteAddressModal = payload
+    mobileCreateAddressModal(state , payload){
+        state.mobileCreateAddressModal = payload
     },
     mobileOrdersModal(state, payload)
     {
@@ -100,11 +104,14 @@ export const getters = {
     editAccountModal: state => {
         return state.editAccountModal
     },
+    createAddressModal: state => {
+        return state.createAddressModal
+    },
     deleteAddressModal: state =>{
         return state.deleteAddressModal
     },
-    mobileCraeteAddressModal: state => {
-        return state.mobileCraeteAddressModal
+    mobileCreateAddressModal: state => {
+        return state.mobileCreateAddressModal
     },
     snackbar(state){
         return state.snackbar

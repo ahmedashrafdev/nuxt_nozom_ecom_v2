@@ -31,6 +31,15 @@ export const mutations = {
     setCart(state, payload) {
         state.cart = payload;
     },
+    setCartTotals(state, payload) {
+        state.cart.subtotal = payload.subtotal;
+        state.cart.total = payload.total;
+    },
+    removeCartProduct(state, payload) {
+        state.cart.products = state.cart.products.filter(pr => {
+            return pr.id == payload ? '' : pr
+        })
+    },
     setCartCount(state, payload) {
         state.cartCount = payload;
     },
@@ -80,6 +89,7 @@ export const getters = {
 }
 export const actions = {
     get({ commit }) {
+        commit('setLoading', true);
         return new Promise((resolve, reject) => {
             http
             .get("cart")
@@ -91,6 +101,19 @@ export const actions = {
             })
             .catch(e => {
                 commit('setLoading', false);
+                reject(e.response.data);
+            })
+        })
+    },
+    getTotals({ commit }) {
+        return new Promise((resolve, reject) => {
+            http
+            .get("cart/totals")
+            .then(res => {
+                commit('setCartTotals', res.data);
+                resolve(res);
+            })
+            .catch(e => {
                 reject(e.response.data);
             })
         })
@@ -176,13 +199,14 @@ export const actions = {
             http
             .delete(`cart/${payload}`)
             .then(res => {
-                dispatch('get');
+                dispatch('getTotals');
                 commit('setDeleteLoading', false);
                 const snackbar = {
                     active : true,
-                    text: 'added_to_cart_successfully'
+                    text: 'deleted_from_cart_successfully'
                 }
                 commit('ui/setSnackbar' , snackbar , {root : true})
+                commit('removeCartProduct' , payload)
                 resolve(res);
             })
             .catch(e => {

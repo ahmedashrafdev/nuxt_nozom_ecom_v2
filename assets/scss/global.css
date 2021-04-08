@@ -8,8 +8,7 @@ html, body, .v-application {
 }
 
 .no-shadow .v-input__slot {
-  -webkit-box-shadow: none !important;
-          box-shadow: none !important;
+  box-shadow: none !important;
 }
 
 .bg-gray .v-input__slot {
@@ -43,8 +42,7 @@ html, body, .v-application {
 }
 
 .v-stepper, .v-stepper__header {
-  -webkit-box-shadow: none !important;
-          box-shadow: none !important;
+  box-shadow: none !important;
 }
 
 .theme--light.v-stepper .v-stepper__step__step .v-icon {
@@ -79,9 +77,7 @@ html, body, .v-application {
 }
 
 .items-center {
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  align-items: center;
 }
 
 .text-sm {
@@ -142,8 +138,7 @@ a {
 }
 
 .flex-wrap {
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
+  flex-wrap: wrap;
 }
 
 .bt-1 {
@@ -161,6 +156,9 @@ a {
 @media (min-width: 768px) {
   .v-main {
     padding: 10px 0px 0px !important;
+  }
+  .v-main.fixed-nav {
+    padding: 90px 0px 0px !important;
   }
 }
 
@@ -183,4 +181,46 @@ li {
   background: #fff;
   padding: 8px 15px !important;
 }
-/*# sourceMappingURL=global.css.map */
+
+.nav .b-right .v-btn::before {
+  background-color: transparent !important;
+}
+
+@media (min-width: 768px) {
+  .v-application .md-hidden {
+    display: none !important;
+  }
+}
+
+.v-stepper__content {
+  padding: 24px 0 16px 0 !important;
+}
+
+@media (max-width: 768px) {
+  .p-b {
+    padding-bottom: 200px;
+  }
+}
+
+.totals {
+  position: fixed;
+  bottom: 56px;
+  left: 0;
+  background-color: #fff;
+  padding: 30px;
+  width: 100%;
+  border-top: 1px solid var(--border-color);
+  box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+}
+
+@media (min-width: 768px) {
+  .totals {
+    bottom: 0 !important;
+    position: relative !important;
+  }
+  .totals__wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}

@@ -1,64 +1,81 @@
 <template>
-    <v-row>
-        <v-col cols="12">
-            <v-subheader>
-                {{$t('shipping_information')}}
-            </v-subheader>
-
-            <v-form
-            ref="form"
-            v-model="valid"
-            lazy-validation
-            >
-                <div class="mb-10" v-if="err">
-                    <v-alert
-                    border="top"
-                    color="red lighten-2"
-                    v-if="typeof err == 'string'"
-                    dark
-                    >
-                    {{err}}
-                    </v-alert>
+    <div>
+    <v-container>
+        <v-row class="p-b">
+            <v-col cols="12" md="6">
+                <div class="d-flex items-center space-between">
+                    <v-subheader>
+                        {{$t('shipping_information')}}
+                    </v-subheader>
+                    <div v-if="!addressFormVisible" class="pointer" @click.prevent="insert">
+                        <h4 @click.prevent="insert">{{$t('none_of_addresses')}}<v-icon class="text-primary">mdi-plus</v-icon></h4>
+                    </div>
                 </div>
-                <v-select
-                    v-show="addresses.length > 0"
-                    :items="addresses"
-                    v-model="form.address"
-                    @change="applyAddress"
-                    item-text="title"
-                    item-value="id"
-                    label="address"
-                    >
-                </v-select>
+                <v-form
+                ref="form"
+                v-model="valid"
+                lazy-validation
+                >   
+                    
+                    <div class="mb-10" v-if="err">
+                        <v-alert
+                        border="top"
+                        color="red lighten-2"
+                        v-if="typeof err == 'string'"
+                        dark
+                        >
+                        {{err}}
+                        </v-alert>
+                    </div>
+                    <v-select
+                        v-show="addresses.length > 0"
+                        :items="addresses"
+                        v-model="form.address"
+                        @change="applyAddress"
+                        item-text="title"
+                        item-value="id"
+                        label="address"
+                        >
+                    </v-select>
 
-            </v-form>
-        </v-col>
-        <v-col cols="12">
-            <v-subheader>
-                {{$t('order_summary')}}
-            </v-subheader>
-            <partials-cart-summary-product v-for="(item,index) in cart.products" :key="index" :product="item"/>
-        </v-col>
+                </v-form>
+            </v-col>
+            <v-col cols="12" md="6">
+                <v-card class="p-4">
+                    <v-subheader>
+                        {{$t('order_summary')}}
+                    </v-subheader>
+                    <partials-cart-summary-product v-for="(item,index) in cart.products" :key="index" :product="item"/>
+                </v-card>
+            </v-col>
+        </v-row>
+    </v-container>
         <div class="totals">
-            <div class="mb-2"> {{$t('subtotal')}}: {{ $n(cart.subtotal, 'currency' , 'en') }}</div>
-            <div class="mb-2" v-if="cart.shipping"> {{$t('shipping')}}: {{ $n(cart.shipping, 'currency' , 'en') }}</div>
-            <h2 class="product-title mb-2"> {{$t('total_amount')}}: {{ $n(cart.total, 'currency' , 'en') }}</h2>
-            <v-row class="btns">
-                <v-col cols="5" @click.prevent="$emit('back')">
-                    <v-btn text >
-                        <v-icon>mdi-arrow-left</v-icon>
-                        {{$t('back')}}
-                    </v-btn>
-                </v-col>
-                <v-col cols="7">
-                    <v-btn :disabled="form.address == null" text @click.prevent="cehckout">
-                        {{$t('checkout')}}
-                        <v-icon>mdi-arrow-right</v-icon>
-                    </v-btn>
-                </v-col>
-            </v-row>
+            <v-container>
+                <div class="totals__wrapper">
+                    <div class="mb-2"> {{$t('subtotal')}}: {{ $n(cart.subtotal, 'currency' , 'en') }}</div>
+                    <div class="mb-2" v-if="cart.shipping"> {{$t('shipping')}}: {{ $n(cart.shipping, 'currency' , 'en') }}</div>
+                    <h2 class="product-title mb-2"> {{$t('total_amount')}}: {{ $n(cart.total, 'currency' , 'en') }}</h2>
+                    <v-row class="btns">
+                        <v-col cols="5" @click.prevent="$emit('back')">
+                            <v-btn text >
+                                <v-icon>mdi-arrow-left</v-icon>
+                                {{$t('back')}}
+                            </v-btn>
+                        </v-col>
+                        <v-col cols="7">
+                            <v-btn :disabled="form.address == null" text @click.prevent="cehckout">
+                                {{$t('checkout')}}
+                                <v-icon>mdi-arrow-right</v-icon>
+                            </v-btn>
+                        </v-col>
+                    </v-row>
+                </div>
+            </v-container>
         </div>
-    </v-row>
+        <modals-create-address @created="addressCreated"/>
+
+    </div>
 </template>
 
 <script>
@@ -83,6 +100,10 @@ export default {
     },
 
     methods:{
+        insert(){
+            console.log('insert ')
+            this.$store.commit('ui/createAddressModal' , true)
+        },
         cehckout() {
             this.$refs.form.validate()
             if(this.valid){
@@ -92,17 +113,24 @@ export default {
                 })
             }
         },
+        addressCreated(id){
+            this.form.address = id
+            this.applyAddress()
+            this.getAdresses()
+        },
         applyAddress() {
             this.$store.dispatch('cart/applyAddress' , this.form.address)
         },
         addressCreated(id){
             this.form.address = id
             this.$store.dispatch('cart/applyAddress' , this.form.address)
+        },
+        getAddresses(){
+            this.$store.dispatch('user/getAddresses')
             .then(() => {
-                this.$store.dispatch('cart/checkout')
-                .then(() => {
-                    this.$store.dispatch('cart/applyAddress' , this.form.address)
-                })
+                if(this.cart.address_id) {
+                    this.form.address = this.cart.address_id
+                }
             })
         }
     },
@@ -113,12 +141,7 @@ export default {
       }),
 
     created(){
-          this.$store.dispatch('user/getAddresses')
-          .then(() => {
-              if(this.cart.address_id) {
-                  this.form.address = this.cart.address_id
-              }
-          })
+          this.getAddresses()
 
     }
 }
