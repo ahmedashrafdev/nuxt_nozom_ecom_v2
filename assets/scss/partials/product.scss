@@ -5,6 +5,11 @@
             align-items: center;
         }
     }
+
+    & .meta{
+        color:var(--font-gray) !important;
+        font-size: 14px !important;
+    }
     & .left{
         display: flex;
         flex-direction: column;

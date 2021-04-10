@@ -1,5 +1,5 @@
 <template>
-<v-dialog
+  <v-dialog
         transition="dialog-bottom-transition"
         max-width="600"
          v-model="deleteAddressModal.active"
@@ -7,12 +7,23 @@
           <v-card>
             <v-toolbar
               color="danger"
+              v-if="!restricted"
               dark
-            >{{$t('are_you_sure_delete_address')}}</v-toolbar>
-            <v-card-text>
-             
+            >
+            {{$t('are_you_sure_delete_address')}}
+          </v-toolbar>
+          <v-toolbar
+            color="danger"
+            v-else
+            dark
+          >
+            {{$t('delete_restricted')}}
+          </v-toolbar>
+            <v-card-text  v-if="restricted">
+             {{$t('cant_delete_address')}}
             </v-card-text>
-            <v-card-actions class="justify-end">
+            <v-card-text v-else></v-card-text>
+            <v-card-actions v-if="!restricted" class="justify-end">
               <v-btn
                 text
                 @click="close"
@@ -49,20 +60,25 @@ export default {
     data () {
       return {
         sound: true,
+        restricted: false,
         points : 300,
         widgets: false,
       }
     },
     methods:{
         close(){
+      this.restricted = false
             this.$store.commit('ui/deleteAddressModal' , {active : false , id : null})
         },
         remove(){
            this.$store.dispatch('user/deleteAddress' , this.deleteAddressModal.id)
+           .catch(e => {
+              this.restricted = true
+           })
         },
         save(){
             console.log('save')
         }
-    }
+    },
   }
 </script>

@@ -1,7 +1,7 @@
 <template>
 <div class="shop">
   <v-container>
-    <v-row justify="center" align="center" v-if="!loading">
+    <v-row  v-if="!loading">
       <!-- <v-col cols="12" class="mt-4 filters font-gray">
       <div class="sort d-flex items-center">
         <span class="mr-2">sorting:</span>
@@ -22,7 +22,7 @@
       <v-col class="top-icons" cols="12">
         <div class="d-flex flex-wrap space-between px-4">
           <div class="applied-filters d-flex max-w-80 flex-wrap">
-            <v-flex v-if="filters">
+            <!-- <v-flex v-if="filters">
               <v-chip
                 v-if="filters.group.id !== null"
                 class="ma-2"
@@ -39,12 +39,12 @@
               >
                 {{ $n(filters.price[0], 'currency' , 'en') }} - {{ $n(filters.price[1], 'currency' , 'en') }}
               </v-chip>
-            </v-flex>
+            </v-flex> -->
           </div>
           <div>
             <v-icon @click.prevent="openFiltersModal">mdi-filter-outline</v-icon>
-            <v-icon @click.prevent="openFiltersModal">mdi-format-list-bulleted</v-icon>
-            <v-icon @click.prevent="openFiltersModal">mdi-view-grid-outline</v-icon>
+            <!-- <v-icon @click.prevent="openFiltersModal">mdi-format-list-bulleted</v-icon>
+            <v-icon @click.prevent="openFiltersModal">mdi-view-grid-outline</v-icon> -->
           </div>
         </div>
       </v-col>
@@ -53,7 +53,10 @@
           {{$t('showing')}} {{products.total}} {{$t('products')}}
         </div>
       </v-col>
-      <v-col cols="12" v-if="products && products.total > 0">
+      <v-col class="sm-hidden" cols="3">
+        <shop-sidebar/>
+      </v-col>
+      <v-col cols="12" md="9" v-if="products && products.total > 0">
         <v-row>
           <v-col cols="6" xl="2" lg="3" v-for="(product , index) in products.data" :key="index">
             <partials-product :product="product"/>
@@ -132,6 +135,7 @@ export default {
     },
     clearFilter(filter){
       if(filter == 'group'){
+        this.filters.group = {id : null,name : null}
         this.$store.commit('product/filtersGroup' , {id : null,name : null})
       }
 

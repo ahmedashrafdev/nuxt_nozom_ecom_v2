@@ -7,6 +7,7 @@ export const state = () => ({
     deleteLoading: false,
     couponLoading: false,
     checkoutLoading: false,
+    orderLoading:false,
     cart: [],
     cartCount : null,
     orders: []
@@ -15,6 +16,9 @@ export const state = () => ({
 export const mutations = {
     setLoading(state, payload) {
         state.loading = payload;
+    },
+    setOrderLoading(state, payload) {
+        state.orderLoading = payload;
     },
     setCreateLoading(state, payload) {
         state.createLoading = payload;
@@ -54,6 +58,9 @@ export const mutations = {
 export const getters = {
     loading(state){
         return state.loading
+    },
+    orderLoading(state){
+        return state.orderLoading
     },
     cartCount(state){
         return state.cartCount
@@ -119,16 +126,17 @@ export const actions = {
         })
     },
     getOrders({ commit }) {
+        commit('setOrderLoading', true);
         return new Promise((resolve, reject) => {
             http
             .get(`user/orders`)
             .then(res => {
                 commit('setOrders', res.data);
-                commit('setLoading', false);
+                commit('setOrderLoading', false);
                 resolve(res);
             })
             .catch(e => {
-                commit('setLoading', false);
+                commit('setOrderLoading', false);
                 reject(e.response.data);
             })
         })

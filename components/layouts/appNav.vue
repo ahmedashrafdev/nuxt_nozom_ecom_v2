@@ -85,13 +85,7 @@
                         </ul>
                     </div>
                     <div class="search">
-                       <v-autocomplete
-                        filled
-                        rounded
-                        dense
-                        hide-details=""
-                        label="search"
-                        ></v-autocomplete>
+                        <layouts-search/>
                     </div>
                 </div>
             </v-container>
@@ -103,7 +97,18 @@
 <script>
 import { mapGetters } from 'vuex'
 export default {
-
+    data(){
+        return {
+            items : ['asd'],
+            isLoading : false,
+            term : '',
+        }
+    },
+    watch:{
+        term: newVal => {
+            console.log(newVal)
+        } 
+    },
     methods: {
         handleScroll () {
         // Your scroll handling here
@@ -116,7 +121,11 @@ export default {
 
             }
         },
-         setGroup(group){
+        search(val){
+            console.log('asd')
+            console.log(val)
+        },
+        setGroup(group){
             
             const name = this.$i18n.locale == 'ar' ? group.GroupName : group.GroupNameEn
             const groupFilter = {

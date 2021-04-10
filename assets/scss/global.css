@@ -224,3 +224,7 @@ li {
     justify-content: space-between;
   }
 }
+
+.bg-gray .v-input__slot{
+  background-color: var(--bg-gray) !important;
+}

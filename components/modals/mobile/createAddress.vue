@@ -207,9 +207,10 @@ export default {
             if(this.valid){
                 this.loading = true
                 this.$store.dispatch('user/attachAddress', this.form)
-                .then(()=>{
+                .then(res=>{
                     this.loading = false
                     this.$store.commit('ui/mobileCreateAddressModal' , false)
+                    this.$emit('created' , res)
                 })
                 .catch(e => {
                     if(typeof e == 'string'){

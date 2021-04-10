@@ -6,7 +6,10 @@
       hide-overlay
       transition="slide-x-transition"
     >
-      <v-card>
+    <v-progress-circular v-if="loading">
+
+    </v-progress-circular>
+      <v-card v-else>
         <v-toolbar
           color="primary"
           dark
@@ -223,7 +226,7 @@
                         :class="{show : editId == address.id}"
                         elevation="5"
                         @click.prevent="editAction()"
-                        :loading="loading"
+                        :loading="editLoading"
                         color="primary"
                       >
                         <v-icon dark>
@@ -305,7 +308,7 @@ export default {
     computed : {
       ...mapGetters({
         addresses: 'user/addresses',
-        addressesLoading: 'user/addressesLoading',
+        loading: 'user/addressesLoading',
         sections: 'user/sections',
         areas: 'user/areas',
       }),
@@ -327,7 +330,7 @@ export default {
         err : null,
         editId : null,
         SectionNo : null,
-        loading: false,
+        editLoading: false,
         form ,
         errors ,
         rules ,
@@ -339,15 +342,15 @@ export default {
           this.$store.commit('ui/mobileAddressesModal' , false)
         },
         editAction(){
-          this.loading = true
+          this.editLoading = true
           this.$store.dispatch('user/editAddress', {address :this.form , id: this.editId})
           .then(()=>{
-              this.loading = false
+              this.editLoading = false
               this.editId = null
           })
           .catch(e => {
               this.msg = e
-              this.loading = false
+              this.editLoading = false
           }); 
         },
         getAreas(id){

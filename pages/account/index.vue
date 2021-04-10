@@ -1,6 +1,6 @@
 <template>
   <v-row justify="center" align="center">
-    <v-col cols="12" class="p-0 user">
+    <v-col cols="12" class="p-0 md-hidden user">
       <v-avatar color="primary mb-2">
         <v-icon dark>
           mdi-account-circle
@@ -14,7 +14,7 @@
       </div>
     <v-subheader>{{$auth.user.user.email}}</v-subheader>
     </v-col>
-    <v-col cols="12">
+    <v-col cols="12" class="md-hidden">
       <v-list flat>
       <v-list-item-group
         v-model="selectedItem"
@@ -34,6 +34,43 @@
         </v-list-item>
       </v-list-item-group>
     </v-list>
+    </v-col>
+    <v-col cols="12" class="sm-hidden">
+      <v-container>
+        <v-tabs vertical>
+      <v-tab class="left" v-for="(item,index) in items" @click.prevent="action(item.text)"  :key="index">
+        <v-icon left>
+         {{item.icon}}
+        </v-icon>
+        {{item.text}}
+      </v-tab>
+      
+
+      <v-tab-item>
+        <v-card flat>
+          <v-card-text >
+            <account-orders/>
+          </v-card-text>
+        </v-card>
+      </v-tab-item>
+     
+     <v-tab-item>
+        <v-card flat>
+          <v-card-text >
+            <account-wishlist/>
+          </v-card-text>
+        </v-card>
+      </v-tab-item>
+      <v-tab-item>
+        <v-card flat>
+          <v-card-text >
+            <account-addresses/>
+          </v-card-text>
+        </v-card>
+      </v-tab-item>
+    </v-tabs>
+      </v-container>
+      
     </v-col>
     <modals-mobile-wishlist/>
     <modals-mobile-points/>
@@ -55,7 +92,6 @@ export default {
           { action , modal : 'mobileOrdersModal'  , text: 'order_history', icon: 'mdi-calendar-blank' },
           { action , modal : 'mobileWishlistModal'  , text: 'wishlist', icon: 'mdi-heart-outline' },
           { action , modal : 'mobileAddressesModal'  , text: 'shipping_addresses', icon: 'mdi-office-building-marker-outline' },
-          { action , modal : 'mobilePointsModal'  , text: 'my_points', icon: 'mdi-gift-outline' },
           { action , modal : 'cart'  , text: 'my_cart', icon: 'mdi-cart-arrow-down' },
           { action , modal : 'logout'  , text: 'logout', icon: 'mdi-logout-variant' },
         ],
@@ -74,6 +110,14 @@ export default {
           return
         }
         this.$store.commit(`ui/${modal}` , true)
+      },
+      action(action){
+        if(action == 'my_cart'){
+          this.$router.push({name : `shop-cart___${this.$i18n.locale}`})
+        }
+        if(action == 'logout'){
+          this.logout()
+        }
       },
       editAccount(){
         this.$store.commit('ui/editAccountModal' , true)
@@ -98,6 +142,9 @@ export default {
   align-items: center;
   background-color: var(--bg-gray-darken);
   flex-direction: column;
+}
+.left {
+  justify-content: flex-start !important;
 }
 .title{
   color: var(--primary-color);

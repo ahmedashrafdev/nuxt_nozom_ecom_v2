@@ -25,10 +25,22 @@ export const mutations = {
     state.filters = payload
   },
   filtersGroup(state, payload){
-    state.filters.group = payload
+    state.filters = {
+      price : [],
+      group: {
+        id : null,
+        name : null,
+      },
+    }
   },
   filtersPrice(state, payload){
-    state.filters.price = payload
+    state.filters = {
+      price : [],
+      group: {
+        id : null,
+        name : null,
+      },
+    }
   },
   
   homeProducts(state, payload) {
@@ -143,7 +155,7 @@ export const actions = {
   searchProducts({}, payload) {
     return new Promise((resolve, reject) => {
         http
-        .get(`product/search?${serializeQuery(payload)}`)
+        .get(`product?Search=${payload}`)
         .then( async (data) => {
             resolve(data.data);
         })

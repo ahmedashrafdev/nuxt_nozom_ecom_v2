@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="shipping">
     <v-container>
         <v-row class="p-b">
             <v-col cols="12" md="6">
@@ -7,16 +7,16 @@
                     <v-subheader>
                         {{$t('shipping_information')}}
                     </v-subheader>
-                    <div v-if="!addressFormVisible" class="pointer" @click.prevent="insert">
+                    <div v-if="addresses.length > 0" class="pointer" @click.prevent="insert">
                         <h4 @click.prevent="insert">{{$t('none_of_addresses')}}<v-icon class="text-primary">mdi-plus</v-icon></h4>
                     </div>
                 </div>
                 <v-form
-                ref="form"
-                v-model="valid"
-                lazy-validation
+                    ref="form"
+                    v-model="valid"
+                    v-show="addresses.length > 0"
+                    lazy-validation
                 >   
-                    
                     <div class="mb-10" v-if="err">
                         <v-alert
                         border="top"
@@ -39,14 +39,37 @@
                     </v-select>
 
                 </v-form>
+                <div  v-show="addresses.length == 0">
+                    <v-alert
+                    border="top"
+                    color="primary"
+                    dark
+                    >
+                    {{$t('no_address_shipping')}}
+                    </v-alert>
+                    <forms-create-address @created="addressCreated"/>
+                </div>
+
+                <v-row class="btns sm-hidden py-4">
+                        <v-col cols="5" @click.prevent="$emit('back')">
+                            <v-btn text >
+                                <v-icon>mdi-arrow-left</v-icon>
+                                {{$t('back')}}
+                            </v-btn>
+                        </v-col>
+                        <v-col cols="7">
+                            <v-btn :disabled="form.address == null" text @click.prevent="cehckout">
+                                {{$t('checkout')}}
+                                <v-icon>mdi-arrow-right</v-icon>
+                            </v-btn>
+                        </v-col>
+                    </v-row>
             </v-col>
             <v-col cols="12" md="6">
-                <v-card class="p-4">
-                    <v-subheader>
-                        {{$t('order_summary')}}
-                    </v-subheader>
-                    <partials-cart-summary-product v-for="(item,index) in cart.products" :key="index" :product="item"/>
-                </v-card>
+                <v-subheader class="summary-title">
+                    {{$t('cart_summary')}}
+                </v-subheader>
+                <shop-cart-summary/>
             </v-col>
         </v-row>
     </v-container>
@@ -79,7 +102,6 @@
 </template>
 
 <script>
-import {getAddressTitle} from '@/utilities/helpers.js'
 import { mapGetters } from 'vuex'
 export default {
     computed: {
@@ -116,15 +138,18 @@ export default {
         addressCreated(id){
             this.form.address = id
             this.applyAddress()
-            this.getAdresses()
+           // this.getAdresses()
+            console.log(id)
+            console.log(this.form.address)
         },
         applyAddress() {
             this.$store.dispatch('cart/applyAddress' , this.form.address)
         },
-        addressCreated(id){
-            this.form.address = id
-            this.$store.dispatch('cart/applyAddress' , this.form.address)
-        },
+        // addressCreated(id){
+        //     console.log(id)
+        //     this.form.address = id
+        //     this.$store.dispatch('cart/applyAddress' , this.form.address)
+        // },
         getAddresses(){
             this.$store.dispatch('user/getAddresses')
             .then(() => {
@@ -148,14 +173,14 @@ export default {
 </script>
 
 <style>
-.totals{
-    position: fixed;
-    bottom: 56px;
-    left: 0;
-    background-color: #fff;
-    padding: 30px;
-    width: 100%;
-    border-top: 1px solid var(--border-color);
-    box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+.summary-title{
+    display: block;
+    padding:0 !important;
+    margin:20px 0 !important;
+}
+@media(min-width: 768px){
+    .shipping .totals {
+        display: none !important;
+    }
 }
 </style>

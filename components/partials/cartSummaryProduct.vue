@@ -7,10 +7,16 @@
                         <v-img :src="product.ItemImage" lazy-src="https://qomra.pro/wp-content/uploads/2019/03/image-placeholder-350x350.png"/>
                     </div>
                     <div class="data pointer" @click.prevent="$router.push({name : `shop-id___${$i18n.locale}` , params : {id : product.id}})">
-                        <h2 class="product-title"  v-if="$i18n.locale == 'ar'">{{product.qty}} x {{product.ItemName}}</h2>
-                        <h2 class="product-title"  v-else>{{product.qty}} x {{product.ItemNameEn}}</h2>
-                        <div class=" mt-2">
-                            <span>{{ $n(product.price * product.qty, 'currency' , 'en') }}</span>
+                        <h2 class="product-title"  v-if="$i18n.locale == 'ar'">{{product.ItemName}}</h2>
+                        <h2 class="product-title"  v-else>{{product.ItemNameEn}}</h2>
+                        <div class=" mt-2 meta">
+                            <span>{{$t('quantity')}} :</span><span>{{ product.qty }}</span>
+                        </div>
+                        <div class=" mt-2 meta">
+                            <span>{{$t('price')}} :</span><span>{{ $n(product.price, 'currency' , 'en') }}</span>
+                        </div>
+                        <div class=" mt-2 meta">
+                            <span>{{$t('total')}} :</span><span>{{ $n(product.price * product.qty, 'currency' , 'en') }}</span>
                         </div>
                         <!-- <h4 class="product-subtitle">subname</h4> -->
                     </div>
