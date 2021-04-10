@@ -1,6 +1,7 @@
 <template>
      <v-app-bar
         fixed
+        class="app-bar"
         app
         >
         <v-toolbar-title v-text="title" />
@@ -20,11 +21,7 @@
                 </v-icon>
             </v-badge>
         </v-btn>
-        <v-btn
-            icon
-        >
-            <v-icon>mdi-magnify</v-icon>
-        </v-btn>
+        <layouts-mobile-search/>
         <v-btn
             icon
             v-if="$i18n.locale == 'en'"
@@ -49,6 +46,7 @@ export default {
     data(){
         return {
             title : 'home',
+            dialog : false
         }
     },
     computed: {
@@ -62,6 +60,9 @@ export default {
             const locale = this.$i18n.locale === 'en' ? 'ar' : 'en'
             console.log('asd')
             this.$router.push({name : `index___${locale}`})
+        },
+        search(){
+            this.dialog = true
         }
     },
 

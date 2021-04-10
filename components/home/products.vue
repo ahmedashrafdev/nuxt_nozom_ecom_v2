@@ -1,17 +1,20 @@
 <template>
 <div>
-  <swiper
-    :options="swiperOption" 
-    v-show="!Componentloading"
-    ref="mySwiper" 
-    :space-between="50"
-    @swiper="onSwiper"
-    @slideChange="onSlideChange"
-  >
-    <swiper-slide v-for="product in products" :key="product.id">
-     <partials-product :product="product" :loading="loading"/>
-    </swiper-slide>
-  </swiper>
+  <no-ssr>
+
+    <swiper
+      :options="swiperOption" 
+      v-show="!Componentloading"
+      ref="mySwiper" 
+      :space-between="50"
+      @swiper="onSwiper"
+      @slideChange="onSlideChange"
+    >
+      <swiper-slide v-for="product in products" :key="product.id">
+      <partials-product :product="product" :loading="loading"/>
+      </swiper-slide>
+    </swiper>
+  </no-ssr>
   <v-skeleton-loader
       v-if="Componentloading"
       width="100%"

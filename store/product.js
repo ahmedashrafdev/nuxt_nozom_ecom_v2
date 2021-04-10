@@ -20,6 +20,12 @@ export const mutations = {
   setProducts(state, payload) {
       state.products = payload;
   },
+  productWishlist(state , payload){
+    const product = state.homeProducts.filter(item => {
+      return item.id === payload.id ? item : ''
+      })[0]
+    product ? product.inWishlist = payload.active : ''
+  },
 
   filters(state, payload){
     state.filters = payload

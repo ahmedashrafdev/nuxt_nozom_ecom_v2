@@ -5,7 +5,7 @@
 }
 
 html , body , .v-application {
-    font-family: "century" !important;
+    font-family: "roboto" !important;
 }
 
 .no-shadow  .v-input__slot{
@@ -18,8 +18,7 @@ html , body , .v-application {
 }
 
 .v-stepper:not(.v-stepper--vertical) .v-stepper__label{
-    display: block !important;
-    @media(max-width: 413px){
+    display: block !important;@media(max-width: 413px){
         display: none !important;
     }
 }
@@ -206,4 +205,37 @@ li{
             justify-content: space-between;
         }
     }
+}
+
+.search .v-input__append-inner{
+    display: none !important;
+}
+
+
+
+.relative{
+    position: relative !important;
+}
+.v-menu__content {
+    background-color: #fff;
+    box-shadow: none;
+    // padding: 20px;
+}
+
+.err-list{
+    & .error{
+        background-color: #fff !important;
+    }
+    & ul{
+        padding-left: 0 !important;
+        & li{
+            background-color: #fff !important;
+            color: var(--danger);
+            margin-bottom: 10px;
+        }
+    }
+}
+
+.d-block button{
+    width: 100% !important;
 }

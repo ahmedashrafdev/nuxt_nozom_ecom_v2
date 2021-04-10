@@ -42,6 +42,11 @@
           </li>
         </ul>
       </div>
+      <div class="no-account">
+        {{$t('no_account')}}
+        <nuxt-link :to="{name :`register___${$i18n.locale}`}">{{'register_now'}}</nuxt-link>
+
+      </div>
       <v-btn
         color="primary"
         class="d-block"
@@ -57,6 +62,8 @@
 
 <script>
   export default {
+      layout :'auth',
+
     data: () => ({
       valid: true,
       loading: false,

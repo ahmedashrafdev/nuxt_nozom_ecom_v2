@@ -168,7 +168,7 @@ export const actions = {
             http
             .put(`cart/${payload.id}` , {qty : payload.qty})
             .then(res => {
-                dispatch('get');
+               // dispatch('get');
                 commit('setUpdateLoading', false);
                 const snackbar = {
                     active : true,

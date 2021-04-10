@@ -9,6 +9,7 @@
 .top .b-right {
   padding: 15px 30px !important;
   border-right: 1px solid var(--border-color);
+  -webkit-transition: var(--primary-transition);
   transition: var(--primary-transition);
 }
 
@@ -31,6 +32,7 @@
 }
 
 .top .right .socials li, .top .right .socials li i {
+  -webkit-transition: var(--primary-transition);
   transition: var(--primary-transition);
 }
 
@@ -43,6 +45,7 @@
 }
 
 .top .left li, .top .left li i {
+  -webkit-transition: var(--primary-transition);
   transition: var(--primary-transition);
 }
 
@@ -55,7 +58,9 @@
 }
 
 .top .social {
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .top .social li {
@@ -64,6 +69,7 @@
 
 .bottom {
   background-color: #fff;
+  -webkit-transition: var(--primary-transition);
   transition: var(--primary-transition);
 }
 
@@ -72,7 +78,8 @@
   top: 0;
   width: 100%;
   background-color: #fff;
-  box-shadow: 0px 6px 5px 0px rgba(0, 0, 0, 0.07);
+  -webkit-box-shadow: 0px 6px 5px 0px rgba(0, 0, 0, 0.07);
+          box-shadow: 0px 6px 5px 0px rgba(0, 0, 0, 0.07);
   z-index: 1000;
 }
 
@@ -85,6 +92,7 @@
 }
 
 .links ul li a {
+  -webkit-transition: var(--primary-transition);
   transition: var(--primary-transition);
   position: relative;
 }
@@ -94,6 +102,7 @@
   position: absolute;
   bottom: -10px;
   width: 0;
+  -webkit-transition: var(--primary-transition);
   transition: var(--primary-transition);
   height: 2px;
   background-color: var(--primary-color);
@@ -107,3 +116,4 @@
 .links ul li:hover a::after, .links ul li:hover a:focus::after, .links ul li:hover a:visited::after, .links ul li:hover a:active::after {
   width: 100%;
 }
+/*# sourceMappingURL=nav.css.map */

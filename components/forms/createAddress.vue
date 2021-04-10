@@ -108,7 +108,7 @@
         
         <v-btn
             color="primary"
-            class="d-block"
+            class="d-block w-full"
             @click="create"
             :loading="loading"
         >

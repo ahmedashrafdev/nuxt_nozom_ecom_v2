@@ -8,6 +8,8 @@
           @click.prevent="setGroup(group)"
           link
         >
+
+          <v-icon>mdi-{{group.icon}}</v-icon>
           <v-list-item-title v-text="group.GroupName" v-if="$i18n.locale === 'ar'"></v-list-item-title>
           <v-list-item-title v-text="group.GroupNameEn" v-else></v-list-item-title>
         </v-list-item>

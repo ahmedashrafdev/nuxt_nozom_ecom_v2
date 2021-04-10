@@ -1,6 +1,8 @@
 @media (min-width: 768px) {
   .btns {
-    flex: 0 auto;
+    -webkit-box-flex: 0;
+        -ms-flex: 0 auto;
+            flex: 0 auto;
   }
 }
 
@@ -27,3 +29,4 @@
 .btns > div:last-child button i {
   margin-left: 10px;
 }
+/*# sourceMappingURL=cart.css.map */

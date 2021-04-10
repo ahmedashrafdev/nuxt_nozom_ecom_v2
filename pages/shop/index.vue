@@ -22,7 +22,7 @@
       <v-col class="top-icons" cols="12">
         <div class="d-flex flex-wrap space-between px-4">
           <div class="applied-filters d-flex max-w-80 flex-wrap">
-            <!-- <v-flex v-if="filters">
+            <v-flex v-if="filters">
               <v-chip
                 v-if="filters.group.id !== null"
                 class="ma-2"
@@ -39,7 +39,7 @@
               >
                 {{ $n(filters.price[0], 'currency' , 'en') }} - {{ $n(filters.price[1], 'currency' , 'en') }}
               </v-chip>
-            </v-flex> -->
+            </v-flex>
           </div>
           <div>
             <v-icon @click.prevent="openFiltersModal">mdi-filter-outline</v-icon>

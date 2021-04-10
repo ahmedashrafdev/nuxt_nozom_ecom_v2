@@ -74,6 +74,7 @@ export const actions = {
             .post("wishlist" , payload)
             .then(res => {
                 dispatch('get');
+                dispatch('product/productWishlist' , {id : payload , active :true} , {root : true});
                 commit('setCreateLoading', false);
                 const snackbar = {
                     active : true,

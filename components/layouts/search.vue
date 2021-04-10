@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="relative">
       
       <v-autocomplete
         v-model="model"
@@ -9,31 +9,28 @@
         rounded
         flat
         hide-details
+        hide-no-data
+        hide-selected
         color="white"
-        item-text="Description"
-        item-value="API"
+        item-text="ItemName"
+        item-value="id"
         placeholder="Start typing to Search"
         prepend-icon="mdi-magnify"
         class="bg-gray"
         return-object
         dense
-
       ></v-autocomplete>
     <v-expand-transition>
-      <v-list
-        v-if="model"
-        class="red lighten-3"
-      >
-        <v-list-item
-          v-for="(item, i) in items"
-          :key="i"
-        >
-          <v-list-item-content>
-            <v-list-item-title v-text="item.ItemName"></v-list-item-title>
-            <v-list-item-subtitle v-text="item.ItemNameEn"></v-list-item-subtitle>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
+      <v-card v-if="model "  class="absolute">
+        <v-list v-if="items.length > 0">
+          <partials-search-product :product="item"
+            v-for="(item, i) in items"
+            :key="i"
+          >
+            {{item}}
+          </partials-search-product>
+        </v-list>
+      </v-card>
     </v-expand-transition>
   </div>
 </template>
@@ -51,29 +48,46 @@
 
     watch: {
       search (val) {
-    //       this.model = true
-    //     // Items have already been loaded
-    //     if (this.items.length > 0) return
+        this.model = true
+        
+        // // Items have already been requested
+        if (this.isLoading) return
 
-    //     // Items have already been requested
-    //     if (this.isLoading) return
 
-    //     this.isLoading = true
+        // // no search
+        if (val == '') {
+          this.items = []
+          return
+        }
 
-    //     // Lazily load input items
-    //     console.log(val)
-    // this.$store.dispatch('product/searchProducts' , val)
-    //       .then(res => {
-    //         const { count, entries } = res
-    //         this.count = count
-    //         this.isLoading = false
-    //         this.items = res.data
-    //       })
-    //       .catch(err => {
-    //         this.isLoading = false
-    //         console.log(err)
-    //       })
+        // this.isLoading = true
+
+        // // Lazily load input items
+        // console.log(val)
+        this.$store.dispatch('product/searchProducts' , val)
+          .then(res => {
+            this.items  = res.data
+            this.count = res.data.length
+            this.isLoading = false
+          })
+          .catch(err => {
+            this.isLoading = false
+            console.log(err)
+          })
+        console.log(val)
       },
     },
   }
 </script>
+
+<style scoped>
+.nav .absolute{
+  position: absolute;
+  top: 40px;
+}
+
+.absolute{
+  margin-top: 20px;
+
+}
+</style>

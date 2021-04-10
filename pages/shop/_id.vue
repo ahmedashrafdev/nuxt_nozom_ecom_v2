@@ -46,13 +46,14 @@
                   </div>
                 </div>
                 <div class="btns d-flex">
-                  <v-btn text @click.prevent="addToCart"  class="border  p-4 rounded-xl">
+                  <v-btn  :disabled="product.InCart" text @click.prevent="addToCart"  class="border  p-4 rounded-xl">
                     <v-icon>mdi-cart-arrow-down</v-icon>
                     {{$t('add_to_cart')}}
                   </v-btn>
                   <v-btn
                     class="mx-2 p-4  border"
                     fab
+                    :disabled="product.InWishlist"
                     text
                     light
                     small
