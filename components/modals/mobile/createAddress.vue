@@ -200,7 +200,6 @@ export default {
                 return
             }
             this.$store.dispatch('user/getSections')
-            
         },
         create(){
             this.$refs.form.validate()
@@ -210,11 +209,23 @@ export default {
                 .then(res=>{
                     this.loading = false
                     this.$store.commit('ui/mobileCreateAddressModal' , false)
+                    this.form ={
+                        BuildingNo : "",
+                        RowNo : "",
+                        FlatNo : "",
+                        Street : "",
+                        Remark : "",
+                        Main : "",
+                        AreaNo : "",
+                        Main : 0,
+                        PhSerial : ""
+                    }
+
                     this.$emit('created' , res)
                 })
                 .catch(e => {
                     if(typeof e == 'string'){
-                        this.err = e
+                       this.err = e
                     } else {
                         this.errors = e
                     }

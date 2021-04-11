@@ -17,6 +17,13 @@ export const mutations = {
     setLoading(state, payload) {
         state.loading = payload;
     },
+    updateCartAfterCartUpdated(state, payload){
+        const product = state.cart.products.filter(item => {
+            return item.id === payload.id ? item : ''
+        })[0]
+        product ? product.qty = payload.qty : ''
+          
+    },
     setOrderLoading(state, payload) {
         state.orderLoading = payload;
     },
@@ -175,6 +182,7 @@ export const actions = {
                     text: 'cart_updated_successfully'
                 }
                 commit('ui/setSnackbar' , snackbar , {root : true})
+                commit('updateCartAfterCartUpdated' , payload)
                 commit('product/updateProductAfterCartUpdated' , payload , {root : true})
                 resolve(res);
             })

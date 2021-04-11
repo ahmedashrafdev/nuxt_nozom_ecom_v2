@@ -87,3 +87,11 @@ body{
   .bg-gray {
       background-color: var(--bg-gray) !important;
   }
+
+.text-medium{
+  font-size: 14px;
+}
+
+.text-small{
+  font-size: 12px;
+}

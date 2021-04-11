@@ -14,11 +14,12 @@
                 <v-select @change="updateQty" :items="qtys" class="atc-input"  v-model="qty"/>
                 <v-icon @click.prevent="decrease" small>mdi-minus</v-icon>
             </div>
+
           </div>
           <div class="actions" v-else>
              <v-btn
                 class="mx-2"
-                :class="{active : product.inWishlist}"
+                :class="{active : product.InWihslit || inWishlist.includes(product.id) }"
                 fab
                 dark
                 small
@@ -45,11 +46,14 @@
           </div>
         </div>
         <div class="meta text-center">
+
           <h2 class="product-title pointer mb-2"  @click.prevent="$router.push({name : `shop-id___${$i18n.locale}` , params : {id : product.id}})" v-if="$i18n.locale == 'ar'">{{product.ItemName}}</h2>
           <h2 class="product-title  pointer mb-2"  @click.prevent="$router.push({name : `shop-id___${$i18n.locale}` , params : {id : product.id}})" v-else>{{product.ItemNameEn}}</h2>
           <div class="price">
+            <span class="text-sm d-block" v-if="inCart.includes(product.id) || product.InCart">{{$t('total')}} : {{ $n(product.POSPP * qty, 'currency' , 'en') }}</span>
+
             <del class="text-sm">{{ $n(120, 'currency' , 'en') }}</del>
-            <span class="text-primary text-sm">{{ $n(100, 'currency' , 'en') }}</span>
+            <span class="text-primary text-sm">{{ $n(product.POSPP, 'currency' , 'en') }}</span>
           </div>
         </div>
       </div>

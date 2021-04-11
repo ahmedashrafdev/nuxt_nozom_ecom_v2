@@ -33,7 +33,7 @@
         </v-col>
         <v-col cols="12" v-if="wishlist.length > 0">
           <v-row>
-            <v-col cols="12" v-for="(product , index) in wishlist" :key="index">
+            <v-col cols="6" v-for="(product , index) in wishlist" :key="index">
               <partials-wishlist-product :product="product"/>
             </v-col>
           </v-row>
@@ -107,5 +107,10 @@ export default {
 }
 .no-products .text-large{
   margin-bottom: 20px;
+}
+.showing{
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  padding: 10px 0;
 }
 </style>

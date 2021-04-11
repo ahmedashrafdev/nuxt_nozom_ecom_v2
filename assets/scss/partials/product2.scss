@@ -26,4 +26,13 @@
     & .meta{
         padding: 40px 10px 0;
     }
+
+    & .actions{
+        & .active{
+            background-color: var(--danger) !important;
+            & i{
+                color :#fff;
+            }
+        }
+    }
 }

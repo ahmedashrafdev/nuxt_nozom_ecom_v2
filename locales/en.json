@@ -18,6 +18,7 @@
     "register_now" : "register now",
     "have_account" : "Already have account?",
     "login_to_your_account" : "login to your account",
+    "are_you_sure_delete_address" : "are you sure delete address",
     "login_now" : "login now",
     "delete_restricted" : "Can't complete your proccess",   
     "cant_delete_address" : "Sorry you cant delete this address because it attached to one of your orders or your cart",

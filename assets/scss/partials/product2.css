@@ -36,4 +36,12 @@
 .pr-partial .meta {
   padding: 40px 10px 0;
 }
+
+.pr-partial .actions .active {
+  background-color: var(--danger) !important;
+}
+
+.pr-partial .actions .active i {
+  color: #fff;
+}
 /*# sourceMappingURL=product2.css.map */

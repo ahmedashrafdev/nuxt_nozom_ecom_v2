@@ -57,7 +57,7 @@
         v-model="form.password"
         :rules="rules.password"
         type="password"
-        label="E-mail"
+        label="Password"
         required
       ></v-text-field>
       <div  class="err-list" v-if="err && err.password">

@@ -9,6 +9,7 @@
                     <div class="data pointer" @click.prevent="$router.push({name : `shop-id___${$i18n.locale}` , params : {id : product.id}})">
                         <h2 class="product-title"  v-if="$i18n.locale == 'ar'">{{product.ItemName}}</h2>
                         <h2 class="product-title"  v-else>{{product.ItemNameEn}}</h2>
+                        <span class="text-small">{{ $n(product.price, 'currency' , 'en') }}</span>
                         <!-- <h4 class="product-subtitle">subname</h4> -->
                     </div>
                 </div>

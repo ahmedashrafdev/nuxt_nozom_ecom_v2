@@ -74,7 +74,7 @@ html , body , .v-application {
 }
 
 //layoputs
-header , .v-bottom-navigation{
+.app-bar , .v-bottom-navigation{
     @media(min-width:768px){
         display: none !important;
     }
@@ -238,4 +238,8 @@ li{
 
 .d-block button{
     width: 100% !important;
+}
+
+.v-autocomplete__content{
+    display: none !important;
 }

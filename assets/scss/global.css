@@ -89,7 +89,7 @@ html, body, .v-application {
 }
 
 @media (min-width: 768px) {
-  header, .v-bottom-navigation {
+  .app-bar, .v-bottom-navigation {
     display: none !important;
   }
 }
@@ -267,5 +267,9 @@ li {
 
 .d-block button {
   width: 100% !important;
+}
+
+.v-autocomplete__content {
+  display: none !important;
 }
 /*# sourceMappingURL=global.css.map */

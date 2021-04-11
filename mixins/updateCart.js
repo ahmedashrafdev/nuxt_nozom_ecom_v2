@@ -2,16 +2,17 @@ export default {
     data () {
       return {
         inCart : [],
+        inWishlist: [],
         qtys : [1],
         qty : 1
       }
     },
     methods:{
       addToCart(){
-        this.inCart.push(this.product.id)
         if(this.$auth.loggedIn){
           this.$store.dispatch('cart/create', {product: this.product.id , qty :this.qty})
           .then(() => {
+            this.inCart.push(this.product.id)
             this.product.InCart = true
           })
         } else {
@@ -28,7 +29,10 @@ export default {
       },
       addToWishlist() {
           if(this.$auth.loggedIn){
-              this.$store.dispatch('wishlist/create', {product: this.product.id})
+            this.$store.dispatch('wishlist/create', {product: this.product.id})
+            .then(() => {
+              this.inWishlist.push(this.product.id)
+            })
           } else {
              const snackbar = {
               active : true,
