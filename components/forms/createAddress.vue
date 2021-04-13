@@ -92,19 +92,22 @@
             </li>
         </ul>
         
-
-        <v-select
-        :items="$auth.user.user.phones"
-        v-model="form.PhSerial"
-        item-text="phone"
-        item-value="id"
-        label="phone"
-        ></v-select>
-        <ul v-if="errors.PhSerial && errors.PhSerial.length > 0  ">
-            <li class="error" v-for="(err , index) in errors.PhSerial" :key="index">
-                {{err}}
-            </li>
-        </ul>
+        <v-row>
+            <v-col cols="10">
+                <v-select
+                :items="$auth.user.user.phones"
+                v-model="form.PhSerial"
+                item-text="phone"
+                item-value="id"
+                label="phone"
+                ></v-select>
+                <ul v-if="errors.PhSerial && errors.PhSerial.length > 0  ">
+                    <li class="error" v-for="(err , index) in errors.PhSerial" :key="index">
+                        {{err}}
+                    </li>
+                </ul>
+            </v-col>
+        </v-row>
         
         <v-btn
             color="primary"

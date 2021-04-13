@@ -13,6 +13,7 @@
                         <li class="b-right">
                             <v-btn
                                 icon
+                                v-if="$auth.loggedIn"
                                 @click.prevent="$router.push({name : `account___${$i18n.locale}`})"
                             >
                                 
@@ -20,7 +21,19 @@
                                         mdi-account-outline
                                     </v-icon>
                                
-                            {{$t('account')}}
+                            {{$auth.user.user.name}}
+                            </v-btn>
+                            <v-btn
+                                icon
+                                v-else
+                                @click.prevent="$router.push({name : `login___${$i18n.locale}`})"
+                            >
+                                
+                                    <v-icon >
+                                        mdi-account-outline
+                                    </v-icon>
+                               
+                            {{$t('login-rgister')}}
                             </v-btn>
                         </li>
                         <li class="b-right">

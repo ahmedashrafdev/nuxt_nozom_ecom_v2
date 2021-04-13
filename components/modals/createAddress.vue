@@ -120,7 +120,7 @@
                     </ul>
                 </v-col>
 
-                <v-col cols="6">
+                <v-col cols="4">
                     <v-select
                     :items="$auth.user.user.phones"
                     v-model="form.PhSerial"
@@ -134,6 +134,18 @@
                         </li>
                     </ul>
                 </v-col>
+                <v-col cols="2" class="d-flex justify-center items-center">
+                        <v-btn
+                            color="primary"
+                            fab
+                            text
+                            small
+                            @click.prevent="createPhone"
+                            dark
+                            >
+                            <v-icon>mdi-plus</v-icon>
+                            </v-btn>
+                    </v-col>
                 <v-col cols="12">
                     <v-btn
                         color="primary"
@@ -150,6 +162,7 @@
         </v-card-text>
       </v-card>
     </v-dialog>
+    <modals-create-phone-desktop @created="phoneCreated"/>
   </v-row>
 </template>
 
@@ -187,6 +200,15 @@ export default {
         close(){
             this.$store.commit('ui/createAddressModal' , false)
         },
+        createPhone(){
+            this.$store.commit('ui/createPhoneDesktopModal' , true)
+            console.log('asd')
+        },
+         phoneCreated(res){
+            console.log(res)
+            this.$auth.user.phones = res.phones
+            this.form.PhSerial = res.id
+        },
         sectionSelected(item){
             console.log(item)
         },
@@ -206,6 +228,17 @@ export default {
                 .then(res =>{
                     this.loading = false
                     this.$store.commit('ui/createAddressModal' , false)
+                    this.form = {
+                        BuildingNo : "",
+                        RowNo : "",
+                        FlatNo : "",
+                        Street : "",
+                        Remark : "",
+                        Main : "",
+                        AreaNo : "",
+                        Main : 0,
+                        PhSerial : ""
+                    }
                     this.$emit('created' , res)
                 })
                 .catch(e => {

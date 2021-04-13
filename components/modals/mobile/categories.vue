@@ -43,5 +43,11 @@
 import filters from '@/mixins/filters.js'
 export default {
     mixins : [filters],
+    methods:{
+      close(){
+        this.$store.commit('ui/mobileCategoriesModal' , false)
+
+      }
+    }
 }
 </script>

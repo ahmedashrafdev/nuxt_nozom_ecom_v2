@@ -26,6 +26,7 @@ export const mutations = {
       })[0]
     product ? product.inWishlist = payload.active : ''
   },
+  
 
   filters(state, payload){
     state.filters = payload

@@ -127,19 +127,34 @@
                     </li>
                 </ul>
                 
-
-                <v-select
-                :items="$auth.user.user.phones"
-                v-model="form.PhSerial"
-                item-text="phone"
-                item-value="id"
-                label="phone"
-                ></v-select>
-               <ul v-if="errors.PhSerial && errors.PhSerial.length > 0  ">
-                    <li class="error" v-for="(err , index) in errors.PhSerial" :key="index">
-                        {{err}}
-                    </li>
-                </ul>
+                <v-row>
+                    <v-col cols="10">
+                        <v-select
+                        :items="$auth.user.user.phones"
+                        v-model="form.PhSerial"
+                        item-text="phone"
+                        item-value="id"
+                        label="phone"
+                        ></v-select>
+                        <ul   ul v-if="errors.PhSerial && errors.PhSerial.length > 0  ">
+                            <li class="error" v-for="(err , index) in errors.PhSerial" :key="index">
+                                {{err}}
+                            </li>
+                        </ul>
+                    </v-col>
+                    <v-col cols="2" class="d-flex justify-center items-center">
+                        <v-btn
+                            color="primary"
+                            fab
+                            text
+                            small
+                            @click.prevent="createPhone"
+                            dark
+                            >
+                            <v-icon>mdi-plus</v-icon>
+                            </v-btn>
+                    </v-col>
+                </v-row>
                 
                 <v-btn
                     color="primary"
@@ -154,6 +169,7 @@
         </v-list>
       </v-card>
     </v-dialog>
+    <modals-create-phone @created="phoneCreated"/>
   </v-row>
 </template>
 
@@ -180,6 +196,7 @@ export default {
         sound: true,
         widgets: false,
         valid: false,
+
         loading: false,
         err : null,
         form ,
@@ -190,6 +207,15 @@ export default {
     methods:{
         close(){
             this.$store.commit('ui/mobileCreateAddressModal' , false)
+        },
+        phoneCreated(res){
+            console.log(res)
+            this.$auth.user.phones = res.phones
+            this.form.PhSerial = res.id
+        },
+        createPhone(){
+            this.$store.commit('ui/createPhoneModal' , true)
+            console.log('asd')
         },
         sectionSelected(item){
             console.log(item)

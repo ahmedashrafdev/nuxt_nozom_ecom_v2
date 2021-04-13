@@ -12,7 +12,7 @@
           mdi-pencil
         </v-icon>           
       </div>
-    <v-subheader>{{$auth.user.user.email}}</v-subheader>
+      <v-subheader>{{$auth.user.user.email}}</v-subheader>
     </v-col>
     <v-col cols="12" class="md-hidden">
       <v-list flat>
@@ -35,8 +35,26 @@
       </v-list-item-group>
     </v-list>
     </v-col>
-    <v-col cols="12" class="sm-hidden">
+    <v-col cols="12" class="sm-hidden user">
+      <div class="d-flex items-center justify-center flex-column">
+        <v-avatar color="primary mb-2">
+          <v-icon dark>
+            mdi-account-circle
+          </v-icon>
+        </v-avatar>
+        <div class="pointer" @click.prevent="editAccount">
+          <span class="title">{{$auth.user.user.name}}</span>
+          <v-icon color="primary" small>
+            mdi-pencil
+          </v-icon>           
+        </div>
+        <v-subheader>{{$auth.user.user.email}}</v-subheader>
+
+      </div>
+    </v-col>
+    <v-col cols="12" class="sm-hidden mb-8">
       <v-container>
+        
         <v-tabs vertical>
       <v-tab class="left" v-for="(item,index) in items" @click.prevent="action(item.text)"  :key="index">
         <v-icon left>

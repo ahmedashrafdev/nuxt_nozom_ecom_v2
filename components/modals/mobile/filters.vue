@@ -57,7 +57,6 @@
                 v-model="price"
                 @change="setPrice"
                 dense
-                hint="Im a hint"
                 max="500"
                 min="0"
               ></v-range-slider>

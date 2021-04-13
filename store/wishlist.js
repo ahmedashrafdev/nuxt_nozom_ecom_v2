@@ -74,13 +74,24 @@ export const actions = {
             .post("wishlist" , payload)
             .then(res => {
                 dispatch('get');
-                dispatch('product/productWishlist' , {id : payload , active :true} , {root : true});
-                commit('setCreateLoading', false);
-                const snackbar = {
-                    active : true,
-                    text: 'added_to_wishlist_successfully'
+                if(res.data == 'deleted'){
+                    commit('product/productWishlist' , {id : payload , active :false} , {root : true});
+                    commit('setCreateLoading', false);
+                    const snackbar = {
+                        active : true,
+                        text: 'removed_from_wishlist_successfully'
+                    }
+                    commit('ui/setSnackbar' , snackbar , {root : true})
+                }else {
+                    commit('product/productWishlist' , {id : payload , active :true} , {root : true});
+                    commit('setCreateLoading', false);
+                    const snackbar = {
+                        active : true,
+                        text: 'added_to_wishlist_successfully'
+                    }
+                    commit('ui/setSnackbar' , snackbar , {root : true})
+
                 }
-                commit('ui/setSnackbar' , snackbar , {root : true})
                 resolve(res);
             })
             .catch(e => {

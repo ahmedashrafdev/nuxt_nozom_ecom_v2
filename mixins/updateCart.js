@@ -30,8 +30,17 @@ export default {
       addToWishlist() {
           if(this.$auth.loggedIn){
             this.$store.dispatch('wishlist/create', {product: this.product.id})
-            .then(() => {
-              this.inWishlist.push(this.product.id)
+            .then(res => {
+              console.log(res.data)
+              if(res.data == 'deleted'){
+                let index = this.inWishlist.indexOf(this.product.id);
+                if (index !== -1) {
+                  this.inWishlist.splice(index, 1);
+                }
+                // this.inWishlist.remove(this.product.id)
+              }else {
+                this.inWishlist.push(this.product.id)
+              }
             })
           } else {
              const snackbar = {

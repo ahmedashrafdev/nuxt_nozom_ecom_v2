@@ -1,5 +1,6 @@
 <template>
   <v-app dark>
+   
     <layouts-app-bar/>
     <layouts-app-nav/>
     <v-main>
@@ -10,6 +11,7 @@
 
     <modals-mobile-categories/>
     <layouts-snack-bar/>
+     
   </v-app>
 </template>
 
@@ -22,3 +24,6 @@ export default {
 }
 </script>
 
+<style scoped>
+
+</style>

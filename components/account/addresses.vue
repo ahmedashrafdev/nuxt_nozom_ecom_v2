@@ -2,6 +2,10 @@
   <div>
     <v-progress-circular class="text-center" indeterminate v-if="loading"></v-progress-circular>
       <div v-else>
+        <div class="d-flex justify-between  pb-4 mb-4 items-center">
+          <h2 class="text-black header">{{$t('shipping_addresses')}}</h2>
+          <v-btn color="primary" @click.prevent=" $store.commit('ui/createAddressModal' , true)"><v-icon>mdi-plus</v-icon>{{$t('create')}}</v-btn>
+        </div>
         <v-expansion-panels  v-if="typeof addresses !== 'undefined' && addresses.length > 0">
           <v-expansion-panel
             v-for="(address,i) in addresses"

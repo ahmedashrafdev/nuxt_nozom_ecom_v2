@@ -8,6 +8,9 @@ export const state = () => ({
     mobileFiltersModal : false,
     mobileOrdersModal : false,
     mobilePointsModal : false,
+    createPhoneModal : false,
+    createPhoneDesktopModal : false,
+    deleteAddressModalRestricted: false,
     editAccountModal : false,
     deleteAddressModal:{
         active : false,
@@ -53,8 +56,17 @@ export const mutations = {
     setErrMsg(state, payload) {
         state.errMsg = payload;
     },
+    createPhoneDesktopModal(state, payload) {
+        state.createPhoneDesktopModal = payload;
+    },
+    createPhoneModal(state, payload) {
+        state.createPhoneModal = payload;
+    },
     editAccountModal(state, payload){
         state.editAccountModal =payload
+    },
+    deleteAddressModalRestricted(state, payload){
+        state.deleteAddressModalRestricted =payload
     },
     createAddressModal(state, payload){
         state.createAddressModal =payload
@@ -100,6 +112,15 @@ export const mutations = {
 export const getters = {
     errMsg: state => {
         return state.errMsg
+    },
+    createPhoneModal: state => {
+        return state.createPhoneModal
+    },
+    createPhoneDesktopModal: state => {
+        return state.createPhoneDesktopModal
+    },
+    deleteAddressModalRestricted: state => {
+        return state.deleteAddressModalRestricted
     },
     editAccountModal: state => {
         return state.editAccountModal

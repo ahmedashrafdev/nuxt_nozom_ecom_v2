@@ -272,4 +272,21 @@ li {
 .v-autocomplete__content {
   display: none !important;
 }
+
+.theme--light.v-btn.v-btn--disabled.textWhite span {
+  color: #fff !important;
+}
+
+.theme--light.v-btn.v-btn--disabled.textWhite i {
+  color: #fff !important;
+}
+
+.wishlist-btn.active {
+  background-color: var(--danger);
+  border-color: var(--danger);
+}
+
+.wishlist-btn.active i {
+  color: #fff !important;
+}
 /*# sourceMappingURL=global.css.map */

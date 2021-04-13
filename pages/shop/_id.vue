@@ -2,7 +2,7 @@
 <div class="shop">
   <v-row justify="center" align="center">
     <v-col cols="12">
-      <layouts-bradcrumbs/>
+      <!-- <layouts-bradcrumbs/> -->
     </v-col>
     <v-col cols="12">
       <v-container>
@@ -46,14 +46,17 @@
                   </div>
                 </div>
                 <div class="btns d-flex">
-                  <v-btn  :disabled="product.InCart" text @click.prevent="addToCart"  class="border  p-4 rounded-xl">
+                  <v-btn  :disabled="product.InCart" text @click.prevent="addToCart" :class="{primary :product.InCart , textWhite :product.InCart}"  class="border  p-4 rounded-xl">
                     <v-icon>mdi-cart-arrow-down</v-icon>
-                    {{$t('add_to_cart')}}
+                    <span v-if="product.InCart">{{$t('on_your_cart')}}</span>
+                    <span v-else>{{$t('add_to_cart')}}</span>
                   </v-btn>
                   <v-btn
-                    class="mx-2 p-4  border"
+                    class="mx-2 p-4 wishlist-btn border"
                     fab
-                    :disabled="product.InWishlist"
+                    @click.prevent="addToWishlist"
+                    :disabled="product.inWishlist"
+                    :class="{active :product.inWishlist}"
                     text
                     light
                     small
