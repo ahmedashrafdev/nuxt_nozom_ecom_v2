@@ -14,7 +14,7 @@
         color="white"
         item-text="ItemName"
         item-value="id"
-        placeholder="Start typing to Search"
+        :placeholder="$t('search_key')"
         prepend-icon="mdi-magnify"
         class="bg-gray"
         return-object
