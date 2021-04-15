@@ -3,9 +3,8 @@
     src: local("century"),
          url(~assets/fonts/Century-Gothic.ttf) format("truetype");
 }
-
-html , body , .v-application {
-    font-family: "roboto" !important;
+.v-application {
+    font-family: "century" ,sans-serif !important;
 }
 
 .no-shadow  .v-input__slot{
@@ -265,4 +264,17 @@ li{
 
 .sidebar .v-text-field > .v-input__control > .v-input__slot::before{
     display: none !important;
+}
+
+.language-switcher{
+    font-family: "kufi" !important;
+}
+
+.rtl .language-switcher{
+    font-family: "century" !important;
+}
+
+
+.search .v-card{
+    z-index: 100000;
 }

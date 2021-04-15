@@ -46,11 +46,12 @@
                             {{$t('cart')}}
                             </a>
                         </li>
+                        
                         <ul class="d-flex items-center socials pointer">
                             <li @click.prevent="link.url" v-for="(link , index) in links" :key="index">
                                 <v-icon medium>mdi-{{link.icon}}</v-icon>
                             </li>
-
+                            <li class="language-switcher" @click.prevent="switchLanguage"><v-icon>mdi-earth</v-icon>{{$t('language')}}</li>
                         </ul>
                     </ul>
                 </div>
@@ -66,7 +67,7 @@
                     <div class="links">
                         <ul class="d-flex">
                             <li>
-                                <nuxt-link to="/" >
+                                <nuxt-link :to="{name: `index___${$i18n.locale}`}" >
                                     {{$t('home')}}
                                 </nuxt-link>
                             </li>
@@ -113,6 +114,16 @@ export default {
         } 
     },
     methods: {
+        switchLanguage(){
+            const locale = this.$i18n.locale === 'en' ? 'ar' : 'en'
+            if(locale == 'ar'){
+                this.$vuetify.rtl = true
+            } else {
+                this.$vuetify.rtl = false
+
+            }
+            this.$router.push({name : `index___${locale}`})
+        },
         handleScroll () {
         // Your scroll handling here
             if(window.scrollY > 145){

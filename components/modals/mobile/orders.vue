@@ -36,7 +36,7 @@
                   {{$t('orderd_at')}}: {{order.closed_at}}
                 </v-expansion-panel-header>
                 <v-expansion-panel-content>
-                  {{$t("statue")}} : <v-chip color="primary" class="text-center" small>{{order.status}}</v-chip>
+                  {{$t("statues")}} : <v-chip color="primary" class="text-center" small>{{order.status}}</v-chip>
                 <v-simple-table>
                   <template v-slot:default>
                     <thead>

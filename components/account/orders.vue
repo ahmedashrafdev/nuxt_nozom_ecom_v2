@@ -10,10 +10,14 @@
           :key="order.id"
         >
           <v-expansion-panel-header>
-            {{$t('orderd_at')}}: {{order.closed_at}}
+            <div class="d-flex space-between w-full">
+              <span><span class="primary-text">{{$t('order')}} #{{order.id}}</span>{{$t('orderd_at')}}: {{order.closed_at}} </span>  
+              <span>{{$t("statues")}} : <v-chip color="primary" class="text-center" small>{{order.status}}</v-chip></span>
+
+            </div>
           </v-expansion-panel-header>
           <v-expansion-panel-content>
-            {{$t("statue")}} : <v-chip color="primary" class="text-center" small>{{order.status}}</v-chip>
+            {{$t("statues")}} : <v-chip color="primary" class="text-center" small>{{order.status}}</v-chip>
           <v-simple-table>
             <template v-slot:default>
               <thead>

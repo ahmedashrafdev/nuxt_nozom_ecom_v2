@@ -120,3 +120,6 @@ body{
 .pointer{
     cursor: pointer;
 }
+.primary-text{
+    color: var(--primary-color);
+}

@@ -10,6 +10,7 @@
     "thank_you" : "THANK YOU",
     "order_done_note" : "We will send you email shortly",
     "to" : "to : ",
+    "language" : "العربية",
     "login-rgister" : "login / rgister",
     "news_letter" : "news letter",
     "subscribe_now" : "subscribe now",
@@ -27,5 +28,6 @@
     "no_address_shipping":"you dont have addresses please create one to continue",
     "copyrights" : "© Copyright 2021, Elnozom. All Rights Reserved.",
     "currency": "EGP",
+    "cart" : "cart",
     "point": "point | points"
 }

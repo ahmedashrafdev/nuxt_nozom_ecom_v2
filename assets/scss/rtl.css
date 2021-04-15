@@ -1,5 +1,18 @@
+@font-face {
+  font-family: "kufi";
+  src: local("kufi"), url(~assets/fonts/Kufi-Regular.ttf) format("truetype");
+}
+
 .rtl {
   direction: rtl;
+}
+
+.rtl.v-application {
+  font-family: "kufi",sans-serif !important;
+}
+
+.rtl .links ul li a::after {
+  right: 0;
 }
 
 .rtl .v-application--is-ltr .v-list-item__icon:first-child {
@@ -21,3 +34,4 @@
   margin-right: 0 !important;
   margin-left: 10px;
 }
+/*# sourceMappingURL=rtl.css.map */
