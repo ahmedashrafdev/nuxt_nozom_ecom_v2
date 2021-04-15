@@ -58,7 +58,12 @@ export default {
     methods:{
         switchLanguage(){
             const locale = this.$i18n.locale === 'en' ? 'ar' : 'en'
-            console.log('asd')
+            if(locale == 'ar'){
+                this.$vuetify.rtl = true
+            } else {
+                this.$vuetify.rtl = false
+
+            }
             this.$router.push({name : `index___${locale}`})
         },
         search(){

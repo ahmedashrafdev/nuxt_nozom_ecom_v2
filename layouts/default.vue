@@ -1,5 +1,5 @@
 <template>
-  <v-app dark>
+  <v-app :class="{rtl : $i18n.locale == 'ar'}" dark>
    
     <layouts-app-bar/>
     <layouts-app-nav/>

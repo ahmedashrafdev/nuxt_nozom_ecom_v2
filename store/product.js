@@ -5,6 +5,13 @@ export const state = () => ({
   products: [],
   product: {},
   homeProducts:[],
+  groupFilter:{
+    name : null,
+    id : null
+  },
+  priceFrom:null,
+  priceTo:null,
+  search : null,
   filters:{
     price : [],
     group: {
@@ -20,6 +27,19 @@ export const mutations = {
   setProducts(state, payload) {
       state.products = payload;
   },
+  groupFilter(state, payload) {
+    state.groupFilter = payload;
+  
+  },
+  priceFrom(state, payload) {
+    state.priceFrom = payload;
+  
+  },
+  priceTo(state, payload) {
+    state.priceTo = payload;
+  
+  },
+  
   productWishlist(state , payload){
     const product = state.homeProducts.filter(item => {
       return item.id === payload.id ? item : ''
@@ -81,6 +101,18 @@ export const getters = {
   products: state => {
       return state.products
   },
+  priceFrom: state => {
+    return state.priceFrom
+  },
+  priceFilter: state => {
+    return [state.priceFrom , state.priceTo]
+  },
+  priceTo: state => {
+    return state.priceTo
+  },
+  groupFilter: state => {
+    return state.groupFilter
+},
   filters: state => {
     return state.filters
   },
@@ -126,24 +158,36 @@ export const actions = {
           reject(e.response.data);
         })
       })
-    },
-    getProducts({commit}, payload) {
-      return new Promise((resolve, reject) => {
-          commit('setLoading' , true)
-          http
-          .get(`product?${serializeQuery(payload)}`)
-          .then( async (data) => {
-            commit('setProducts' , data.data)
-            commit('setLoading' , false)
-            resolve(data.data);
-          })
-          .catch(e => {
-            commit('setLoading' , false)
-            reject(e.response.data);
-          })
+  },
+  getProducts({commit}, payload) {
+    if(payload.priceFrom){
+      commit("priceFrom" , payload.priceFrom)
+    } else {
+      commit("priceFrom" , null)
+
+    }
+    if(payload.priceTo){
+      commit("priceTo" , payload.priceTo)
+    } else {
+      commit("priceTo" , null)
+
+    }
+    return new Promise((resolve, reject) => {
+        commit('setLoading' , true)
+        http
+        .get(`product?${serializeQuery(payload)}`)
+        .then( async (data) => {
+          commit('setProducts' , data.data)
+          commit('setLoading' , false)
+          resolve(data.data);
         })
-    },
-    getProduct({commit}, payload) {
+        .catch(e => {
+          commit('setLoading' , false)
+          reject(e.response.data);
+        })
+      })
+  },
+  getProduct({commit}, payload) {
       return new Promise((resolve, reject) => {
           commit('setLoading' , true)
           http

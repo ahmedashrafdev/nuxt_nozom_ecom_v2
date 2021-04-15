@@ -34,6 +34,13 @@ export const getters = {
     switchLoading(state){
         return state.switchLoading
     },
+    activeWishlist(state){
+        const ids = []
+        state.wishlist.forEach(pr => {
+            ids.push(pr.id)
+        });
+        return ids
+    },
     createLoading(state){
         return state.createLoading
     },

@@ -209,13 +209,11 @@ export default {
             this.$store.commit('ui/mobileCreateAddressModal' , false)
         },
         phoneCreated(res){
-            console.log(res)
             this.$auth.user.phones = res.phones
             this.form.PhSerial = res.id
         },
         createPhone(){
             this.$store.commit('ui/createPhoneModal' , true)
-            console.log('asd')
         },
         sectionSelected(item){
             console.log(item)

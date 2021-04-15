@@ -19,7 +19,7 @@
           <div class="actions" v-else>
              <v-btn
                 class="mx-2"
-                :class="{active : product.InWihslit || inWishlist.includes(product.id) }"
+                :class="{active : activeWishlist.includes(product.id) }"
                 fab
                 dark
                 small

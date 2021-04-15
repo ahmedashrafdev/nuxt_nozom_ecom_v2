@@ -1,3 +1,5 @@
+
+import {mapGetters} from 'vuex'
 export default {
     data () {
       return {
@@ -7,6 +9,12 @@ export default {
         qty : 1
       }
     },
+    computed : {
+      ...mapGetters({
+        activeCart: 'cart/activeCart',
+        activeWishlist: 'wishlist/activeWishlist',
+      }),
+  },
     methods:{
       addToCart(){
         if(this.$auth.loggedIn){

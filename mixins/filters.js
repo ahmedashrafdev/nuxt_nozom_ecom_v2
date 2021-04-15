@@ -4,18 +4,18 @@ export default {
     computed : {
         mobileFiltersModal: {
             get: function() {
-				return this.$store.getters['ui/mobileFiltersModal']
+				      return this.$store.getters['ui/mobileFiltersModal']
             },
             set: function(newValue) {
-                this.$store.commit('ui/mobileFiltersModal' , newValue)
+              this.$store.commit('ui/mobileFiltersModal' , newValue)
             }
         },
         mobileCateghoriesModal: {
             get: function() {
-				return this.$store.getters['ui/mobileCateghoriesModal']
+				      return this.$store.getters['ui/mobileCateghoriesModal']
             },
             set: function(newValue) {
-                this.$store.commit('ui/mobileCategoriesModal' , newValue)
+              this.$store.commit('ui/mobileCategoriesModal' , newValue)
             }
         },
         ...mapGetters({
@@ -80,10 +80,16 @@ export default {
           name
         }
         this.localFilters.group =  groupFilter
+        this.$store.commit('product/groupFilter' , groupFilter)
       },
       applyGroup(group){
-        this.setGroup(group)
-        this.apply()
+        if(this.$route.name == `shop___${this.$i18n.locale}`){
+          this.setGroup(group)
+          this.apply()
+        } else {
+          this.$router.push({name : `shop___${this.$i18n.locale}` , query : {group : group.id}})
+        }
+        this.mobileCateghoriesModal = false
       },
       setFilters(arr){
         let filters = {

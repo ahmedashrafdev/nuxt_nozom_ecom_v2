@@ -107,6 +107,18 @@
                     </li>
                 </ul>
             </v-col>
+            <v-col cols="2" class="d-flex justify-center items-center">
+                <v-btn
+                    color="primary"
+                    fab
+                    text
+                    small
+                    @click.prevent="createPhone"
+                    dark
+                    >
+                    <v-icon>mdi-plus</v-icon>
+                    </v-btn>
+            </v-col>
         </v-row>
         
         <v-btn
@@ -117,6 +129,7 @@
         >
             Create
         </v-btn>
+    <modals-create-phone @created="phoneCreated"/>
     </v-form>
        
 </template>
@@ -149,6 +162,13 @@ export default {
             }
             this.$store.dispatch('user/getSections')
             
+        },
+        phoneCreated(res){
+            this.$auth.user.phones = res.phones
+            this.form.PhSerial = res.id
+        },
+        createPhone(){
+            this.$store.commit('ui/createPhoneModal' , true)
         },
         create(){
             this.$refs.form.validate()

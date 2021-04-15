@@ -11,7 +11,9 @@ export const mutations = {
     },
     groups(state, payload) {
         state.groups = payload;
-    }
+    },
+    
+    
 };
 
 export const getters = {
@@ -20,6 +22,9 @@ export const getters = {
     },
     groups(state){
         return state.groups
+    },
+    groupName(state){
+        return state.groupName
     },
 }
 export const actions = {
@@ -39,4 +44,16 @@ export const actions = {
             })
         })
     },
+    find({} , payload) {
+        return new Promise((resolve, reject) => {
+        http
+        .get(`group/find/${payload}`)
+        .then(res => {
+            resolve(res.data);
+        })
+        .catch(e => {
+            reject(e.response.data);
+        })
+    })
+},
 }

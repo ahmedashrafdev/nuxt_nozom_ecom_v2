@@ -26,5 +26,6 @@
     "cant_delete_address" : "Sorry you cant delete this address because it attached to one of your orders or your cart",
     "no_address_shipping":"you dont have addresses please create one to continue",
     "copyrights" : "© Copyright 2021, Elnozom. All Rights Reserved.",
+    "currency": "EGP",
     "point": "point | points"
 }

@@ -8,7 +8,7 @@
             <v-toolbar
               color="danger"
               dark
-            >{{$t('edit_your_account')}}</v-toolbar>
+            >{{$t('create_new_phone')}}</v-toolbar>
             <v-card-text>
                 <v-form
                   ref="form"

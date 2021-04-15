@@ -10,37 +10,27 @@
                         </li>
                    </ul>
                     <ul class="d-flex right">
-                        <li class="b-right">
-                            <v-btn
-                                icon
-                                v-if="$auth.loggedIn"
-                                @click.prevent="$router.push({name : `account___${$i18n.locale}`})"
-                            >
-                                
-                                    <v-icon >
-                                        mdi-account-outline
-                                    </v-icon>
-                               
-                            {{$auth.user.user.name}}
-                            </v-btn>
-                            <v-btn
-                                icon
-                                v-else
-                                @click.prevent="$router.push({name : `login___${$i18n.locale}`})"
-                            >
+                        <li class="b-right pointer"  v-if="$auth.loggedIn" @click.prevent="$router.push({name : `account___${$i18n.locale}`})">
+                            <a>
+                                <v-icon >
+                                    mdi-account-outline
+                                </v-icon>
+                                {{$auth.user.user.name}}
+                            </a>
+                        </li>
+                        <li class="b-right pointer"  v-else @click.prevent="$router.push({name : `login___${$i18n.locale}`})">
+                            <a>
                                 
                                     <v-icon >
                                         mdi-account-outline
                                     </v-icon>
                                
                             {{$t('login-rgister')}}
-                            </v-btn>
+                            </a>
                         </li>
-                        <li class="b-right">
+                        <li class="b-right"  @click.prevent="$router.push({name : `shop-cart___${$i18n.locale}`})">
                             <!-- <v-icon class="mr-2" >mdi-cart-arrow-down</v-icon> -->
-                            <v-btn
-                                icon
-                                @click.prevent="$router.push({name : `shop-cart___${$i18n.locale}`})"
+                            <a
                             >
                                 <v-badge
                                     :content="count"
@@ -54,7 +44,7 @@
                                     </v-icon>
                                 </v-badge>
                             {{$t('cart')}}
-                            </v-btn>
+                            </a>
                         </li>
                         <ul class="d-flex items-center socials pointer">
                             <li @click.prevent="link.url" v-for="(link , index) in links" :key="index">
@@ -81,17 +71,17 @@
                                 </nuxt-link>
                             </li>
                             <li>
-                                <nuxt-link to="/shop" >
+                                <a @click.prevent="goToStore()" >
                                     {{$t('Store')}}
-                                </nuxt-link>
+                                </a>
                             </li>
                             <li>
-                                <a @click.prevent="setGroup({id: 1 , itemName : 'خضراوات' , itemNameEn : 'vegitables'})">
+                                <a @click.prevent="setGroup({id: 2 , GroupName : 'خضراوات' , GroupNameEn : 'vegitables'})">
                                     {{$t('Vegitables')}}
                                 </a>
                             </li>
                             <li>
-                                <a @click.prevent="setGroup({id: 3 , itemName : 'فاكهة' , itemNameEn : 'fruits'})" >
+                                <a @click.prevent="setGroup({id: 1 , GroupName : 'فاكهة' , GroupNameEn : 'fruits'})" >
                                     {{$t('Fruits')}}
                                 </a>
                             </li>
@@ -145,17 +135,24 @@ export default {
                 id : group.id,
                 name
             }
-            const localFilters = {
-                price : [],
-                group : groupFilter
-            }
-            
-            this.$store.commit('product/filters' , localFilters)
-             if(this.$route.name !== `shop___${this.$i18n.locale}`){
+           this.$store.commit('product/groupFilter' , groupFilter)
+            if(this.$route.name !== `shop___${this.$i18n.locale}`){
                  this.$router.push({name : `shop___${this.$i18n.locale}` , query : {group : group.id}})
              } else {
-                 this.addParamsToLocation(this.filtersParams)
+                  let query = this.$route.query
+                    query.group = group.id
+                 this.addParamsToLocation(query)
              }
+        },
+        goToStore(){
+           this.$store.commit('product/groupFilter' , {  name : null,  id : null})
+           this.$store.commit('product/priceFrom' , null)
+           this.$store.commit('product/priceTo' , null)
+           if(this.$route.name !== `shop___${this.$i18n.locale}`){
+                this.$router.push({name : `shop___${this.$i18n.locale}` , query : {}})
+            } else {
+                this.addParamsToLocation({})
+            }
         },
         addParamsToLocation(params) {
         this.$store.dispatch('product/getProducts' , params)

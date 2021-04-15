@@ -46,9 +46,9 @@
                   </div>
                 </div>
                 <div class="btns d-flex">
-                  <v-btn  :disabled="product.InCart" text @click.prevent="addToCart" :class="{primary :product.InCart , textWhite :product.InCart}"  class="border  p-4 rounded-xl">
+                  <v-btn  :disabled="product.InCart" text @click.prevent="addToCart" :class="{primary :product.InCart || activeCart.includes(product.id) , textWhite :product.InCart || activeCart.includes(product.id)}"  class="border  p-4 rounded-xl">
                     <v-icon>mdi-cart-arrow-down</v-icon>
-                    <span v-if="product.InCart">{{$t('on_your_cart')}}</span>
+                    <span v-if="product.InCart || activeCart.includes(product.id)">{{$t('on_your_cart')}}</span>
                     <span v-else>{{$t('add_to_cart')}}</span>
                   </v-btn>
                   <v-btn
@@ -56,7 +56,7 @@
                     fab
                     @click.prevent="addToWishlist"
                     :disabled="product.inWishlist"
-                    :class="{active :product.inWishlist}"
+                    :class="{active :product.inWishlist || activeWishlist.includes(product.id)}"
                     text
                     light
                     small

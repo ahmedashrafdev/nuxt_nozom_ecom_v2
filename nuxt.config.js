@@ -24,6 +24,7 @@ export default {
     '@/assets/scss/utilities.css',
     '@/assets/scss/normalize.css',
     '@/assets/scss/global.css',
+    '@/assets/scss/rtl.css',
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -96,10 +97,10 @@ export default {
       }
     }
   },
-
   server:{
-    host : "192.168.1.40"
+    host : "192.168.1.102"
   },
+
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
   },

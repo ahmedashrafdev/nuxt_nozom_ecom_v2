@@ -7,6 +7,8 @@ export const state = () => ({
     deleteLoading: false,
     couponLoading: false,
     checkoutLoading: false,
+    // activeCart: [],
+    // activeWishlist: [],
     orderLoading:false,
     cart: [],
     cartCount : null,
@@ -65,6 +67,13 @@ export const mutations = {
 export const getters = {
     loading(state){
         return state.loading
+    },
+    activeCart(state){
+        const ids = []
+        state.cart.products.forEach(pr => {
+            ids.push(pr.id)
+        });
+        return ids
     },
     orderLoading(state){
         return state.orderLoading
@@ -209,7 +218,7 @@ export const actions = {
             })
         })
     },
-    remove({commit , dispatch} , payload) {
+    remove({commit , dispatch , state} , payload) {
         commit('setDeleteLoading', true);
         return new Promise((resolve, reject) => {
             http
@@ -223,6 +232,8 @@ export const actions = {
                 }
                 commit('ui/setSnackbar' , snackbar , {root : true})
                 commit('removeCartProduct' , payload)
+                commit('setCartCount' , state.cartCount - 1)
+
                 resolve(res);
             })
             .catch(e => {
