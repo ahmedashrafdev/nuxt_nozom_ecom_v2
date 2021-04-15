@@ -37,6 +37,35 @@
                   <span class="text-primary">{{ $n(100, 'currency' , 'en') }}</span>
                   <del >{{ $n(120, 'currency' , 'en') }}</del>
                 </div>
+                <div class="size-chart">
+                  <h4 class="mb-4 mt-4">{{$t('sizes')}}</h4>
+                  <v-chip-group
+                    active-class="primary--text"
+                    column
+                  >
+                    <v-chip
+                      v-for="tag in tags"
+                      :key="tag"
+                    >
+                      {{ tag }}
+                    </v-chip>
+                  </v-chip-group>
+                </div>
+                <div class="colors">
+                  <h4 class="mb-4 mt-4">{{$t('colors')}}</h4>
+                  <v-chip-group
+                    active-class="primary--text"
+                    column
+                  >
+                    <v-chip
+                      v-for="tag in colors"
+                      :key="tag"
+                      large
+                    >
+                     <span class="color" :style="{backgroundColor : tag}"></span>
+                    </v-chip>
+                  </v-chip-group>
+                </div>
                 <div class="qty">
                   <div class="d-flex atc items-center py-2">
                     <v-icon @click.prevent="increase" small>mdi-plus</v-icon>
@@ -95,7 +124,40 @@ export default {
     
     return {
       qty : 1 ,
-      qtys : [1]
+      qtys : [1],
+      colors :[
+        "#87674f",
+        "#1b1f21"
+      ],
+      tags: [
+        '31',
+        '32',
+        '33',
+        '34',
+        '35',
+        '36',
+        '37',
+        '38',
+        '39',
+        '31',
+        '32',
+        '33',
+        '34',
+        '35',
+        '36',
+        '37',
+        '38',
+        '39',
+        '31',
+        '32',
+        '33',
+        '34',
+        '35',
+        '36',
+        '37',
+        '38',
+        '39',
+      ],
     }
   },
   created(){
@@ -141,3 +203,4 @@ export default {
 </script>
 
 <style scoped src="@/assets/scss/pages/single-product.css"/>
+

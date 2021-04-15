@@ -70,9 +70,11 @@ export const getters = {
     },
     activeCart(state){
         const ids = []
-        state.cart.products.forEach(pr => {
-            ids.push(pr.id)
-        });
+        if(state.cart.products){
+            state.cart.products.forEach(pr => {
+                ids.push(pr.id)
+            });
+        }
         return ids
     },
     orderLoading(state){

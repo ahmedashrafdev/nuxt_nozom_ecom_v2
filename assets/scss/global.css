@@ -309,4 +309,25 @@ li {
 .search .v-card {
   z-index: 100000;
 }
+
+.colors .theme--light.v-chip:not(.v-chip--active) {
+  background-color: transparent !important;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+}
+
+.colors .v-chip.v-size--large {
+  border-radius: 5px;
+}
+
+.colors .v-chip {
+  padding: 5px !important;
+  height: auto !important;
+}
+
+.colors .color {
+  width: 30px;
+  height: 30px;
+  border-radius: 5px;
+}
 /*# sourceMappingURL=global.css.map */
