@@ -55,7 +55,7 @@
     <v-col cols="12" class="sm-hidden mb-8">
       <v-container>
         
-        <v-tabs vertical>
+    <v-tabs vertical>
       <v-tab class="left" v-for="(item,index) in items" @click.prevent="action(item.text)"  :key="index">
         <v-icon left>
          {{item.icon}}

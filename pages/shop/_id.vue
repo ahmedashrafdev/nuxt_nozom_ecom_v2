@@ -19,8 +19,18 @@
             <v-row>
 
               <v-col cols="12" lg="6" >
-                <div class="img shadow">
-                    <v-img min-height="200" :src="product.ItemImage"></v-img>
+                <div class="">
+                    <!-- <v-img min-height="200" :src="product.ItemImage"></v-img> -->
+                     <v-tabs vertical>
+                      <v-tab class="left mb-2" v-for="(item,index) in product.images" :key="index">
+                        <div class="img-wrapper">
+                          <v-img height="48" width="50" :src="item.image"></v-img>
+                        </div>
+                      </v-tab>
+                      <v-tab-item class="" v-for="(item,index) in product.images" :key="index">
+                        <v-img class="img shadow" min-height="200" :src="item.image"></v-img>
+                      </v-tab-item>
+                    </v-tabs>
                 </div>
               </v-col>
               <!-- <v-col cols="2"></v-col> -->
@@ -44,10 +54,12 @@
                     column
                   >
                     <v-chip
-                      v-for="tag in tags"
-                      :key="tag"
+                      v-for="size in product.sizes"
+                      :key="size"
+                      class=""
                     >
-                      {{ tag }}
+                      <span v-if="size.InStock">{{size.size}}</span>
+                      <del v-else>{{ size.size }}</del>
                     </v-chip>
                   </v-chip-group>
                 </div>
@@ -58,11 +70,11 @@
                     column
                   >
                     <v-chip
-                      v-for="tag in colors"
-                      :key="tag"
+                      v-for="(color,index) in product.colors"
+                      :key="index"
                       large
                     >
-                     <span class="color" :style="{backgroundColor : tag}"></span>
+                     <span class="color" :style="{backgroundColor : `#${color.color}`}"></span>
                     </v-chip>
                   </v-chip-group>
                 </div>
@@ -125,39 +137,18 @@ export default {
     return {
       qty : 1 ,
       qtys : [1],
-      colors :[
-        "#87674f",
-        "#1b1f21"
+      slides : [
+        'https://www.ocsolutions.co.in/html/organic_food/images/slider/style_blue.png',
+        'https://www.ocsolutions.co.in/html/organic_food/images/slider/style_blue.png',
       ],
-      tags: [
-        '31',
-        '32',
-        '33',
-        '34',
-        '35',
-        '36',
-        '37',
-        '38',
-        '39',
-        '31',
-        '32',
-        '33',
-        '34',
-        '35',
-        '36',
-        '37',
-        '38',
-        '39',
-        '31',
-        '32',
-        '33',
-        '34',
-        '35',
-        '36',
-        '37',
-        '38',
-        '39',
-      ],
+      swiperOption:{
+        initialSlide: 0,
+        slidesPerView: 1,
+        spaceBetween: 20,
+        freeMode: true,
+        watchOverflow: true,
+      },
+      
     }
   },
   created(){

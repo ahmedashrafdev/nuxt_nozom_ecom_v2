@@ -191,7 +191,7 @@ export const actions = {
       return new Promise((resolve, reject) => {
           commit('setLoading' , true)
           http
-          .get(`product/find/${payload}`)
+          .get(`product/find/${payload}?color=171614`)
           .then( async (data) => {
             commit('setProduct' , data.data)
             commit('setLoading' , false)

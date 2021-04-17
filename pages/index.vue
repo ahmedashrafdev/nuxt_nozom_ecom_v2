@@ -16,10 +16,10 @@
               <home-products productKey="featured"/>
             </v-col>
             <v-col cols="12" sm="6">
-              <home-banner :loading="false" img="https://www.ocsolutions.co.in/html/organic_food/images/header3/shipping-2.png"/>
+              <home-banner :loading="false" img="https://dfcdn.defacto.com.tr/Mobile/2-li-alan-accessories_176c0825-8ddd-4d3f-988d-350f3f8b004e_815726b1-2c0c-40ff-9c56-65488bbeab49_DI_222.jpg"/>
             </v-col>
             <v-col cols="12" sm="6">
-              <home-banner :loading="false" img="https://www.ocsolutions.co.in/html/organic_food/images/header3/shipping-1.png"/>
+              <home-banner :loading="false" img="https://dfcdn.defacto.com.tr/Mobile/2-li-alan-oversize-en_0e513df9-563b-4d58-a79d-8bd163b1f55a_3a80de69-9d12-4cd0-8e94-0a55896a1bda_DI_222.jpg"/>
             </v-col>
             <v-col cols="12">
               <div class="d-flex space-between px-4">
