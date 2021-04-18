@@ -1,3 +1,4 @@
+
 <template>
     <nav class="nav">
         <div class="top">
@@ -61,7 +62,7 @@
             <v-container>
                 <div class="nav d-flex space-between items-center">
                     <nuxt-link to="/" class="logo">
-                        <img src="https://www.ocsolutions.co.in/html/organic_food/images/style_blue.png">
+                        <img src="https://dfcdn.defacto.com.tr/Assets/dist/images/logo.png">
                     </nuxt-link>
 
                     <div class="links">

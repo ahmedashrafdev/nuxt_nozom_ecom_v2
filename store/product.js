@@ -189,9 +189,11 @@ export const actions = {
   },
   getProduct({commit}, payload) {
       return new Promise((resolve, reject) => {
-          commit('setLoading' , true)
+          if(payload.loading == true){
+            commit('setLoading' , true)
+          } 
           http
-          .get(`product/find/${payload}?color=171614`)
+          .get(`product/find/${payload.id}?${serializeQuery(payload.filters)}`)
           .then( async (data) => {
             commit('setProduct' , data.data)
             commit('setLoading' , false)

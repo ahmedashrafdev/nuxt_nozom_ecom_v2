@@ -7,10 +7,20 @@
     <v-col cols="12">
       <v-container>
         <v-row>
-          <v-col cols="12" v-if="loading">
+          <v-col cols="12" md="6" v-if="loading">
             <v-skeleton-loader
               width="100%"
               type="image"
+              height="800"
+            >
+            </v-skeleton-loader>
+          </v-col>
+          <v-col cols="12" md="6" v-if="loading">
+            <v-skeleton-loader
+            v-for="i in 6"
+            :key="i"
+              width="100%"
+              type="list-item"
             >
             </v-skeleton-loader>
           </v-col>
@@ -21,14 +31,15 @@
               <v-col cols="12" lg="6" >
                 <div class="">
                     <!-- <v-img min-height="200" :src="product.ItemImage"></v-img> -->
-                     <v-tabs vertical>
+                     <v-tabs vertical v-model="tabs">
                       <v-tab class="left mb-2" v-for="(item,index) in product.images" :key="index">
                         <div class="img-wrapper">
                           <v-img height="48" width="50" :src="item.image"></v-img>
                         </div>
                       </v-tab>
                       <v-tab-item class="" v-for="(item,index) in product.images" :key="index">
-                        <v-img class="img shadow" min-height="200" :src="item.image"></v-img>
+                        <v-img class="img shadow" :src="item.image">
+                        </v-img>
                       </v-tab-item>
                     </v-tabs>
                 </div>
@@ -54,12 +65,13 @@
                     column
                   >
                     <v-chip
-                      v-for="size in product.sizes"
-                      :key="size"
+                      v-for="(size , index) in product.sizes"
+                      :key="index"
+                      :class="$route.query.size == size.size? `primary--text v-chip--active` : ''"
                       class=""
+                    @click.prevent="filter('size' , size.size)"
                     >
-                      <span v-if="size.InStock">{{size.size}}</span>
-                      <del v-else>{{ size.size }}</del>
+                      <span>{{size.size}}</span>
                     </v-chip>
                   </v-chip-group>
                 </div>
@@ -72,7 +84,9 @@
                     <v-chip
                       v-for="(color,index) in product.colors"
                       :key="index"
+                      :class="product.initlaColor == color.color || $route.query.color == color? `primary--text v-chip--active` : ''"
                       large
+                    @click.prevent="filter('color' , color.color)"
                     >
                      <span class="color" :style="{backgroundColor : `#${color.color}`}"></span>
                     </v-chip>
@@ -137,10 +151,7 @@ export default {
     return {
       qty : 1 ,
       qtys : [1],
-      slides : [
-        'https://www.ocsolutions.co.in/html/organic_food/images/slider/style_blue.png',
-        'https://www.ocsolutions.co.in/html/organic_food/images/slider/style_blue.png',
-      ],
+      tabs: null,
       swiperOption:{
         initialSlide: 0,
         slidesPerView: 1,
@@ -152,10 +163,38 @@ export default {
     }
   },
   created(){
-    console.log(this.$route.name)
-    this.$store.dispatch('product/getProduct' , this.$route.params.id)
+    let payload = {
+      id : this.$route.params.id,
+      filters :{}
+    }
+    if(this.$route.query.color){
+      payload.filters.color = this.$route.query.color
+    }
+    if(this.$route.query.size){
+      payload.filters.size = this.$route.query.size
+    }
+    this.getProduct(payload)
+  },
+  methods:{
+    openFiltersModal(){
+				this.$store.commit('ui/mobileFiltersModal', true)
+    },
+    getProduct(payload){
+      //check if we dont need to perform loading
+    payload.loading = payload.loading !== false ? true : false
+    this.$store.dispatch('product/getProduct' , payload)
     .then(() => {
-      this.qtys = this.product.byWeight ? 
+      if(payload.filters.color){
+        const image = this.product.images.filter(img => {
+          return img.color  === payload.filters.color
+        })
+        console.log('test')
+        if(image[0]){
+          this.tabs = this.product.images.indexOf(image[0])
+        }
+          console.log(this.tabs)
+      }
+      this.qtys = this.product.ByWeight == 0 ? 
         [1,2,3,4,5,6,7,8,9,10] 
         : 
         [
@@ -182,10 +221,48 @@ export default {
       ]
       this.qty = this.product.cartQty ? this.product.cartQty : 1
     })
-  },
-  methods:{
-    openFiltersModal(){
-				this.$store.commit('ui/mobileFiltersModal', true)
+    },
+    filter(type , value){
+      let query = this.$route.query
+      if(type == 'size'){
+        if(query.size == value){
+          delete query.size
+        } else {
+          query.size = value
+        }
+      }
+      if(type == 'color'){
+        if(query.color == value){
+          delete query.color
+        } else {
+          query.color = value
+        }
+        query.color = value
+      }
+  
+      this.addParamsToLocation(query)
+    },
+    addParamsToLocation(params) {
+      let payload = {
+        id : this.$route.params.id,
+        loading : false,
+        filters :params
+      }
+      this.getProduct(payload)
+      history.pushState(
+          {},
+          null,
+          this.$route.path +
+          '?' +
+          Object.keys(params)
+              .map(key => {
+              return (
+                  encodeURIComponent(key) + '=' + encodeURIComponent(params[key])
+              )
+              })
+              .join('&')
+      )
+      window.scrollTo({ top:0, behavior: 'smooth'});
     },
     
   }

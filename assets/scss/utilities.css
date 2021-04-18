@@ -95,6 +95,9 @@ body{
 .text-small{
   font-size: 12px;
 }
+.text-medium{
+    font-size: 14px;
+  }
 .justify-between{
     justify-content: space-between;
 }

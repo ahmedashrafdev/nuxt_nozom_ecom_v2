@@ -18,7 +18,10 @@ export default {
     methods:{
       addToCart(){
         if(this.$auth.loggedIn){
-          this.$store.dispatch('cart/create', {product: this.product.id , qty :this.qty})
+          let payload = {product: this.product.id , qty :this.qty}
+          this.$route.query.color ? payload.color = this.$route.query.color : ''
+          this.$route.query.size ? payload.size = this.$route.query.size : ''
+          this.$store.dispatch('cart/create', payload)
           .then(() => {
             this.inCart.push(this.product.id)
             this.product.InCart = true
