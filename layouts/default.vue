@@ -11,6 +11,7 @@
 
     <modals-mobile-categories/>
     <layouts-snack-bar/>
+    <modals-add-to-cart/>
      
   </v-app>
 </template>

@@ -55,19 +55,18 @@
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis, quibusdam quos? Minima iure repellendus quia dignissimos perspiciatis similique consequatur optio reiciendis, repudiandae aperiam iste aspernatur, dicta asperiores corrupti distinctio soluta?
                 </p> -->
                 <div class="price  text-h4">
-                  <span class="text-primary">{{ $n(100, 'currency' , 'en') }}</span>
-                  <del >{{ $n(120, 'currency' , 'en') }}</del>
+                  <span class="text-primary">{{ $n(product.POSPP, 'currency' , 'en') }}</span>
+                  <!-- <del >{{ $n(120, 'currency' , 'en') }}</del> -->
                 </div>
                 <div class="size-chart">
                   <h4 class="mb-4 mt-4">{{$t('sizes')}}</h4>
                   <v-chip-group
-                    active-class="primary--text"
                     column
                   >
                     <v-chip
                       v-for="(size , index) in product.sizes"
                       :key="index"
-                      :class="$route.query.size == size.size? `primary--text v-chip--active` : ''"
+                      :class="$route.query.size == size.size? `v-chip--active` : ''"
                       class=""
                     @click.prevent="filter('size' , size.size)"
                     >
@@ -78,13 +77,12 @@
                 <div class="colors">
                   <h4 class="mb-4 mt-4">{{$t('colors')}}</h4>
                   <v-chip-group
-                    active-class="primary--text"
                     column
                   >
                     <v-chip
                       v-for="(color,index) in product.colors"
                       :key="index"
-                      :class="product.initlaColor == color.color || $route.query.color == color? `primary--text v-chip--active` : ''"
+                      :class="product.initlaColor == color.color || $route.query.color == color? `v-chip--active` : ''"
                       large
                     @click.prevent="filter('color' , color.color)"
                     >

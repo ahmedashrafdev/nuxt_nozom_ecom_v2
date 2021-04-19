@@ -5,8 +5,8 @@ export default {
       return {
         inCart : [],
         inWishlist: [],
-        qtys : [1],
-        qty : 1
+        qty : 1,
+        qtys : [],
       }
     },
     computed : {
@@ -16,16 +16,54 @@ export default {
       }),
   },
     methods:{
+      getProduct(payload){
+      this.$store.dispatch('product/getProduct' , payload)
+      .then(res => {
+        const color = res.initialColor
+        history.pushState(
+            {},
+            null,
+            this.$route.path +
+            `?color=${color}`
+        )
+      })
+      },
       addToCart(){
         if(this.$auth.loggedIn){
-          let payload = {product: this.product.id , qty :this.qty}
-          this.$route.query.color ? payload.color = this.$route.query.color : ''
-          this.$route.query.size ? payload.size = this.$route.query.size : ''
-          this.$store.dispatch('cart/create', payload)
-          .then(() => {
-            this.inCart.push(this.product.id)
-            this.product.InCart = true
-          })
+          if(this.product.hasOptions){
+            if(this.$route.name == `shop-id___${this.$i18n.locale}`){
+              if(this.$route.query.color && this.$route.query.size){
+                let payload = {product: this.product.id , qty :this.qty , color :this.$route.query.color , size : this.$route.query.size }
+                this.$store.dispatch('cart/create', payload)
+                .then(() => {
+                  this.inCart.push(this.product.id)
+                  this.product.InCart = true
+                })
+              } else{ 
+                const snackbar = {
+                  active : true,
+                  text: 'please_select_option'
+                }
+                this.$store.commit('ui/setSnackbar' , snackbar)
+              }
+            } else {
+              let payload = {
+                id : this.product.id,
+                filters :{}
+              }
+              this.getProduct(payload)
+              
+              this.$store.commit('ui/addToCartModal' , true)
+              
+            }
+          } else {
+            let payload = {product: this.product.id , qty :this.qty}
+            this.$store.dispatch('cart/create', payload)
+            .then(() => {
+              this.inCart.push(this.product.id)
+              this.product.InCart = true
+            })
+          }
         } else {
           const snackbar = {
               active : true,

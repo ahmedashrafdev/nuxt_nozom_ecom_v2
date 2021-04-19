@@ -79,12 +79,12 @@
                             </li>
                             <li>
                                 <a @click.prevent="setGroup({id: 2 , GroupName : 'خضراوات' , GroupNameEn : 'vegitables'})">
-                                    {{$t('Vegitables')}}
+                                    {{$t('Women')}}
                                 </a>
                             </li>
                             <li>
                                 <a @click.prevent="setGroup({id: 1 , GroupName : 'فاكهة' , GroupNameEn : 'fruits'})" >
-                                    {{$t('Fruits')}}
+                                    {{$t('Men')}}
                                 </a>
                             </li>
                         </ul>

@@ -101,6 +101,14 @@ body{
 .justify-between{
     justify-content: space-between;
 }
+.color-lable{
+    width: 15px;
+    height: 15px;
+    outline: 1px solid var(--primary);
+    border-radius: 5px;
+    display: inline-block;
+
+}
 .text-black{
     color: #000;
 }

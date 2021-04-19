@@ -11,11 +11,13 @@ export const state = () => ({
     createPhoneModal : false,
     createPhoneDesktopModal : false,
     deleteAddressModalRestricted: false,
+    addToCartModal: false,
     editAccountModal : false,
     deleteAddressModal:{
         active : false,
         id : null
     },
+    addToCartProduct:{},
     mobileAddressesModal : false,
     mobileCreateAddressModal : false,
     createAddressModal : false,
@@ -23,6 +25,7 @@ export const state = () => ({
     qtys: [
         1,2,3,4,5,6,7,8,9,10
     ],
+    addToCartModalLoading : true,
     snackbar : {
         active: false,
         text: '',
@@ -55,6 +58,12 @@ export const state = () => ({
 export const mutations = {
     setErrMsg(state, payload) {
         state.errMsg = payload;
+    },
+    addToCartProduct(state, payload) {
+        state.addToCartProduct = payload;
+    },
+    addToCartModal(state, payload) {
+        state.addToCartModal = payload;
     },
     createPhoneDesktopModal(state, payload) {
         state.createPhoneDesktopModal = payload;
@@ -94,7 +103,6 @@ export const mutations = {
     {
         state.mobileAddressesModal = payload
     },
-    
     mobileFiltersModal(state, payload) {
         state.mobileFiltersModal = payload;
     },
@@ -106,12 +114,24 @@ export const mutations = {
     },
     setErrCode(state, payload) {
         state.errCode = payload;
-    }
+    },
+    addToCartModalLoading(state, payload) {
+        state.addToCartModalLoading = payload;
+    },
 };
 
 export const getters = {
     errMsg: state => {
         return state.errMsg
+    },
+    addToCartModalLoading:state => {
+        return state.addToCartModalLoading
+    },
+    addToCartProduct: state => {
+        return state.addToCartProduct
+    },
+    addToCartModal: state => {
+        return state.addToCartModal
     },
     createPhoneModal: state => {
         return state.createPhoneModal

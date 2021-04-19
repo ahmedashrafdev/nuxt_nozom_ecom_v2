@@ -49,7 +49,6 @@
 
           <h2 class="product-title pointer mb-2"  @click.prevent="$router.push({name : `shop-id___${$i18n.locale}` , params : {id : product.id}})" v-if="$i18n.locale == 'ar'">{{product.ItemName}}</h2>
           <h2 class="product-title  pointer mb-2"  @click.prevent="$router.push({name : `shop-id___${$i18n.locale}` , params : {id : product.id}})" v-else>{{product.ItemNameEn}}</h2>
-          <v-subheader v-if="product.size">{{$t('size')}} {{product.size}}</v-subheader>
           <div class="price">
             <span class="text-sm d-block" v-if="inCart.includes(product.id) || product.InCart">{{$t('total')}} : {{ $n(product.POSPP * qty, 'currency' , 'en') }}</span>
 
