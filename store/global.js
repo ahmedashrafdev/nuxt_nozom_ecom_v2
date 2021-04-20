@@ -17,17 +17,17 @@ export const state = () => ({
     links : [
         {
             title : "facebook",
-            url : "www.facebook.com",
+            url : "http://www.facebook.com",
             icon : "facebook"
         },
         {
             title : "instagram",
-            url : "www.instagram.com",
+            url : "http://www.instagram.com",
             icon : "instagram"
         },
         {
             title : "twitter",
-            url : "www.twitter.com",
+            url : "http://www.twitter.com",
             icon : "twitter"
         }
     ]

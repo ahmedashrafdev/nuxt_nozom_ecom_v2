@@ -5,6 +5,7 @@ export default {
       return {
         inCart : [],
         inWishlist: [],
+        addToCartModal : false,
         qty : 1,
         qtys : [],
       }
@@ -16,64 +17,120 @@ export default {
       }),
   },
     methods:{
-      getProduct(payload){
-      this.$store.dispatch('product/getProduct' , payload)
-      .then(res => {
-        const color = res.initialColor
-        history.pushState(
-            {},
-            null,
-            this.$route.path +
-            `?color=${color}`
-        )
-      })
-      },
-      addToCart(){
-        if(this.$auth.loggedIn){
-          if(this.product.hasOptions){
-            if(this.$route.name == `shop-id___${this.$i18n.locale}`){
-              if(this.$route.query.color && this.$route.query.size){
-                let payload = {product: this.product.id , qty :this.qty , color :this.$route.query.color , size : this.$route.query.size }
-                this.$store.dispatch('cart/create', payload)
-                .then(() => {
-                  this.inCart.push(this.product.id)
-                  this.product.InCart = true
-                })
-              } else{ 
-                const snackbar = {
-                  active : true,
-                  text: 'please_select_option'
-                }
-                this.$store.commit('ui/setSnackbar' , snackbar)
-              }
-            } else {
-              let payload = {
-                id : this.product.id,
-                filters :{}
-              }
-              this.getProduct(payload)
-              
-              this.$store.commit('ui/addToCartModal' , true)
-              
-            }
-          } else {
-            let payload = {product: this.product.id , qty :this.qty}
-            this.$store.dispatch('cart/create', payload)
-            .then(() => {
-              this.inCart.push(this.product.id)
-              this.product.InCart = true
-            })
-          }
-        } else {
+      //add product with options to cart from single product page
+      singleWithOptions(){
+        //check if the options are provided
+        if(this.$route.query.color && this.$route.query.size){
+          let payload = {product: this.product.id , qty :this.qty , color :this.$route.query.color , size : this.$route.query.size }
+          this.plainAddToCart(payload)
+        } else{ 
+          // show message to make use select options if its not provided
           const snackbar = {
-              active : true,
-              text: 'logged in successfully'
+            active : true,
+            text: 'please_select_option'
           }
           this.$store.commit('ui/setSnackbar' , snackbar)
-          localStorage.setItem('product' , this.product.id )
-          localStorage.setItem('qty' , this.qty )
+        }
+      },
+      //add product with options to cart from shop or home  page (partials/product component)
+      partialWithOptions(){
+        //open modal
+        
+        this.$store.commit('product/modalId' , this.product.id)
+        this.$store.commit('ui/addToCartModal' , true)
+
+        
+      },
+      // add to cart if product has options
+      optionsRequired(){
+        if(this.$route.name == `shop-id___${this.$i18n.locale}`){
+          // add to cart if product has options from single product page (shop/_id.vue)
+          this.singleWithOptions()
+        } else {
+          // add to cart if product has options from product partial page page (components/partials/product.vue)
+          this.partialWithOptions()
+        }
+      },
+      // rediredct to login if use not logged in & show snack bar
+      loginRequired(){
+        const snackbar = {
+          active : true,
+          text: 'logged in successfully'
+        }
+        this.$store.commit('ui/setSnackbar' , snackbar)
+        localStorage.setItem('product' , this.product.id )
+        localStorage.setItem('qty' , this.qty )
+
+        this.$router.push('/login')
+      },
+      // add to cart actions 
+        /** params [payload | object] */
+      plainAddToCart(payload){
+        this.$store.dispatch('cart/create', payload)
+        .then(() => {
+          this.inCart.push(this.product.id)
+          this.product.InCart = true
+        })
+      },
+      // addToCart(){
+      //   if(this.$auth.loggedIn){
+      //     if(this.product.hasOptions){
+      //       if(this.$route.name == `shop-id___${this.$i18n.locale}`){
+      //         if(this.$route.query.color && this.$route.query.size){
+      //           let payload = {product: this.product.id , qty :this.qty , color :this.$route.query.color , size : this.$route.query.size }
+      //           this.$store.dispatch('cart/create', payload)
+      //           .then(() => {
+      //             this.inCart.push(this.product.id)
+      //             this.product.InCart = true
+      //           })
+      //         } else{ 
+      //           const snackbar = {
+      //             active : true,
+      //             text: 'please_select_option'
+      //           }
+      //           this.$store.commit('ui/setSnackbar' , snackbar)
+      //         }
+      //       } else {
+      //         let payload = {
+      //           id : this.product.id,
+      //           filters :{}
+      //         }
+      //         this.getProduct(payload)
+              
+      //         this.$store.commit('ui/addToCartModal' , true)
+              
+      //       }
+      //     } else {
+      //       let payload = {product: this.product.id , qty :this.qty}
+      //       this.$store.dispatch('cart/create', payload)
+      //       .then(() => {
+      //         this.inCart.push(this.product.id)
+      //         this.product.InCart = true
+      //       })
+      //     }
+      //   } else {
+      //     const snackbar = {
+      //         active : true,
+      //         text: 'logged in successfully'
+      //     }
+      //     this.$store.commit('ui/setSnackbar' , snackbar)
+      //     localStorage.setItem('product' , this.product.id )
+      //     localStorage.setItem('qty' , this.qty )
   
-          this.$router.push('/login')
+      //     this.$router.push('/login')
+      //   }
+      // },
+      addToCart(){
+        if(this.$auth.loggedIn){
+          console.log(this.product.hasOptions)
+          if(this.product.hasOptions){
+            this.optionsRequired()
+          } else {
+            const payload = {product: this.product.id , qty :this.qty}
+            this.plainAddToCart(payload)
+          }
+        } else {
+          this.loginRequired()
         }
       },
       addToWishlist() {
@@ -145,17 +202,14 @@ export default {
         16.25 , 16.5 , 16.75 , 17,
         17.25 , 17.5 , 17.75 , 18,
         18.25 , 18.5 , 18.75 , 19,
-        19.25 , 19.5 , 19.75 , 20,
-    ]
+        19.25 , 19.5 , 19.75 , 20,]
       if(this.$route.name == `shop-id___${this.$i18n.locale}`){
         this.$store.dispatch('product/getProduct' , this.$route.params.id)
         .then(() => {
-          console.log('asd')
           this.qtys = this.product.ByWeight === 1 ? weights : qtys
           this.qty = this.product.cartQty ? this.product.cartQty : 1
         })
       } else {
-        console.log('asdasd')
         this.qtys = this.product.ByWeight === 1? weights : qtys
         this.qty = this.product.cartQty ? this.product.cartQty : 1
       }

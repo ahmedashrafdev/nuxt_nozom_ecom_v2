@@ -48,8 +48,10 @@
     "cart_step_shipping": "Shipping",
     "cart_step_done" : "Done",
     "add_to_cart" : "add to cart",
+    "sizes" : "sizes",
+    "colors" : "colors",
     "on_your_cart" : "Product is on your cart",
-    "added_to_cart_successfully " : "product added to cart successfully",
+    "added_to_cart_successfully" : "product added to cart successfully",
     "Button_back_forcheckout": "Back",
     "please_select_option": "please select options before add to cart",
     "Button_Checkout_forcheckout": "Checkout"  

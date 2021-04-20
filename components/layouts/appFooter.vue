@@ -42,10 +42,10 @@
                         <v-col cols="4" class="list">
                             <h2 class="title">{{$t('stay connected')}}</h2>
                             <ul>
-                                <li @click.prevent="link.url" v-for="(link , index) in links" :key="index">
+                                <a :href="link.url" target="_blank" v-for="(link , index) in links" :key="index">
                                     <v-icon small>mdi-{{link.icon}}</v-icon>
                                     {{link.title}}
-                                </li>
+                                </a>
                             </ul>
                         </v-col>
                         <v-col cols="4" class="list">

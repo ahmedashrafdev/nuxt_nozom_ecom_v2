@@ -5,6 +5,7 @@ export const state = () => ({
   products: [],
   product: {},
   homeProducts:[],
+  modalId : null,
   groupFilter:{
     name : null,
     id : null
@@ -27,9 +28,11 @@ export const mutations = {
   setProducts(state, payload) {
       state.products = payload;
   },
+  modalId(state, payload) {
+    state.modalId = payload;
+  },
   groupFilter(state, payload) {
     state.groupFilter = payload;
-  
   },
   priceFrom(state, payload) {
     state.priceFrom = payload;
@@ -37,17 +40,13 @@ export const mutations = {
   },
   priceTo(state, payload) {
     state.priceTo = payload;
-  
   },
-  
   productWishlist(state , payload){
     const product = state.homeProducts.filter(item => {
       return item.id === payload.id ? item : ''
       })[0]
     product ? product.inWishlist = payload.active : ''
   },
-  
-
   filters(state, payload){
     state.filters = payload
   },
@@ -101,6 +100,9 @@ export const getters = {
   products: state => {
       return state.products
   },
+  modalId: state => {
+    return state.modalId
+},
   priceFrom: state => {
     return state.priceFrom
   },

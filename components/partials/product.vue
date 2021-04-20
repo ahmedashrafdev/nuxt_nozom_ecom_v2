@@ -8,7 +8,7 @@
       <div class="pr-partial" v-else>
         <div class="img"  >
           <v-img min-height="200" @click.prevent="$router.push({name : `shop-id___${$i18n.locale}` , params : {id : product.id}})" :src="product.ItemImage"></v-img>
-          <div class="actions"  v-if="inCart.includes(product.id) || product.InCart">
+          <div class="actions"  v-if="activeCart.includes(product.id)">
             <div class="right d-flex atc items-center py-2">
                 <v-icon @click.prevent="increase" small>mdi-plus</v-icon>
                 <v-select @change="updateQty" :items="qtys" class="atc-input"  v-model="qty"/>

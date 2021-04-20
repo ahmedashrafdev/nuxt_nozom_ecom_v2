@@ -5,25 +5,40 @@
       @click:outside="close"
       max-width="600"
     >
-      <v-card>
-         
+      <v-card v-if="loading">
         <v-container>
-            <div class="d-flex" v-if="loading">
-                <v-skeleton-loader width="200" height="350" type="image"></v-skeleton-loader>
-                <div>
-                    <v-skeleton-loader
-                    v-for="i in 6"
-                    :key="i"
-                    width="300"
-                    type="list-item"
-                    >
-                    click:outside</v-skeleton-loader>
-                </div>
-            </div> 
-            <div class="d-flex" v-else>
+        <div class="d-flex">
+          <v-skeleton-loader width="200" height="350" type="image"></v-skeleton-loader>
+          <div>
+              <v-skeleton-loader
+              v-for="i in 2"
+              :key="i"
+              width="300"
+              type="list-item-three-line"
+              >
+              </v-skeleton-loader>
+          </div>
+        </div> 
+
+        </v-container>
+      </v-card>
+      <v-card v-else>
+        <v-container>
+            <div class="d-flex">
                 <div class="img shadow mr-4">
-                    <v-img max-width="200" class="img shadow" :src="product.ItemImage">
-                    </v-img>
+                    <!-- <v-img max-width="200" class="img shadow" :src="product.ItemImage">
+                    </v-img> -->
+                    <v-tabs vertical v-model="tabs">
+                      <v-tab class="left mb-2" v-for="(item,index) in product.images" :key="index">
+                        <div class="img-wrapper">
+                          <v-img height="48" width="50" :src="item.image"></v-img>
+                        </div>
+                      </v-tab>
+                      <v-tab-item class="modal-tab" v-for="(item,index) in product.images" :key="index">
+                        <v-img ax-width="200"  class="img shadow" :src="item.image">
+                        </v-img>
+                      </v-tab-item>
+                    </v-tabs>
                 </div>
                 <div class="wrapper">
                     <h2 class="product-title larger mb-1" v-if="$i18n.locale == 'ar'">{{product.ItemName}}</h2>
@@ -39,36 +54,28 @@
                 </div>
                 <div class="size-chart">
                   <h4 class="mb-4 mt-4">{{$t('sizes')}}</h4>
-                  <v-chip-group
-                    v-model="size"
-                    column
-                  >
-                    <v-chip
+                    
+                    <span
                       v-for="(size , index) in product.sizes"
                       :key="index"
-                      :class="$route.query.size == size.size? ` v-chip--active` : ''"
-                      class=""
-                    @click.prevent="filter('size' , size.size)"
+                      :class="activeSize == size.size? ` v-chip--active` : ''"
+                      class="v-chip pointer"
+                      @click.prevent="filter('size' , size.size)"
                     >
-                      <span>{{size.size}}</span>
-                    </v-chip>
-                  </v-chip-group>
+                      {{size.size}}
+                    </span>
                 </div>
                 <div class="colors">
                   <h4 class="mb-4 mt-4">{{$t('colors')}}</h4>
-                  <v-chip-group
-                    column
-                  >
-                    <v-chip
-                      v-for="(color,index) in product.colors"
-                      :key="index"
-                      :class="product.initlaColor == color.color || $route.query.color == color? ` v-chip--active` : ''"
-                      large
+                  <span
+                    v-for="(color , index) in product.colors"
+                    :key="index"
+                    :class="activeColor == color.color? ` v-chip--active` : ''"
+                    class="v-chip-color pointer"
                     @click.prevent="filter('color' , color.color)"
-                    >
-                     <span class="color" :style="{backgroundColor : `#${color.color}`}"></span>
-                    </v-chip>
-                  </v-chip-group>
+                  >
+                    <span class="color" :style="{backgroundColor : `#${color.color}`}"></span>
+                  </span>
                 </div>
                 <div class="qty">
                   <div class="d-flex atc items-center py-2">
@@ -89,6 +96,7 @@
         
       </v-container>
       </v-card>
+
     </v-dialog>
   </v-row>
 </template>
@@ -99,11 +107,11 @@ export default {
     computed : {
         ...mapGetters({
             product: 'product/product',
-            loading: 'product/loading'
+            id: 'product/modalId',
         }),
         addToCartModal: {
             get: function() {
-				return this.$store.getters['ui/addToCartModal']
+				      return this.$store.getters['ui/addToCartModal']
             },
             set: function(newValue) {
                 this.$store.commit('ui/addToCartModal' , newValue)
@@ -114,13 +122,32 @@ export default {
       return {
         qty : 1,
         qtys : [1,2,3,4,5,6,7,8,9,10] ,
+        loading : true,
+        activeSize  :null,
+        activeColor  :null,
+        tabs: null,
         size : null,
+      }
+    },
+    
+    watch : {
+      addToCartModal(val){
+        if(val === true){ 
+          this.getProduct()   
+        }
       }
     },
     methods:{
         close(){
-          this.addParamsToLocation({})
+          history.pushState(
+              {},
+              null,
+              this.$route.path)
           this.size = null
+          this.loading = true
+          this.activeSize = null
+          this.activeColor = null
+          this.$store.commit('product/modalId' , null)
           this.$store.commit('ui/addToCartModal' , false)
         },
         decrease(){
@@ -134,54 +161,30 @@ export default {
           if(index !== this.qtys.length -1)
           this.qty = this.qtys[index + 1]
         },
+        
         filter(type , value){
           let query = this.$route.query
           if(type == 'size'){
             if(query.size == value){
               delete query.size
+              this.activeSize = null
             } else {
+              this.activeSize = value
               query.size = value
             }
           }
           if(type == 'color'){
-            if(query.color == value){
-              delete query.color
-            } else {
-              query.color = value
-            }
+            this.activeColor = value
             query.color = value
           }
-      
-          this.addParamsToLocation(query)
-        },
-        addParamsToLocation(params) {
-          let payload = {
-            id : this.product.id,
-            loading : false,
-            filters :params
-          }
-          this.getProduct(payload)
-          history.pushState(
-              {},
-              null,
-              this.$route.path +
-              '?' +
-              Object.keys(params)
-                  .map(key => {
-                  return (
-                      encodeURIComponent(key) + '=' + encodeURIComponent(params[key])
-                  )
-                  })
-                  .join('&')
-          )
+          this.getProduct()
         },
         addToCart(){
-          if(this.$route.query.color && this.$route.query.size){
-            let payload = {product: this.product.id , qty :this.qty , color :this.$route.query.color , size : this.$route.query.size }
+          if(this.activeSize && this.activeColor){
+            let payload = {product: this.product.id , qty :this.qty , color :this.activeColor , size : this.activeSize }
             this.$store.dispatch('cart/create', payload)
             .then(() => {
-              this.inCart.push(this.product.id)
-              this.product.InCart = true
+              console.log('asd')
               this.close()
             })
           } else{ 
@@ -190,28 +193,45 @@ export default {
               text: 'please_select_option'
             }
             this.$store.commit('ui/setSnackbar' , snackbar)
+            this.$store.commit('product/updateProductAfterCartUpdated' , {id : this.product.id , qty : this.qty})
           }
         },
-        getProduct(payload){
+        getProduct(){
       //check if we dont need to perform loading
-        payload.loading = payload.loading !== false ? true : false
+        const payload = {
+          id :this.id,
+          loading:false,
+          filters :{}
+        }
+        this.activeSize ? payload.filters.size = this.activeSize : ''
+        this.activeColor ? payload.filters.color = this.activeColor : ''
         this.$store.dispatch('product/getProduct' , payload)
-        .then(() => {
+        .then(res => {
           if(payload.filters.color){
             const image = this.product.images.filter(img => {
               return img.color  === payload.filters.color
             })
-            console.log('test')
             if(image[0]){
               this.tabs = this.product.images.indexOf(image[0])
             }
+          } else {
+            const color = res.initialColor
+            this.activeColor = color
+
+            // history.pushState(
+            //     {},
+            //     null,
+            //     this.$route.path +
+            //     `?color=${color}`
+            // )
           }
+            this.loading = false
         })
     },
         
     },
     created(){
-        
+     
     }
   }
 </script>

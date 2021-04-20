@@ -129,7 +129,7 @@ body{
 
 
 .pointer{
-    cursor: pointer;
+    cursor: pointer !important;
 }
 .primary-text{
     color: var(--primary-color);
