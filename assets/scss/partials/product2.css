@@ -29,8 +29,8 @@
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  -webkit-transform: translateY(75%);
-          transform: translateY(75%);
+  -webkit-transform: translateY(50%);
+          transform: translateY(50%);
 }
 
 .pr-partial .meta {

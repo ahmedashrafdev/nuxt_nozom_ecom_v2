@@ -6,7 +6,7 @@
                     <div class="logo">
                         <img src="https://www.ocsolutions.co.in/html/organic_food/images/header3/footer-logo.png" alt="el rady logo">
                     </div>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi nobis praesentium ab cupiditate dolor.</p>
+                    <p>{{aboutUs}}</p>
                     <ul class="contacts">
                         <li v-for="(contact,index) in contacts" :key="index">
                             <v-icon>mdi-{{contact.icon}}</v-icon>
@@ -100,6 +100,7 @@ export default {
     },
     data(){
         return{
+            aboutUs : "Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi nobis praesentium ab cupiditate dolor.",
             accountItems: [
                 {  text: 'order_history', icon: 'calendar-blank' },
                 {  text: 'wishlist', icon: 'heart-outline' },

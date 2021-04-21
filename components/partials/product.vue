@@ -8,11 +8,11 @@
       <div class="pr-partial" v-else>
         <div class="img"  >
           <v-img min-height="200" @click.prevent="$router.push({name : `shop-id___${$i18n.locale}` , params : {id : product.id}})" :src="product.ItemImage"></v-img>
-          <div class="actions"  v-if="activeCart.includes(product.id)">
+          <div class="actions"  v-if="activeCart.includes(product.id) && !product.hasOptions">
             <div class="right d-flex atc items-center py-2">
-                <v-icon @click.prevent="increase" small>mdi-plus</v-icon>
+                <v-icon @click.prevent="changeQty('increase')" small>mdi-plus</v-icon>
                 <v-select @change="updateQty" :items="qtys" class="atc-input"  v-model="qty"/>
-                <v-icon @click.prevent="decrease" small>mdi-minus</v-icon>
+                <v-icon @click.prevent="changeQty('decrease')" small>mdi-minus</v-icon>
             </div>
 
           </div>
@@ -32,7 +32,7 @@
               </v-btn>
               <v-btn
                 class="mx-2"
-                :class="{active : product.inCart}"
+                :class="{active : activeCart.includes(product.id)}"
                 fab
                 dark
                 small
@@ -50,7 +50,7 @@
           <h2 class="product-title pointer mb-2"  @click.prevent="$router.push({name : `shop-id___${$i18n.locale}` , params : {id : product.id}})" v-if="$i18n.locale == 'ar'">{{product.ItemName}}</h2>
           <h2 class="product-title  pointer mb-2"  @click.prevent="$router.push({name : `shop-id___${$i18n.locale}` , params : {id : product.id}})" v-else>{{product.ItemNameEn}}</h2>
           <div class="price">
-            <span class="text-sm d-block" v-if="inCart.includes(product.id) || product.InCart">{{$t('total')}} : {{ $n(product.POSPP * qty, 'currency' , 'en') }}</span>
+            <span class="text-sm d-block" v-if="activeCart.includes(product.id)">{{$t('total')}} : {{ $n(product.POSPP * qty, 'currency' , 'en') }}</span>
 
             <del class="text-sm">{{ $n(120, 'currency' , 'en') }}</del>
             <span class="text-primary text-sm">{{ $n(product.POSPP, 'currency' , 'en') }}</span>

@@ -193,7 +193,13 @@ export const actions = {
                     text: 'cart_updated_successfully'
                 }
                 commit('ui/setSnackbar' , snackbar , {root : true})
-                commit('updateCartAfterCartUpdated' , payload)
+                // commit('updateCartAfterCartUpdated' , payload)
+                http
+                .get("cart")
+                .then(res => {
+                    commit('setCart', res.data);
+                    commit('setCartCount', res.data.products.length);
+                })
                 commit('product/updateProductAfterCartUpdated' , payload , {root : true})
                 resolve(res);
             })

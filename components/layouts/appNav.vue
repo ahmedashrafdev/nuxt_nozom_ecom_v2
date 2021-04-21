@@ -62,7 +62,7 @@
             <v-container>
                 <div class="nav d-flex space-between items-center">
                     <nuxt-link to="/" class="logo">
-                        <img src="https://dfcdn.defacto.com.tr/Assets/dist/images/logo.png">
+                        <img src="https://www.ocsolutions.co.in/html/organic_food/images/style_blue.png">
                     </nuxt-link>
 
                     <div class="links">
@@ -78,12 +78,12 @@
                                 </a>
                             </li>
                             <li>
-                                <a @click.prevent="setGroup({id: 2 , GroupName : 'خضراوات' , GroupNameEn : 'vegitables'})">
+                                <a @click.prevent="setGroup({id: 2 , GroupName : 'نسائي' , GroupNameEn : 'women'})">
                                     {{$t('Women')}}
                                 </a>
                             </li>
                             <li>
-                                <a @click.prevent="setGroup({id: 1 , GroupName : 'فاكهة' , GroupNameEn : 'fruits'})" >
+                                <a @click.prevent="setGroup({id: 1 , GroupName : 'رجالي' , GroupNameEn : 'men'})" >
                                     {{$t('Men')}}
                                 </a>
                             </li>

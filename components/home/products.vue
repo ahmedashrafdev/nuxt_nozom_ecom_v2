@@ -34,6 +34,8 @@ export default {
     data() {
       return {
         Componentloading : true,
+        products : [],
+        productsLoading : true,
         swiperOption,
       }
     },
@@ -42,7 +44,6 @@ export default {
         return this.$refs.mySwiper.$swiper
       },
       ...mapGetters({
-        products: 'product/homeProducts',
         loading: 'product/homeLoading',
       })
 
@@ -51,15 +52,16 @@ export default {
     mounted() {
       setTimeout(() => {
         this.Componentloading = false
-      }, 1000);
+      }, 1500);
       // this.swiper.slideTo(3, 1000, false)
     },
 
     created(){
-      // const payload = { key : this.productKey}
       this.$store.dispatch('product/getHomeProducts' , this.productKey)
-      // console.log(payload)
-      // this.$store.dispatch('product/getProducts' ,payload)
+      .then(res => {
+        this.products = res
+        this.productsLoading = false
+      })
     },
     
     methods: {

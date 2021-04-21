@@ -105,6 +105,7 @@ import {mapGetters} from 'vuex'
             id : group.id,
             name
           }
+          console.log(groupFilter)
           this.$store.commit('product/groupFilter' , groupFilter)
 
             if(this.$route.name == `shop___${this.$i18n.locale}`){
