@@ -10,8 +10,8 @@
           :key="order.id"
         >
           <v-expansion-panel-header>
-            <div class="d-flex space-between w-full">
-              <span><span class="primary-text">{{$t('order')}} #{{order.id}}</span>{{$t('orderd_at')}}: {{order.closed_at}} </span>  
+            <div class="d-flex items-center space-between w-full">
+              <span><span class="primary-text">{{$t('order')}} #{{order.id}} </span>{{$t('orderd_at')}}: {{order.closed_at}} </span>  
               <span>{{$t("statues")}} : <v-chip color="primary" class="text-center" small>{{order.status}}</v-chip></span>
 
             </div>

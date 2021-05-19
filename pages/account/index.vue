@@ -56,36 +56,37 @@
       <v-container>
         
     <v-tabs vertical>
-      <v-tab class="left" v-for="(item,index) in items" @click.prevent="action(item.text)"  :key="index">
+      <v-tab class="left" :class="$route.query == index ? 'v-tab--active' : ''"  v-for="(item,index) in items" @click.prevent="action(item.text , index)"  :key="index">
         <v-icon left>
          {{item.icon}}
         </v-icon>
         {{item.text}}
       </v-tab>
-      
+      <v-tabs-items v-model="selectedItem">
 
+        <v-tab-item>
+          <v-card flat>
+            <v-card-text >
+              <account-orders/>
+            </v-card-text>
+          </v-card>
+        </v-tab-item>
+      
       <v-tab-item>
-        <v-card flat>
-          <v-card-text >
-            <account-orders/>
-          </v-card-text>
-        </v-card>
-      </v-tab-item>
-     
-     <v-tab-item>
-        <v-card flat>
-          <v-card-text >
-            <account-wishlist/>
-          </v-card-text>
-        </v-card>
-      </v-tab-item>
-      <v-tab-item>
-        <v-card flat>
-          <v-card-text >
-            <account-addresses/>
-          </v-card-text>
-        </v-card>
-      </v-tab-item>
+          <v-card flat>
+            <v-card-text >
+              <account-wishlist/>
+            </v-card-text>
+          </v-card>
+        </v-tab-item>
+        <v-tab-item>
+          <v-card flat>
+            <v-card-text >
+              <account-addresses/>
+            </v-card-text>
+          </v-card>
+        </v-tab-item>
+      </v-tabs-items>
     </v-tabs>
       </v-container>
       
@@ -103,9 +104,9 @@ export default {
     middleware: 'auth',
     data(){
       const action = this.openModal
-     
+     const selectedItem =parseInt(this.$route.query.tab) || 0
       return {
-        selectedItem: 1,
+        selectedItem,
         items: [
           { action , modal : 'mobileOrdersModal'  , text: 'order_history', icon: 'mdi-calendar-blank' },
           { action , modal : 'mobileWishlistModal'  , text: 'wishlist', icon: 'mdi-heart-outline' },
@@ -129,14 +130,31 @@ export default {
         }
         this.$store.commit(`ui/${modal}` , true)
       },
-      action(action){
+      action(action , index){
         if(action == 'my_cart'){
           this.$router.push({name : `shop-cart___${this.$i18n.locale}`})
         }
         if(action == 'logout'){
           this.logout()
         }
+        this.selectedItem = index
+        this.addParamsToLocation({tab : index})
       },
+      addParamsToLocation(params) {
+        history.pushState(
+            {},
+            null,
+            this.$route.path +
+            '?' +
+            Object.keys(params)
+                .map(key => {
+                return (
+                    encodeURIComponent(key) + '=' + encodeURIComponent(params[key])
+                )
+                })
+                .join('&')
+        )
+        },
       editAccount(){
         this.$store.commit('ui/editAccountModal' , true)
       },
@@ -147,6 +165,7 @@ export default {
             text: 'logged out in successfully',
           }
           this.$store.commit('ui/setSnackbar', snackbar)
+          this.$store.commit('cart/setCart', [])
         })
       }
     }

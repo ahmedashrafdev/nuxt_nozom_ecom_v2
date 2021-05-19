@@ -110,6 +110,9 @@ export default {
 				this.$store.commit('ui/mobileFiltersModal', true)
     },
     
+  },
+  created(){
+    this.initShop()
   }
   
 }

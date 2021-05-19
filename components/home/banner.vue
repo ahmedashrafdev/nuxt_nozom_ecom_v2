@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="pointer" @click.prevent="$router.push({name : `shop___${$i18n.locale}` , query : {}})">
     <v-skeleton-loader
       width="100%"
       height="150px"

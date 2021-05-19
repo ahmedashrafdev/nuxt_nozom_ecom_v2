@@ -1,4 +1,5 @@
 
+import http from '~/utilities/http.js';
 export const state = () => ({
    contacts : [
         {
@@ -14,6 +15,7 @@ export const state = () => ({
             title : 'info@elradymarket.com',
         },  
     ],
+    
     links : [
         {
             title : "facebook",
@@ -30,7 +32,11 @@ export const state = () => ({
             url : "http://www.twitter.com",
             icon : "twitter"
         }
-    ]
+    ],
+    sliders: [],
+    slidersLoading: false,
+    bannersLoading: [],
+    banners: false,
 });
 
 export const mutations = {
@@ -40,11 +46,35 @@ export const mutations = {
     links(state, payload) {
         state.links = payload;
     },
+    bannersLoading(state, payload) {
+        state.bannersLoading = payload;
+    },
+    banners(state, payload) {
+        state.banners = payload;
+    },
+    sliders(state, payload) {
+        state.sliders = payload;
+    },
+    slidersLoading(state, payload) {
+    state.slidersLoading = payload;
+    },
 };
 
 export const getters = {
     contacts(state){
         return state.contacts
+    },
+    sliders(state) {
+        return state.sliders;
+    },
+    bannersLoading(state) {
+        return state.bannersLoading;
+    },
+    banners(state) {
+        return state.banners;
+    },
+    slidersLoading(state) {
+    return state.slidersLoading;
     },
     contactsNav(state){
         const contacts = [
@@ -60,5 +90,34 @@ export const getters = {
    
 }
 export const actions = {
-   
+    getSliders({commit}){
+        commit("slidersLoading", true);
+        return new Promise((resolve, reject) => {
+            http.get(`banners/sliders`)
+            .then(res => {
+              commit("slidersLoading", false)
+              commit("sliders", res.data)
+              resolve(res.data)
+            })
+            .catch((res) => {
+              commit("slidersLoading", false)
+              reject(res);
+            });
+        });
+      },
+      getHomeBnners({commit}){
+        commit("bannersLoading", true);
+        return new Promise((resolve, reject) => {
+            http.get(`banners/home`)
+            .then(res => {
+              commit("bannersLoading", false)
+              commit("banners", res.data)
+              resolve(res.data)
+            })
+            .catch((res) => {
+              commit("bannersLoading", false)
+              reject(res);
+            });
+        });
+      },
 }

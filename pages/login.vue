@@ -18,6 +18,8 @@
       <v-text-field
         v-model="form.emailOrPhone"
         :rules="rules.emailOrPhone"
+        ref="email"
+        @keyup.enter="$refs.password.focus()"
         label="E-mail"
         required
       ></v-text-field>
@@ -32,7 +34,9 @@
         v-model="form.password"
         :rules="rules.password"
         type="password"
-        label="E-mail"
+        label="password"
+        ref="password"
+        @keyup.enter="login()"
         required
       ></v-text-field>
       <div  class="err-list" v-if="err && err.password">

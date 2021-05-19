@@ -42,7 +42,7 @@
                         <v-col cols="4" class="list">
                             <h2 class="title">{{$t('stay connected')}}</h2>
                             <ul>
-                                <a :href="link.url" target="_blank" v-for="(link , index) in links" :key="index">
+                                <a :href="link.url" target="_blank" class="d-block mb-4" v-for="(link , index) in links" :key="index">
                                     <v-icon small>mdi-{{link.icon}}</v-icon>
                                     {{link.title}}
                                 </a>
@@ -67,7 +67,7 @@
                             
                             <h2 class="title">{{$t('my_account')}}</h2>
                             <ul>
-                                <li v-for="(item , index) in accountItems" :key="index">
+                                <li v-for="(item , index) in accountItems" @click.prevent="item.action" :key="index">
                                      <v-icon small>mdi-{{item.icon}}</v-icon>
                                     {{$t(item.text)}}
                                 </li>
@@ -102,10 +102,10 @@ export default {
         return{
             aboutUs : "Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi nobis praesentium ab cupiditate dolor.",
             accountItems: [
-                {  text: 'order_history', icon: 'calendar-blank' },
-                {  text: 'wishlist', icon: 'heart-outline' },
-                {  text: 'shipping_addresses', icon: 'office-building-marker-outline' },
-                {  text: 'my_cart', icon: 'cart-arrow-down' },
+                {  text: 'order_history', icon: 'calendar-blank' , action : ()=>{this.$router.push({name :  `account___${this.$i18n.locale}`, query :{tab : 0}})}  },
+                {  text: 'wishlist', icon: 'heart-outline' , action : ()=>{this.$router.push({name :  `account___${this.$i18n.locale}`, query :{tab : 1} })} },
+                {  text: 'shipping_addresses', icon: 'office-building-marker-outline' , action : ()=>{this.$router.push({name : `account___${this.$i18n.locale}` , query :{tab : 2} })} },
+                {  text: 'my_cart', icon: 'cart-arrow-down' , action : ()=>{this.$router.push({name : `shop-cart___${this.this.$i18n.locale}`})} },
             ],
         }
     },

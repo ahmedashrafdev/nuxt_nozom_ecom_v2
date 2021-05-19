@@ -138,9 +138,7 @@ export default {
         addressCreated(id){
             this.form.address = id
             this.applyAddress()
-           // this.getAdresses()
-            console.log(id)
-            console.log(this.form.address)
+          
         },
         applyAddress() {
             this.$store.dispatch('cart/applyAddress' , this.form.address)

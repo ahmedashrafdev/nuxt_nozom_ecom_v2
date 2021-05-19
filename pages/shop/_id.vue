@@ -156,6 +156,9 @@ export default {
       tabs: null,
     }
   },
+  created(){
+    this.initSingleProduct() 
+  }
 }
 </script>
 

@@ -6,7 +6,7 @@ export default {
         query.page = page
         this.addParamsToLocation(query)
         .then(() => {
-          this.$store.dispatch('product/getProducts' , params)
+          this.$store.dispatch('product/getProducts' , query)
         })
       },
       clearFilter(filter){
@@ -25,7 +25,8 @@ export default {
         }
         this.addParamsToLocation(query)
         .then(() => {
-          this.$store.dispatch('product/getProducts' , params)
+          console.log(query)
+          this.$store.dispatch('product/getProducts' , query)
         })
       },
       getProduct(payload){
@@ -72,7 +73,7 @@ export default {
         })
       },
       addParamsToLocation(params) {
-        return new Promise(() => {
+        return new Promise(resolve => {
           history.pushState(
               {},
               null,
@@ -87,6 +88,7 @@ export default {
                   .join('&')
           )
           window.scrollTo({ top:0, behavior: 'smooth'});
+          resolve(true)
         })
       },
       initShop() {
@@ -127,17 +129,9 @@ export default {
         //check if query parameter has color filter and apply it
         this.$route.query.color ? payload.filters.color = this.$route.query.color : ''
         //check if query parameter has size filter and apply it
-        payload.filters.size = this.$route.query.size
+        this.$route.query.size ? payload.filters.size = this.$route.query.size : ''
     
         this.getProduct(payload)
       }
-  },
-  created(){
-    if(this.$route.name == `shop-id___${this.$i18n.locale}`){
-      this.initSingleProduct()
-    }
-    if(this.$route.name == `shop___${this.$i18n.locale}`){
-      this.initShop()
-    } 
   },
 }
