@@ -8,19 +8,19 @@
           <v-row justify="center" align="center">
             <v-col cols="12">
               <div class="d-flex space-between px-4">
-                <h4 class="section-header d-inline">{{$t('latest_products')}}</h4>
+                <h4 class="section-header d-inline">{{$t('bestselers')}}</h4>
                 <div class="d-inline controllers">
                   <nuxt-link :to="{name : `shop___${$i18n.locale}`}" class=" d-inline underline">{{$t('view_all')}}</nuxt-link>
                 </div>
               </div>
-              <home-products productKey="featured"/>
+              <home-products productKey="bestseller"/>
             </v-col>
             <v-col cols="12" sm="6" v-for="banner in banners" :key="banner.id">
               <home-banner :loading="bannersLoading" :img="banner.image"/>
             </v-col>
             <v-col cols="12">
               <div class="d-flex space-between px-4">
-                <h4 class="section-header d-inline">{{$t('featured_products')}}</h4>
+                <h4 class="section-header d-inline">{{$t('latest_products')}}</h4>
                 <div class="d-inline controllers">
                   <nuxt-link :to="{name : `shop___${$i18n.locale}`}" class=" d-inline underline">{{$t('view_all')}}</nuxt-link>
                 </div>

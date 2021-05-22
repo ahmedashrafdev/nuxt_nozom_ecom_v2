@@ -5,9 +5,13 @@
             <v-container>
                 <div class="d-flex items-center space-between w-full">
                    <ul class="d-flex left">
-                       <li v-for="(contact,index) in contacts" :key="index">
-                            <v-icon>mdi-{{contact.icon}}</v-icon>
-                            {{contact.title}}
+                       <li v-if="$i18n.locale == 'en'">
+                            <v-icon>mdi-map-marker-outline</v-icon>
+                            {{settings.address}}
+                        </li>
+                        <li v-else>
+                            <v-icon>mdi-map-marker-outline</v-icon>
+                            {{settings.address_ar}}
                         </li>
                    </ul>
                     <ul class="d-flex right">
@@ -62,7 +66,7 @@
             <v-container>
                 <div class="nav d-flex space-between items-center">
                     <nuxt-link to="/" class="logo">
-                        <img src="https://www.ocsolutions.co.in/html/organic_food/images/style_blue.png">
+                        <img :src="settings.logo">
                     </nuxt-link>
 
                     <div class="links">
@@ -75,16 +79,6 @@
                             <li>
                                 <a @click.prevent="goToStore()" >
                                     {{$t('Store')}}
-                                </a>
-                            </li>
-                            <li>
-                                <a @click.prevent="setGroup({id: 1 , GroupName : 'فواكهة' , GroupNameEn : 'fruits'})">
-                                    {{$t('fruits')}}
-                                </a>
-                            </li>
-                            <li>
-                                <a @click.prevent="setGroup({id: 2 , GroupName : 'خضروات' , GroupNameEn : 'vigitables'})" >
-                                    {{$t('vigitables')}}
                                 </a>
                             </li>
                         </ul>
@@ -193,7 +187,7 @@ export default {
             loading: 'product/loading',
             filtersParams: 'product/filtersParams',
             links : 'global/links',
-            contacts : 'global/contactsNav'
+            settings : 'global/settings'
 
         })
     },

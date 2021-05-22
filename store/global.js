@@ -1,38 +1,10 @@
 
 import http from '~/utilities/http.js';
 export const state = () => ({
-   contacts : [
-        {
-            icon : 'map-marker-outline',
-            title : 'No 60 Lorem Street 6/2 lorem city, Cairo. ',
-        },
-        {
-            icon : 'phone-outline',
-            title : '0123456789',
-        },
-        {
-            icon : 'email-outline',
-            title : 'info@elradymarket.com',
-        },  
-    ],
+    settings: [],
+   contacts : [],
     
-    links : [
-        {
-            title : "facebook",
-            url : "http://www.facebook.com",
-            icon : "facebook"
-        },
-        {
-            title : "instagram",
-            url : "http://www.instagram.com",
-            icon : "instagram"
-        },
-        {
-            title : "twitter",
-            url : "http://www.twitter.com",
-            icon : "twitter"
-        }
-    ],
+    links : [],
     sliders: [],
     slidersLoading: false,
     bannersLoading: [],
@@ -42,6 +14,9 @@ export const state = () => ({
 export const mutations = {
     contacts(state, payload) {
         state.contacts = payload;
+    },
+    settings(state, payload) {
+        state.settings = payload;
     },
     links(state, payload) {
         state.links = payload;
@@ -64,6 +39,9 @@ export const getters = {
     contacts(state){
         return state.contacts
     },
+    settings(state){
+        return state.settings
+    },
     sliders(state) {
         return state.sliders;
     },
@@ -75,13 +53,6 @@ export const getters = {
     },
     slidersLoading(state) {
     return state.slidersLoading;
-    },
-    contactsNav(state){
-        const contacts = [
-            state.contacts[0],
-            // state.contacts[1],
-        ]
-        return contacts
     },
     links(state){
         return state.links
@@ -101,6 +72,49 @@ export const actions = {
             })
             .catch((res) => {
               commit("slidersLoading", false)
+              reject(res);
+            });
+        });
+      },
+      getSettings({commit}){
+        return new Promise((resolve, reject) => {
+            http.get(`settings`)
+            .then(res => {
+                const contacts = [{
+                    icon : 'map-marker-outline',
+                    title : res.data.address,
+                },
+                {
+                    icon : 'phone-outline',
+                    title : res.data.phone,
+                },
+                {
+                    icon : 'email-outline',
+                    title : res.data.email,
+                }]
+                const links = [
+                    {
+                        title : "facebook",
+                        url : res.data.facebook.value,
+                        icon : "facebook"
+                    },
+                    // {
+                    //     title : "instagram",
+                    //     url : "http://www.instagram.com",
+                    //     icon : "instagram"
+                    // },
+                    // {
+                    //     title : "twitter",
+                    //     url : "http://www.twitter.com",
+                    //     icon : "twitter"
+                    // }
+                ]
+              commit('contacts' , contacts)
+              commit('links' , links)
+              commit('settings' , res.data)
+              resolve(res.data)
+            })
+            .catch((res) => {
               reject(res);
             });
         });

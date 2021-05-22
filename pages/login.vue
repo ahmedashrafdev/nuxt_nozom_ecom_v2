@@ -77,7 +77,7 @@
         password : [],
       },
       form : {
-        emailOrPhone : 'test@test.com',
+        emailOrPhone : 'test@elnozom.com',
         password: '123456',
       },
       rules :{

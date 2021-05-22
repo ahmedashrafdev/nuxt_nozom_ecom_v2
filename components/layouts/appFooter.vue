@@ -4,9 +4,10 @@
             <v-row class="content">
                 <v-col class="about" cols="3">
                     <div class="logo">
-                        <img src="https://www.ocsolutions.co.in/html/organic_food/images/header3/footer-logo.png" alt="el rady logo">
+                        <img :src="settings.logo" alt="el rady logo">
                     </div>
-                    <p>{{aboutUs}}</p>
+                    <p v-if="$i18n.locale == 'en'">{{settings.about}}</p>
+                    <p v-if="$i18n.locale == 'ar'">{{settings.about_ar}}</p>
                     <ul class="contacts">
                         <li v-for="(contact,index) in contacts" :key="index">
                             <v-icon>mdi-{{contact.icon}}</v-icon>
@@ -96,11 +97,12 @@ export default {
               filtersParams: 'product/filtersParams',
               links : 'global/links',
               contacts: 'global/contacts',
+              settings : 'global/settings'
+              
             }),
     },
     data(){
         return{
-            aboutUs : "Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi nobis praesentium ab cupiditate dolor.",
             accountItems: [
                 {  text: 'order_history', icon: 'calendar-blank' , action : ()=>{this.$router.push({name :  `account___${this.$i18n.locale}`, query :{tab : 0}})}  },
                 {  text: 'wishlist', icon: 'heart-outline' , action : ()=>{this.$router.push({name :  `account___${this.$i18n.locale}`, query :{tab : 1} })} },
