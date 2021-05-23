@@ -20,7 +20,7 @@
         :rules="rules.emailOrPhone"
         ref="email"
         @keyup.enter="$refs.password.focus()"
-        label="E-mail"
+        :label="$t('email')"
         required
       ></v-text-field>
       <div  class="err-list" v-if="err && err.emailOrPhone">
@@ -34,7 +34,7 @@
         v-model="form.password"
         :rules="rules.password"
         type="password"
-        label="password"
+        :label="$t('password')"
         ref="password"
         @keyup.enter="login()"
         required
@@ -58,7 +58,7 @@
       
         :loading="loading"
       >
-        Login
+        {{$t('login')}}
       </v-btn>
     </v-form>
   </v-container>
@@ -77,7 +77,7 @@
         password : [],
       },
       form : {
-        emailOrPhone : 'test@test.com',
+        emailOrPhone : 'test@elnozom.com',
         password: '123456',
       },
       rules :{

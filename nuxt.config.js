@@ -99,7 +99,7 @@ export default {
   },
   server:{
     host : "192.168.1.40",
-    port : "3001",
+    port : "3002",
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

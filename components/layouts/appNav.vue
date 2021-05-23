@@ -62,7 +62,7 @@
             <v-container>
                 <div class="nav d-flex space-between items-center">
                     <nuxt-link to="/" class="logo">
-                        <img src="https://www.ocsolutions.co.in/html/organic_food/images/style_blue.png">
+                        <img :src="logo">
                     </nuxt-link>
 
                     <div class="links">
@@ -77,7 +77,7 @@
                                     {{$t('Store')}}
                                 </a>
                             </li>
-                            <li>
+                            <!-- <li>
                                 <a @click.prevent="setGroup({id: 1 , GroupName : 'فواكهة' , GroupNameEn : 'fruits'})">
                                     {{$t('fruits')}}
                                 </a>
@@ -86,7 +86,7 @@
                                 <a @click.prevent="setGroup({id: 2 , GroupName : 'خضروات' , GroupNameEn : 'vigitables'})" >
                                     {{$t('vigitables')}}
                                 </a>
-                            </li>
+                            </li> -->
                         </ul>
                     </div>
                     <div class="search">
@@ -193,6 +193,7 @@ export default {
             loading: 'product/loading',
             filtersParams: 'product/filtersParams',
             links : 'global/links',
+            logo : 'global/logo',
             contacts : 'global/contactsNav'
 
         })

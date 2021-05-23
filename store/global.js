@@ -1,20 +1,9 @@
 
 import http from '~/utilities/http.js';
 export const state = () => ({
-   contacts : [
-        {
-            icon : 'map-marker-outline',
-            title : 'No 60 Lorem Street 6/2 lorem city, Cairo. ',
-        },
-        {
-            icon : 'phone-outline',
-            title : '0123456789',
-        },
-        {
-            icon : 'email-outline',
-            title : 'info@elradymarket.com',
-        },  
-    ],
+   contacts : [],
+    settings : [],
+    settingsLoading : false,
     
     links : [
         {
@@ -46,6 +35,12 @@ export const mutations = {
     links(state, payload) {
         state.links = payload;
     },
+    settings(state, payload) {
+        state.settings = payload;
+    },
+    settingsLoading(state, payload) {
+        state.settingsLoading = payload;
+    },
     bannersLoading(state, payload) {
         state.bannersLoading = payload;
     },
@@ -66,6 +61,38 @@ export const getters = {
     },
     sliders(state) {
         return state.sliders;
+    },
+    settings(state) {
+        return state.settings;
+    },
+    settingsLoading(state) {
+        return state.settingsLoading;
+    },
+    logo(state) {
+        return state.settings.logo;
+    },
+
+    address(state) {
+        return state.settings.address;
+    },
+
+    phone(state) {
+        return state.settings.phone;
+    },
+
+    email(state) {
+        return state.settings.email;
+
+    },
+
+    about(state) {
+        return state.settings.about;
+
+    },
+
+    about_ar(state) {
+        return state.settings.about_ar;
+
     },
     bannersLoading(state) {
         return state.bannersLoading;
@@ -104,20 +131,51 @@ export const actions = {
               reject(res);
             });
         });
-      },
-      getHomeBnners({commit}){
+    },
+    getSettings({commit}){
+        commit("settingsLoading", true);
+        return new Promise((resolve, reject) => {
+        http.get(`settings`)
+        .then(res => {
+            commit("settingsLoading", false)
+            commit("settings", res.data)
+            const contacts = [
+            {
+                icon : 'map-marker-outline',
+                title : res.data.address,
+            },
+            {
+                icon : 'phone-outline',
+                title : res.data.phone,
+            },
+            {
+                icon : 'email-outline',
+                title : res.data.email,
+            }]  
+            commit("settings", res.data)
+            commit("contacts", contacts)
+
+            resolve(res.data)
+        })
+        .catch((res) => {
+            commit("settingsLoading", false)
+            reject(res);
+        });
+    });
+    },
+    getHomeBnners({commit}){
         commit("bannersLoading", true);
         return new Promise((resolve, reject) => {
             http.get(`banners/home`)
             .then(res => {
-              commit("bannersLoading", false)
-              commit("banners", res.data)
-              resolve(res.data)
+                commit("bannersLoading", false)
+                commit("banners", res.data)
+                resolve(res.data)
             })
             .catch((res) => {
-              commit("bannersLoading", false)
-              reject(res);
+                commit("bannersLoading", false)
+                reject(res);
             });
         });
-      },
+    },
 }

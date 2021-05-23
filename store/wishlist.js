@@ -1,6 +1,4 @@
 import http from '~/utilities/http.js';
-
-
 export const state = () => ({
     loading: false,
     createLoading: false,

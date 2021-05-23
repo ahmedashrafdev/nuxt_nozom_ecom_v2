@@ -52,7 +52,7 @@
           <div class="price">
             <span class="text-sm d-block" v-if="activeCart.includes(product.id)">{{$t('total')}} : {{ $n(product.POSPP * qty, 'currency' , 'en') }}</span>
 
-            <del class="text-sm">{{ $n(120, 'currency' , 'en') }}</del>
+            <!-- <del class="text-sm">{{ $n(120, 'currency' , 'en') }}</del> -->
             <span class="text-primary text-sm">{{ $n(product.POSPP, 'currency' , 'en') }}</span>
           </div>
         </div>
