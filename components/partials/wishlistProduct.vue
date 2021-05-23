@@ -6,7 +6,7 @@
         type="card, list-item-two-line"
       ></v-skeleton-loader>
       <div class="pr-partial" v-else>
-        <div class="img"  >
+        <div class="img" >
           <v-img min-height="200" @click.prevent="$router.push({name : `shop-id___${$i18n.locale}` , params : {id : product.id}})" :src="product.ItemImage"></v-img>
           <div class="actions">
              <v-btn

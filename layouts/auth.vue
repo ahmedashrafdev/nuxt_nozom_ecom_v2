@@ -1,15 +1,12 @@
 <template>
-  <v-app class="auth" dark>
+  <v-app  :class="{rtl : $i18n.locale == 'ar'}" class="auth" dark>
     <v-main class="px-4">
       <v-card class="p-4" max-width="500" flat>
         <v-container>
           <div class="logo">
             <nuxt-link to="/" class="logo">
-                <img src="https://www.ocsolutions.co.in/html/organic_food/images/style_blue.png">
+                <img :src="logo">
             </nuxt-link>
-          </div>
-          <div class="title my-4">
-            {{$t('login_to_your_account')}}
           </div>
           <nuxt />
         </v-container>
@@ -18,10 +15,27 @@
     <layouts-snack-bar/>
   </v-app>
 </template>
-
 <script>
 export default {
-  
+  data(){
+    return{
+      loading:true,
+      overlay : true,
+      logo : "",
+    }
+  },
+  methods:{
+    async init(){
+      await this.$store.dispatch('global/getSettings')
+      .then(res => {
+        this.logo = res.logo
+        this.loading = false
+      })
+    }
+  },
+  created(){
+    this.init()
+  }
 }
 </script>
 
@@ -58,6 +72,9 @@ export default {
 }
 .auth button{
   width: 100%;
+}
+.logo img{
+  width: 200px;
 }
 </style>
 

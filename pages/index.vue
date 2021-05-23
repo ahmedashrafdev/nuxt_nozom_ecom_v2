@@ -8,12 +8,16 @@
           <v-row justify="center" align="center">
             <!-- <v-col cols="12">
               <div class="d-flex space-between px-4">
+<<<<<<< HEAD
                 <h4 class="section-header d-inline">{{$t('featured_products')}}</h4>
+=======
+                <h4 class="section-header d-inline">{{$t('bestselers')}}</h4>
+>>>>>>> 3b00d0b3f4aa9a69043e70e80865c09a3f2a6deb
                 <div class="d-inline controllers">
                   <nuxt-link :to="{name : `shop___${$i18n.locale}`}" class=" d-inline underline">{{$t('view_all')}}</nuxt-link>
                 </div>
               </div>
-              <home-products productKey="featured"/>
+              <home-products productKey="bestseller"/>
             </v-col>
             -->
             <v-col cols="12">

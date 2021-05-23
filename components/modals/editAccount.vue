@@ -29,7 +29,7 @@
                   <v-text-field
                     v-model="form.email"
                     :rules="rules.email"
-                    label="E-mail"
+                    :label="$t('email')"
                     required
                   ></v-text-field>
                   <div  class="err-list" v-if="err && err.email">
@@ -42,7 +42,8 @@
                   <v-text-field
                     v-model="form.name"
                     :rules="rules.name"
-                    label="Name"
+                    :label="$t('name')"
+
                     required
                   ></v-text-field>
                   <div  class="err-list" v-if="err && err.name">
@@ -55,9 +56,9 @@
                   <v-text-field
                     v-model="form.password"
                     type="password"
+                    :label="$t('password')"
                     :rules="rules.password"
                     hint="leave_it_blank"
-                    label="password"
                     required
                   ></v-text-field>
                   <div  class="err-list" v-if="err && err.password">
@@ -74,14 +75,12 @@
               <v-btn
                     color="primary"
                     class="d-block"
-                    @click.prevent="update"
-
-                  
+                    @click.prevent="update"                  
                     :loading="loading"
                   >
               <v-icon>mdi-check</v-icon>
 
-                    Done
+                    {{$t('done')}}
                   </v-btn>
               <v-btn
                 text

@@ -4,11 +4,20 @@
             <v-row class="content">
                 <v-col class="about" cols="3">
                     <div class="logo">
-                        <img :src="logo" style="max-width:150px" alt="logo">
+                        <img :src="settings.logo" alt="el rady logo">
                     </div>
-                    <p v-if="$i18n.locale == 'ar'">{{about_ar}}</p>
-                    <p v-else>{{about}}</p>
+                    <p v-if="$i18n.locale == 'en'">{{settings.about}}</p>
+                    <p v-if="$i18n.locale == 'ar'">{{settings.about_ar}}</p>
                     <ul class="contacts">
+                        <li v-if="$i18n.locale == 'en'">
+                            <v-icon>mdi-map-marker-outline</v-icon>
+                            {{settings.address}}
+                        </li>
+
+                        <li v-else>
+                            <v-icon>mdi-map-marker-outline</v-icon>
+                            {{settings.address_ar}}
+                        </li>
                         <li v-for="(contact,index) in contacts" :key="index">
                             <v-icon>mdi-{{contact.icon}}</v-icon>
                             {{contact.title}}
@@ -25,7 +34,7 @@
                             <v-flex class="newsletter__form">
                                 <div class="input">
                                     <v-text-field
-                                        label="email"
+                                        :label="$t('email')"
                                         rounded
                                         dense
                                         color="black"
@@ -41,7 +50,7 @@
                             </v-flex>
                         </v-col>
                         <v-col cols="4" class="list">
-                            <h2 class="title">{{$t('stay connected')}}</h2>
+                            <h2 class="title">{{$t('stay_connected')}}</h2>
                             <ul>
                                 <a :href="link.url" target="_blank" class="d-block mb-4" v-for="(link , index) in links" :key="index">
                                     <v-icon small>mdi-{{link.icon}}</v-icon>
@@ -101,8 +110,8 @@ export default {
               filtersParams: 'product/filtersParams',
               links : 'global/links',
               contacts: 'global/contacts',
-              about: 'global/about',
-              about_ar: 'global/about_ar',
+              settings : 'global/settings'
+              
             }),
     },
     data(){

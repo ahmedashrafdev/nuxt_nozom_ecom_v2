@@ -11,6 +11,37 @@
   font-family: "kufi",sans-serif !important;
 }
 
+.rtl label {
+  right: 0 !important;
+  left: auto !important;
+}
+
+.rtl .newsletter .v-text-field--rounded > .v-input__control > .v-input__slot {
+  padding: 0 0 0 24px !important;
+}
+
+.rtl .v-application--is-ltr .v-text-field .v-label {
+  -webkit-transform-origin: top right !important;
+          transform-origin: top right !important;
+}
+
+.rtl .mdi-arrow-right, .rtl .mdi-arrow-left {
+  -webkit-transform: rotate(180deg) !important;
+          transform: rotate(180deg) !important;
+}
+
+.rtl .btns > div:last-child button i {
+  margin-right: 10px;
+}
+
+.rtl .v-btn {
+  letter-spacing: 0 !important;
+}
+
+.rtl.v-application .title {
+  font-family: "kufi",sans-serif !important;
+}
+
 .rtl .links ul li a::after {
   right: 0;
 }

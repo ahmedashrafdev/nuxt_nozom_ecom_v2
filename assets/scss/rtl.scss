@@ -12,6 +12,32 @@
     &.v-application {
         font-family: "kufi",sans-serif !important;
     }
+   
+    & label{
+        right: 0 !important;
+        left:auto !important;
+
+    }
+    .newsletter .v-text-field--rounded > .v-input__control > .v-input__slot {
+        padding: 0 0 0 24px !important;
+    }
+
+    .v-application--is-ltr .v-text-field .v-label {
+        transform-origin: top right !important;
+    }
+    & .mdi-arrow-right , & .mdi-arrow-left{
+        transform: rotate(180deg) !important;
+    }
+
+    & .btns > div:last-child button i {
+        margin-right: 10px;
+    }
+    & .v-btn {
+       letter-spacing: 0 !important;
+    }
+    &.v-application .title{
+        font-family: "kufi",sans-serif !important;
+    }
 
     & .links ul li a::after{
         right: 0;
