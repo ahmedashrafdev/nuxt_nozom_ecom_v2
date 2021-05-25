@@ -1,5 +1,9 @@
 <template>
   <v-container>
+    <div class="title my-4">
+      {{$t('login_to_your_account')}}
+    </div>
+      
     <v-form
       ref="form"
       v-model="valid"
@@ -20,7 +24,7 @@
         :rules="rules.emailOrPhone"
         ref="email"
         @keyup.enter="$refs.password.focus()"
-        label="E-mail"
+        :label="$t('email')"
         required
       ></v-text-field>
       <div  class="err-list" v-if="err && err.emailOrPhone">
@@ -34,7 +38,7 @@
         v-model="form.password"
         :rules="rules.password"
         type="password"
-        label="password"
+        :label="$t('password')"
         ref="password"
         @keyup.enter="login()"
         required
@@ -48,7 +52,7 @@
       </div>
       <div class="no-account">
         {{$t('no_account')}}
-        <nuxt-link :to="{name :`register___${$i18n.locale}`}">{{'register_now'}}</nuxt-link>
+        <nuxt-link :to="{name :`register___${$i18n.locale}`}">{{$t('register_now')}}</nuxt-link>
 
       </div>
       <v-btn
@@ -58,7 +62,7 @@
       
         :loading="loading"
       >
-        Login
+        {{$t('login_button')}}
       </v-btn>
     </v-form>
   </v-container>

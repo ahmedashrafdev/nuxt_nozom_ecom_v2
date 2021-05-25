@@ -103,11 +103,21 @@ export default {
       this.$store.dispatch('cart/update' , payload)
     },
     changeQty(type){
+      console.log(type)
       const index = this.qtys.indexOf(this.qty)
-      if(index !== 0){
-        this.qty = type == 'decrease' ? this.qtys[index-1] : this.qtys[index + 1]
-        this.updateQty()
+      //check if he wants to decrease the first value to prevent
+      if(index == 0 && type == 'decrease' ){
+        return
       }
+      //check if he wants to increse the last value to prevent
+      if(index == this.qtys.length - 1 && type == 'increase' ){
+        return
+      }
+      if(index == 0 && type == 'decrease' ){
+        return
+      }
+      this.qty = type == 'decrease' ? this.qtys[index-1] : this.qtys[index + 1]
+      this.updateQty()
     },
   },
   created(){

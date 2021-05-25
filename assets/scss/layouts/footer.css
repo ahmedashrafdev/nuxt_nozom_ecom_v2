@@ -38,7 +38,8 @@ footer .copyrights span {
 }
 
 footer .about {
-  box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.22);
+  -webkit-box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.22);
+          box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.22);
   background: #fff;
   padding: 48px 14px 32px;
 }
@@ -80,7 +81,11 @@ footer .newsletter p {
 }
 
 footer .newsletter__form {
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
 }
 
@@ -101,13 +106,15 @@ footer .list ul li {
   padding: 0 0 20px;
   font-size: 14px;
   color: #000;
+  -webkit-transition: var(--primary-transition);
   transition: var(--primary-transition);
   cursor: pointer;
 }
 
 footer .list ul li:hover {
   color: var(--primary-color);
-  transform: translateX(10px);
+  -webkit-transform: translateX(10px);
+          transform: translateX(10px);
 }
 
 footer .list ul li:hover i {
@@ -118,3 +125,4 @@ footer .list ul li i {
   color: #000;
   margin-right: 12px;
 }
+/*# sourceMappingURL=footer.css.map */

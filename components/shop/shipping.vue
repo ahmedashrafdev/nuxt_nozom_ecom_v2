@@ -34,7 +34,7 @@
                         @change="applyAddress"
                         item-text="title"
                         item-value="id"
-                        label="address"
+                        :label="$t('address')"
                         >
                     </v-select>
 

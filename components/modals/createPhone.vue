@@ -29,7 +29,7 @@
                   <v-text-field
                     v-model="form.phone"
                     :rules="rules.phone"
-                    label="Phone"
+                    :label="$t('phone')"
                     required
                   ></v-text-field>
                   <div  class="err-list" v-if="errors  && errors.phone">

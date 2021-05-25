@@ -33,7 +33,7 @@
                     <v-text-field
                         v-model="form.BuildingNo"
                         :rules="rules.BuildingNo"
-                        label="Building"
+                        :label="$t('building')"
                         required
                     ></v-text-field>
                     <ul v-if="errors.BuildingNo && errors.BuildingNo.length > 0  ">
@@ -46,7 +46,7 @@
                     <v-text-field
                         v-model="form.RowNo"
                         :rules="rules.RowNo"
-                        label="Row"
+                        :label="$t('row')"
                         required
                     ></v-text-field>
                     <ul v-if="errors.RowNo && errors.RowNo.length > 0  ">
@@ -59,7 +59,7 @@
                     <v-text-field
                         v-model="form.FlatNo"
                         :rules="rules.FlatNo"
-                        label="Flat"
+                        :label="$t('flat')"
                         required
                     ></v-text-field>
                     <ul v-if="errors.FlatNo && errors.FlatNo.length > 0  ">
@@ -72,7 +72,7 @@
                     <v-text-field
                         v-model="form.Street"
                         :rules="rules.Street"
-                        label="Street"
+                        :label="$t('street')"
                         required
                     ></v-text-field>
                     <ul v-if="errors.Street && errors.Street.length > 0  ">
@@ -85,7 +85,7 @@
                     <v-text-field
                         v-model="form.Remark"
                         :rules="rules.Remark"
-                        label="Remark"
+                        :label="$t('remark')"
                         required
                     ></v-text-field>
                     <ul v-if="errors.Remark && errors.Remark.length > 0  ">
@@ -101,7 +101,7 @@
                     item-text="AreaName"
                     item-value="id"
                     @change="getAreas"
-                    label="section"
+                    :label="$t('section')"
                     ></v-select>
                 </v-col>
 
@@ -111,7 +111,7 @@
                     v-model="form.AreaNo"
                     item-text="AreaName"
                     item-value="id"
-                    label="area"
+                    :label="$t('area')"
                     ></v-select>
                     <ul v-if="errors.AreaNo && errors.AreaNo.length > 0  ">
                         <li class="error" v-for="(err , index) in errors.AreaNo" :key="index">
@@ -126,7 +126,8 @@
                     v-model="form.PhSerial"
                     item-text="phone"
                     item-value="id"
-                    label="phone"
+                    :label="$t('phone')"
+
                     ></v-select>
                 <ul v-if="errors.PhSerial && errors.PhSerial.length > 0  ">
                         <li class="error" v-for="(err , index) in errors.PhSerial" :key="index">
@@ -153,7 +154,7 @@
                         @click="create"
                         :loading="loading"
                     >
-                        Create
+                        {{$t("create")}}
                     </v-btn>
                 </v-col>
             </v-row>

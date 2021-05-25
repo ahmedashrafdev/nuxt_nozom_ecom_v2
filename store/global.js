@@ -21,6 +21,12 @@ export const mutations = {
     links(state, payload) {
         state.links = payload;
     },
+    settings(state, payload) {
+        state.settings = payload;
+    },
+    settingsLoading(state, payload) {
+        state.settingsLoading = payload;
+    },
     bannersLoading(state, payload) {
         state.bannersLoading = payload;
     },
@@ -44,6 +50,38 @@ export const getters = {
     },
     sliders(state) {
         return state.sliders;
+    },
+    settings(state) {
+        return state.settings;
+    },
+    settingsLoading(state) {
+        return state.settingsLoading;
+    },
+    logo(state) {
+        return state.settings.logo;
+    },
+
+    address(state) {
+        return state.settings.address;
+    },
+
+    phone(state) {
+        return state.settings.phone;
+    },
+
+    email(state) {
+        return state.settings.email;
+
+    },
+
+    about(state) {
+        return state.settings.about;
+
+    },
+
+    about_ar(state) {
+        return state.settings.about_ar;
+
     },
     bannersLoading(state) {
         return state.bannersLoading;
@@ -80,10 +118,7 @@ export const actions = {
         return new Promise((resolve, reject) => {
             http.get(`settings`)
             .then(res => {
-                const contacts = [{
-                    icon : 'map-marker-outline',
-                    title : res.data.address,
-                },
+                const contacts = [
                 {
                     icon : 'phone-outline',
                     title : res.data.phone,
@@ -95,19 +130,14 @@ export const actions = {
                 const links = [
                     {
                         title : "facebook",
-                        url : res.data.facebook.value,
+                        url : res.data.facebook,
                         icon : "facebook"
                     },
-                    // {
-                    //     title : "instagram",
-                    //     url : "http://www.instagram.com",
-                    //     icon : "instagram"
-                    // },
-                    // {
-                    //     title : "twitter",
-                    //     url : "http://www.twitter.com",
-                    //     icon : "twitter"
-                    // }
+                    {
+                        title : "instagram",
+                        url : res.data.instagram,
+                        icon : "instagram"
+                    },
                 ]
               commit('contacts' , contacts)
               commit('links' , links)
@@ -124,14 +154,14 @@ export const actions = {
         return new Promise((resolve, reject) => {
             http.get(`banners/home`)
             .then(res => {
-              commit("bannersLoading", false)
-              commit("banners", res.data)
-              resolve(res.data)
+                commit("bannersLoading", false)
+                commit("banners", res.data)
+                resolve(res.data)
             })
             .catch((res) => {
-              commit("bannersLoading", false)
-              reject(res);
+                commit("bannersLoading", false)
+                reject(res);
             });
         });
-      },
+    },
 }

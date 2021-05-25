@@ -51,8 +51,11 @@
               <v-col cols="12" class="product-description" lg="6" >   
                 <h2 class="product-title larger mb-1" v-if="$i18n.locale == 'ar'">{{product.ItemName}}</h2>
                 <h2 class="product-title larger mb-1" v-else>{{product.ItemNameEn}}</h2>
-                <span class="category" v-if="$i18n.loale == 'ar'">{{product.group.GroupName}}</span>
+                <nuxt-link :to="{name : `shop___${$i18n.locale}` , query: {group : product.group.id}}" class="category" v-if="$i18n.loale == 'ar'">{{product.group.GroupName}}</nuxt-link>
                 <nuxt-link :to="{name : `shop___${$i18n.locale}` , query: {group : product.group.id}}" class="category" v-else>{{product.group.GroupNameEn}}</nuxt-link>
+
+                <p class="desc" v-if="$i18n.locale == 'ar' && product.ItemDesc">{{product.ItemDesc}}</p>
+                <p class="desc" v-if="$i18n.locale == 'en' && product.ItemDescEn">{{product.ItemDescEn}}</p>
                 <!-- <p class="p">
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis, quibusdam quos? Minima iure repellendus quia dignissimos perspiciatis similique consequatur optio reiciendis, repudiandae aperiam iste aspernatur, dicta asperiores corrupti distinctio soluta?
                 </p> -->
@@ -60,7 +63,7 @@
                   <span class="text-primary">{{ $n(product.POSPP, 'currency' , 'en') }}</span>
                   <!-- <del >{{ $n(120, 'currency' , 'en') }}</del> -->
                 </div>
-                <div class="size-chart">
+                <div class="size-chart" v-if="product.sizes">
                   <h4 class="mb-4 mt-4">{{$t('sizes')}}</h4>
                   <v-chip-group
                     column
@@ -76,7 +79,7 @@
                     </v-chip>
                   </v-chip-group>
                 </div>
-                <div class="colors">
+                <div class="colors"  v-if="product.colors">
                   <h4 class="mb-4 mt-4">{{$t('colors')}}</h4>
                   <v-chip-group
                     column

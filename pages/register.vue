@@ -4,6 +4,9 @@
       v-model="valid"
       lazy-validation
     >
+    <div class="title my-4">
+            {{$t('create_account')}}
+          </div>
       <div class="mb-10" v-if="err">
         <v-alert
           border="top"
@@ -17,7 +20,7 @@
       <v-text-field
         v-model="form.name"
         :rules="rules.name"
-        label="name"
+        :label="$t('name')"
         required
       ></v-text-field>
       <div  class="err-list" v-if="err && err.name">
@@ -30,7 +33,7 @@
       <v-text-field
         v-model="form.email"
         :rules="rules.email"
-        label="E-mail"
+        :label="$t('email')"
         required
       ></v-text-field>
       <div  class="err-list" v-if="err && err.email">
@@ -43,7 +46,7 @@
       <v-text-field
         v-model="form.phone"
         :rules="rules.phone"
-        label="Phone"
+        :label="$t('phone')"
         required
       ></v-text-field>
       <div  class="err-list" v-if="err && err.phone">
@@ -57,7 +60,8 @@
         v-model="form.password"
         :rules="rules.password"
         type="password"
-        label="Password"
+        @keyup.prevent="register"
+        :label="$t('password')"
         required
       ></v-text-field>
       <div  class="err-list" v-if="err && err.password">
@@ -69,7 +73,7 @@
       </div>
       <div class="no-account">
         {{$t('have_account')}}
-        <nuxt-link :to="{name :`login___${$i18n.locale}`}">{{'login_now'}}</nuxt-link>
+        <nuxt-link :to="{name :`login___${$i18n.locale}`}">{{$t('login_now')}}</nuxt-link>
 
       </div>
       <v-btn

@@ -4,8 +4,10 @@
 }
 
 .pr-partial:hover .img {
-  transform: scale(1.02);
-  box-shadow: 0px 6px 5px 0px rgba(0, 0, 0, 0.07);
+  -webkit-transform: scale(1.02);
+          transform: scale(1.02);
+  -webkit-box-shadow: 0px 6px 5px 0px rgba(0, 0, 0, 0.07);
+          box-shadow: 0px 6px 5px 0px rgba(0, 0, 0, 0.07);
   max-width: 300px;
   margin-top: 30px;
   border: 1px solid transparent;
@@ -13,6 +15,7 @@
 
 .pr-partial .img {
   border: 1px solid var(--border-color-lighter);
+  -webkit-transition: var(--primary-transition);
   transition: var(--primary-transition);
   position: relative;
   cursor: pointer;
@@ -22,9 +25,14 @@
   position: absolute;
   bottom: 0;
   width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
-  transform: translateY(50%);
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-transform: translateY(50%);
+          transform: translateY(50%);
 }
 
 .pr-partial .meta {
@@ -38,3 +46,4 @@
 .pr-partial .actions .active i {
   color: #fff;
 }
+/*# sourceMappingURL=product2.css.map */

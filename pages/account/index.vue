@@ -29,7 +29,7 @@
             <v-icon v-text="item.icon"></v-icon>
           </v-list-item-icon>
           <v-list-item-content>
-            <v-list-item-title v-text="item.text"></v-list-item-title>
+            <v-list-item-title v-text="$t(item.text)"></v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list-item-group>
@@ -60,7 +60,7 @@
         <v-icon left>
          {{item.icon}}
         </v-icon>
-        {{item.text}}
+        {{$t(item.text)}}
       </v-tab>
       <v-tabs-items v-model="selectedItem">
 

@@ -1,5 +1,5 @@
 <template>
-  <v-app class="auth" dark>
+  <v-app  :class="{rtl : $i18n.locale == 'ar'}" class="auth" dark>
     <v-main class="px-4">
       <v-card class="p-4" max-width="500" flat>
         <v-container>
@@ -7,9 +7,6 @@
             <nuxt-link to="/" class="logo">
                 <img :src="logo">
             </nuxt-link>
-          </div>
-          <div class="title my-4">
-            {{$t('login_to_your_account')}}
           </div>
           <nuxt />
         </v-container>
@@ -31,7 +28,7 @@ export default {
     async init(){
       await this.$store.dispatch('global/getSettings')
       .then(res => {
-        this.logo = res[0].value
+        this.logo = res.logo
         this.loading = false
       })
     }
