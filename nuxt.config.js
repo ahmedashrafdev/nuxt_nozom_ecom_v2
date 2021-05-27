@@ -98,8 +98,8 @@ export default {
     }
   },
   server:{
-    host : "192.168.1.40",
-    port : "3000",
+    host : process.env.APP_HOST,
+    port : process.env.APP_PORT,
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

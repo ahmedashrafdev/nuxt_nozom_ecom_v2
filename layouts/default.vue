@@ -31,8 +31,15 @@ export default {
       overlay : true,
     }
   },
+  
   methods:{
     async init(){
+      const locale = await localStorage.getItem('locale')
+      if(locale){
+        this.$i18n.locale = locale
+      }
+      
+      this.$vuetify.rtl = this.$i18n.locale === 'ar'
       await this.$store.dispatch('global/getSettings')
       .then(() => {
         this.loading = false

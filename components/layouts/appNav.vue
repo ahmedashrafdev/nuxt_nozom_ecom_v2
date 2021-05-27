@@ -111,6 +111,7 @@ export default {
     methods: {
         switchLanguage(){
             const locale = this.$i18n.locale === 'en' ? 'ar' : 'en'
+            localStorage.setItem('locale' , locale)
             if(locale == 'ar'){
                 this.$vuetify.rtl = true
             } else {
