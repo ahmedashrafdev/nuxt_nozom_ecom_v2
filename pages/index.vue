@@ -13,7 +13,7 @@
                   <nuxt-link :to="{name : `shop___${$i18n.locale}`}" class=" d-inline underline">{{$t('view_all')}}</nuxt-link>
                 </div>
               </div>
-              <home-products productKey="featured"/>
+              <home-products productKey="latest"/>
             </v-col>
             <v-col cols="12" sm="6" v-for="banner in banners" :key="banner.id">
               <home-banner :loading="bannersLoading" :img="banner.image"/>

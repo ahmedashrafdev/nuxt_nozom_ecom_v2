@@ -78,13 +78,13 @@
                                 </a>
                             </li>
                             <li>
-                                <a @click.prevent="setGroup({id: 1 , GroupName : 'فواكهة' , GroupNameEn : 'fruits'})">
-                                    {{$t('fruits')}}
+                                <a @click.prevent="setGroup({id: 1 , GroupName : 'رجالي' , GroupNameEn : 'men'})">
+                                    {{$t('men')}}
                                 </a>
                             </li>
                             <li>
-                                <a @click.prevent="setGroup({id: 2 , GroupName : 'خضروات' , GroupNameEn : 'vigitables'})" >
-                                    {{$t('vigitables')}}
+                                <a @click.prevent="setGroup({id: 2 , GroupName : 'نسائي' , GroupNameEn : 'women'})" >
+                                    {{$t('women')}}
                                 </a>
                             </li>
                         </ul>

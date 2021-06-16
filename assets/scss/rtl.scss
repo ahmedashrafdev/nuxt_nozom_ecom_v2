@@ -12,6 +12,9 @@
     &.v-application {
         font-family: "kufi",sans-serif !important;
     }
+    .v-application--is-ltr .v-chip .v-chip__close.v-icon.v-icon--right {
+        margin-left: -4px;
+    }
 
     & .links ul li a::after{
         right: 0;

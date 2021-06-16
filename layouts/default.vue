@@ -21,6 +21,12 @@ export default {
   created(){
     this.$store.dispatch('cart/get')
     this.$store.dispatch('wishlist/get')
+    const locale = this.$i18n.locale 
+      if(locale == 'ar'){
+          this.$vuetify.rtl = true
+      } else {
+          this.$vuetify.rtl = false
+      }
   }
 }
 </script>
